@@ -1,0 +1,80 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+    output   = "../generated/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model QuizSet {
+    id        String    @id @default(cuid())
+    title     String
+    images    Image[]
+    answers   Answer[]
+    sessions  Session[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+}
+
+model Image {
+    id        String   @id @default(cuid())
+    url       String
+    publicId  String?
+    order     Int
+    quizSetId String
+    quizSet   QuizSet  @relation(fields: [quizSetId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([quizSetId])
+}
+
+model Answer {
+    id        String    @id @default(cuid())
+    qNumber   Int
+    answer    String
+    quizSetId String
+    quizSet   QuizSet   @relation(fields: [quizSetId], references: [id], onDelete: Cascade)
+    attempts  Attempt[]
+    createdAt DateTime  @default(now())
+    updatedAt DateTime  @updatedAt
+
+    @@unique([quizSetId, qNumber])
+    @@index([quizSetId])
+}
+
+model Session {
+    id          String    @id @default(cuid())
+    quizSetId   String
+    quizSet     QuizSet   @relation(fields: [quizSetId], references: [id], onDelete: Cascade)
+    score       Int
+    total       Int
+    timeTakenMs Int
+    attempts    Attempt[]
+    createdAt   DateTime  @default(now())
+
+    @@index([quizSetId])
+}
+
+model Attempt {
+    id            String   @id @default(cuid())
+    sessionId     String
+    session       Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+    qNumber       Int
+    userAnswer    String
+    correctAnswer String
+    isCorrect     Boolean
+    timeTakenMs   Int
+    answerId      String?
+    answer        Answer?  @relation(fields: [answerId], references: [id], onDelete: SetNull)
+    createdAt     DateTime @default(now())
+
+    @@index([sessionId])
+    @@index([answerId])
+    @@index([qNumber])
+}

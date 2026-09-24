@@ -1,0 +1,75 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# Dependencies
+/node_modules
+/.pnp
+.pnp.js
+.pnpm-store
+
+# Testing & Coverage
+/coverage
+
+# Database
+/prisma/db.sqlite
+/prisma/db.sqlite-journal
+db.sqlite
+db.sqlite-journal
+*.sqlite
+*.sqlite3
+
+# Next.js Build Output
+/.next/
+/out/
+/build
+/dist
+next-env.d.ts
+
+# Production & Vercel
+.vercel
+
+# Debug & Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Local Environment Variables
+# Do not commit any .env files to git, except for .env.example
+.env
+.env.*
+!.env.example
+
+# TypeScript & Linter Cache
+*.tsbuildinfo
+.eslintcache
+
+# OS Files & Artifacts
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+*.pem
+
+# Editor & IDE Directories
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Temporary files & AI Scratchpad
+*.tmp
+*.tmp.*
+scratch/
+.agents/scratch/
