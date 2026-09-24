@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -7,7 +7,7 @@ import {
   BarChart3,
   Settings,
   ShieldCheck,
-  Compass,
+  Target,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -16,6 +16,7 @@ interface NavItemProps {
   label: string;
   icon: React.ComponentType<{ className?: string }>;
   badge?: string;
+  description?: string;
 }
 
 const NAV_ITEMS: NavItemProps[] = [
@@ -23,17 +24,20 @@ const NAV_ITEMS: NavItemProps[] = [
     href: "/quiz",
     label: "Practice Quizzes",
     icon: BookOpen,
+    description: "Chapter question sets",
   },
   {
     href: "/dashboard",
     label: "Analytics & Stats",
     icon: BarChart3,
+    description: "Performance overview",
   },
   {
     href: "/admin",
     label: "Admin Studio",
     icon: Settings,
     badge: "Admin",
+    description: "Upload & manage content",
   },
 ];
 
@@ -49,30 +53,38 @@ export function AppSidebar({
   return (
     <aside
       className={cn(
-        "flex flex-col h-full bg-card/60 backdrop-blur-xl border-r border-border/40 select-none",
+        "flex flex-col h-full select-none",
+        "bg-sidebar/95 backdrop-blur-xl border-r border-sidebar-border",
         className
       )}
     >
       {/* Brand Header */}
-      <div className="p-6 border-b border-border/40 flex items-center gap-3">
-        <div className="h-10 w-10 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/20 text-white font-bold ring-1 ring-white/20">
-          <ShieldCheck className="h-5 w-5" />
-        </div>
-        <div>
-          <h1 className="font-bold text-sm tracking-wide text-foreground flex items-center gap-1.5">
-            BAF WRITTEN <span className="text-xs px-1.5 py-0.5 rounded bg-sky-500/10 text-sky-400 font-mono">v1</span>
-          </h1>
-          <p className="text-xs text-muted-foreground font-medium">
-            Air Force Exam Practice
-          </p>
+      <div className="p-5 border-b border-sidebar-border">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/25 text-white ring-1 ring-white/15 flex-shrink-0">
+            <ShieldCheck className="h-5 w-5" />
+          </div>
+          <div className="min-w-0">
+            <div className="flex items-center gap-2">
+              <h1 className="font-extrabold text-sm tracking-tight text-sidebar-foreground">
+                BAF WRITTEN
+              </h1>
+              <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-primary/15 text-primary font-bold font-mono">
+                v1
+              </span>
+            </div>
+            <p className="text-[11px] text-sidebar-foreground/50 font-medium mt-0.5 truncate">
+              Air Force Exam Practice
+            </p>
+          </div>
         </div>
       </div>
 
       {/* Nav List */}
-      <div className="flex-1 py-6 px-3 space-y-1.5 overflow-y-auto">
-        <div className="px-3 pb-2 text-[11px] font-semibold uppercase tracking-wider text-muted-foreground/70">
-          Main Navigation
-        </div>
+      <div className="flex-1 py-5 px-3 space-y-1 overflow-y-auto">
+        <p className="px-3 pb-3 text-[10px] font-bold uppercase tracking-widest text-sidebar-foreground/35">
+          Navigation
+        </p>
         {NAV_ITEMS.map((item) => {
           const Icon = item.icon;
           const isActive =
@@ -85,28 +97,51 @@ export function AppSidebar({
               href={item.href}
               onClick={onNavigate}
               className={cn(
-                "group flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-medium transition-all duration-200",
+                "group flex items-center justify-between px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-150",
                 isActive
-                  ? "bg-primary text-primary-foreground shadow-md shadow-primary/20 font-semibold"
-                  : "text-muted-foreground hover:text-foreground hover:bg-accent/60"
+                  ? "bg-primary text-primary-foreground shadow-md shadow-primary/25"
+                  : "text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent"
               )}
             >
-              <div className="flex items-center gap-3">
-                <Icon
+              <div className="flex items-center gap-3 min-w-0">
+                <div
                   className={cn(
-                    "h-4 w-4 transition-transform group-hover:scale-110",
-                    isActive ? "text-primary-foreground" : "text-muted-foreground"
+                    "h-7 w-7 rounded-lg flex items-center justify-center flex-shrink-0 transition-all",
+                    isActive
+                      ? "bg-white/20"
+                      : "bg-sidebar-accent group-hover:bg-sidebar-accent/80"
                   )}
-                />
-                <span>{item.label}</span>
+                >
+                  <Icon
+                    className={cn(
+                      "h-3.5 w-3.5",
+                      isActive
+                        ? "text-primary-foreground"
+                        : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground"
+                    )}
+                  />
+                </div>
+                <div className="min-w-0">
+                  <div className="truncate font-semibold text-[13px]">{item.label}</div>
+                  {item.description && (
+                    <div
+                      className={cn(
+                        "text-[10px] truncate font-normal mt-0.5 leading-none",
+                        isActive ? "text-white/60" : "text-sidebar-foreground/35"
+                      )}
+                    >
+                      {item.description}
+                    </div>
+                  )}
+                </div>
               </div>
               {item.badge && (
                 <span
                   className={cn(
-                    "text-[10px] uppercase font-mono px-1.5 py-0.5 rounded-md",
+                    "text-[9px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-md flex-shrink-0",
                     isActive
                       ? "bg-white/20 text-white"
-                      : "bg-muted text-muted-foreground"
+                      : "bg-sidebar-accent text-sidebar-foreground/40"
                   )}
                 >
                   {item.badge}
@@ -118,15 +153,19 @@ export function AppSidebar({
       </div>
 
       {/* Bottom Mission Card */}
-      <div className="p-4 border-t border-border/40">
-        <div className="rounded-xl p-3.5 bg-gradient-to-br from-sky-500/10 via-indigo-500/5 to-transparent border border-sky-500/20 space-y-1.5">
-          <div className="flex items-center gap-2 text-sky-400 font-semibold text-xs">
-            <Compass className="h-3.5 w-3.5" />
-            <span>Mission Objective</span>
+      <div className="p-3 border-t border-sidebar-border">
+        <div className="rounded-xl p-3.5 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent border border-primary/20 space-y-2">
+          <div className="flex items-center gap-2 text-primary font-bold text-xs">
+            <Target className="h-3.5 w-3.5" />
+            <span>Mission Target</span>
           </div>
-          <p className="text-[11px] text-muted-foreground leading-relaxed">
-            Target 90%+ accuracy on all chapters before the final written test date.
+          <p className="text-[11px] text-sidebar-foreground/50 leading-relaxed">
+            Achieve 90%+ accuracy on all chapters before the final exam.
           </p>
+          <div className="w-full h-1.5 rounded-full bg-sidebar-accent overflow-hidden">
+            <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-primary to-blue-500" />
+          </div>
+          <p className="text-[10px] text-sidebar-foreground/35 font-mono">72% overall mastery</p>
         </div>
       </div>
     </aside>

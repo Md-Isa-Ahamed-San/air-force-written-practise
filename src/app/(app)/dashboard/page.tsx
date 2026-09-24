@@ -6,6 +6,8 @@ export const dynamic = "force-dynamic";
 export default async function AnalyticsDashboardPage() {
   void api.stats.getOverview.prefetch();
   void api.stats.getSessionHistory.prefetch();
+  void api.stats.getRecentSessionsList.prefetch();
+  void api.stats.getPacingOverview.prefetch();
   void api.stats.getQuestionAccuracy.prefetch();
   void api.stats.getWeakQuestions.prefetch();
   void api.stats.getMastery.prefetch();

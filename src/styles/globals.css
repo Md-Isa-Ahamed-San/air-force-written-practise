@@ -1,12 +1,12 @@
-@import "tailwindcss";
+﻿@import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (&:is(.dark *));
 
+/* Map Inter font from Next.js font variable */
 @theme {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-sans: var(--font-inter), "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
 }
 
 @theme inline {
@@ -52,73 +52,82 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* ───────────────────────────────────────
+   LIGHT THEME  — warm cream, like reference
+─────────────────────────────────────── */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  /* Warm cream background matching reference screenshot */
+  --background: hsl(45, 30%, 97%);
+  --foreground: hsl(220, 25%, 10%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(220, 25%, 10%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(220, 25%, 10%);
+  --primary: hsl(221, 83%, 53%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(45, 20%, 93%);
+  --secondary-foreground: hsl(220, 20%, 20%);
+  --muted: hsl(45, 15%, 93%);
+  --muted-foreground: hsl(220, 12%, 46%);
+  --accent: hsl(221, 83%, 53% / 8%);
+  --accent-foreground: hsl(221, 83%, 40%);
+  --destructive: hsl(0, 84%, 60%);
+  --border: hsl(220, 15%, 88%);
+  --input: hsl(220, 13%, 90%);
+  --ring: hsl(221, 83%, 53%);
+  --chart-1: hsl(221, 83%, 53%);
+  --chart-2: hsl(262, 80%, 58%);
+  --chart-3: hsl(142, 71%, 45%);
+  --chart-4: hsl(38, 92%, 50%);
+  --chart-5: hsl(0, 84%, 60%);
+  --radius: 0.75rem;
+  --sidebar: hsl(45, 25%, 95%);
+  --sidebar-foreground: hsl(220, 25%, 10%);
+  --sidebar-primary: hsl(221, 83%, 53%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(221, 83%, 53% / 8%);
+  --sidebar-accent-foreground: hsl(221, 83%, 40%);
+  --sidebar-border: hsl(220, 15%, 88%);
+  --sidebar-ring: hsl(221, 83%, 53%);
 }
 
+/* ───────────────────────────────────────
+   DARK THEME  — deep forest green, like reference screenshot
+   Reference: dark background is a warm dark green ~hsl(138, 22%, 14%)
+─────────────────────────────────────── */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Deep forest green — matches the dark reference exactly */
+  --background: hsl(138, 20%, 11%);
+  --foreground: hsl(140, 20%, 92%);
+  --card: hsl(138, 18%, 15%);
+  --card-foreground: hsl(140, 20%, 92%);
+  --popover: hsl(138, 18%, 17%);
+  --popover-foreground: hsl(140, 20%, 92%);
+  --primary: hsl(221, 83%, 65%);
+  --primary-foreground: hsl(0, 0%, 100%);
+  --secondary: hsl(138, 14%, 20%);
+  --secondary-foreground: hsl(140, 15%, 85%);
+  --muted: hsl(138, 14%, 19%);
+  --muted-foreground: hsl(140, 10%, 55%);
+  --accent: hsl(138, 20%, 22%);
+  --accent-foreground: hsl(140, 20%, 88%);
+  --destructive: hsl(0, 72%, 60%);
+  --border: hsl(138, 15%, 22%);
+  --input: hsl(138, 15%, 22%);
+  --ring: hsl(221, 83%, 65%);
+  --chart-1: hsl(221, 83%, 65%);
+  --chart-2: hsl(262, 75%, 68%);
+  --chart-3: hsl(142, 60%, 55%);
+  --chart-4: hsl(38, 85%, 60%);
+  --chart-5: hsl(0, 72%, 60%);
+  --sidebar: hsl(138, 22%, 12%);
+  --sidebar-foreground: hsl(140, 20%, 88%);
+  --sidebar-primary: hsl(221, 83%, 65%);
+  --sidebar-primary-foreground: hsl(0, 0%, 100%);
+  --sidebar-accent: hsl(138, 20%, 22%);
+  --sidebar-accent-foreground: hsl(140, 20%, 85%);
+  --sidebar-border: hsl(138, 15%, 20%);
+  --sidebar-ring: hsl(221, 83%, 65%);
 }
 
 @layer base {
@@ -127,8 +136,34 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "cv11", "ss01";
   }
   html {
-    @apply font-sans;
+    font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-inter), "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+    letter-spacing: -0.025em;
+    font-weight: 700;
+  }
+}
+
+@layer utilities {
+  .animate-in-up {
+    animation: slideInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  @keyframes slideInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card-hover {
+    @apply transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg;
+  }
+  .glass {
+    @apply bg-card/80 backdrop-blur-xl border border-border;
   }
 }

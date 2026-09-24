@@ -1,6 +1,6 @@
 "use client";
 
-import { useReducer, useMemo, useState } from "react";
+import { useReducer, useMemo, useState, useEffect } from "react";
 import Link from "next/link";
 import { AlertCircle, BookOpen, Layers } from "lucide-react";
 import { api } from "~/trpc/react";
@@ -182,6 +182,10 @@ export function QuizEngine({ quizSetId }: { quizSetId: string }) {
   const [isPanelCollapsed, setIsPanelCollapsed] = useState(false);
   const [mobileTab, setMobileTab] = useState<"image" | "omr">("image");
 
+  // ⚠️ Must be called unconditionally at the top level — before any early returns
+  const currentTimestamp = useCurrentTimestamp();
+  const totalElapsedSec = useElapsedSeconds(state.sessionStartTime);
+
   // Calculate question metrics
   const totalQuestions = quizSet?.answers.length ?? 0;
 
@@ -201,6 +205,90 @@ export function QuizEngine({ quizSetId }: { quizSetId: string }) {
     }
     return list;
   }, [quizSet, state.answers]);
+
+  // Global Keyboard Shortcuts (1-4 -> A-D, A-D, ArrowLeft/ArrowRight)
+  useEffect(() => {
+    if (state.phase !== "answering" || state.submitDialogOpen) return;
+
+    const handleWindowKeyDown = (e: KeyboardEvent) => {
+      if (e.defaultPrevented) return;
+      if (e.ctrlKey || e.altKey || e.metaKey) return;
+
+      const activeTag = document.activeElement?.tagName?.toLowerCase();
+      if (activeTag === "textarea") return;
+
+      const key = e.key;
+
+      // 1, 2, 3, 4 (and Numpad 1-4, Bengali digits) -> A, B, C, D
+      const numMap: Record<string, string> = {
+        "1": "A",
+        "2": "B",
+        "3": "C",
+        "4": "D",
+        "১": "A",
+        "২": "B",
+        "৩": "C",
+        "৪": "D",
+      };
+
+      if (numMap[key]) {
+        e.preventDefault();
+        dispatch({
+          type: "SET_ANSWER",
+          payload: { qNumber: state.currentQuestion, answer: numMap[key]! },
+        });
+        return;
+      }
+
+      // Letter A, B, C, D and Bengali ক, খ, গ, ঘ
+      const letterMap: Record<string, string> = {
+        a: "A",
+        A: "A",
+        b: "B",
+        B: "B",
+        c: "C",
+        C: "C",
+        d: "D",
+        D: "D",
+        "ক": "A",
+        "খ": "B",
+        "গ": "C",
+        "ঘ": "D",
+      };
+
+      if (letterMap[key]) {
+        e.preventDefault();
+        dispatch({
+          type: "SET_ANSWER",
+          payload: { qNumber: state.currentQuestion, answer: letterMap[key]! },
+        });
+        return;
+      }
+
+      // Arrow navigation
+      if (key === "ArrowLeft" || key === "ArrowUp") {
+        e.preventDefault();
+        dispatch({ type: "PREV_QUESTION" });
+        return;
+      }
+
+      if (key === "ArrowRight" || key === "ArrowDown") {
+        e.preventDefault();
+        if (state.currentQuestion < totalQuestions) {
+          dispatch({
+            type: "NEXT_QUESTION",
+            payload: { total: totalQuestions },
+          });
+        } else {
+          dispatch({ type: "SET_SUBMIT_DIALOG", payload: true });
+        }
+        return;
+      }
+    };
+
+    window.addEventListener("keydown", handleWindowKeyDown);
+    return () => window.removeEventListener("keydown", handleWindowKeyDown);
+  }, [state.phase, state.submitDialogOpen, state.currentQuestion, totalQuestions]);
 
   const handleConfirmSubmit = () => {
     if (!quizSet) return;
@@ -286,8 +374,6 @@ export function QuizEngine({ quizSetId }: { quizSetId: string }) {
   }
 
   // Active quiz answering interface - Full Viewport Distraction-Free (Live second-by-second updates)
-  const currentTimestamp = useCurrentTimestamp();
-  const totalElapsedSec = useElapsedSeconds(state.sessionStartTime);
 
   const currentAnswer = state.answers[state.currentQuestion] ?? "";
   const currentQAccumulatedMs = state.timers[state.currentQuestion] ?? 0;

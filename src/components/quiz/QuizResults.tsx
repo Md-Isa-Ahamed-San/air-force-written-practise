@@ -1,6 +1,6 @@
-"use client";
+﻿"use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import {
   CheckCircle2,
@@ -10,13 +10,13 @@ import {
   BarChart3,
   BookOpen,
   Award,
-  ChevronRight,
-  Filter,
+  TrendingUp,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { analyzeSessionPacing } from "~/lib/pacing";
+import { QuizPacingMatrix, type FilterOption } from "./QuizPacingMatrix";
+import { QuizQuestionReviewList } from "./QuizQuestionReviewList";
 
 export interface QuizAttemptResult {
   qNumber: number;
@@ -43,243 +43,193 @@ export function QuizResults({
   results: QuizSessionResult;
   onRetry: () => void;
 }) {
-  const [filter, setFilter] = useState<"all" | "wrong" | "correct">("all");
+  const [filter, setFilter] = useState<FilterOption>("all");
 
   const totalSec = Math.round(results.timeTakenMs / 1000);
   const minutes = Math.floor(totalSec / 60);
   const seconds = totalSec % 60;
   const formattedTotalTime = `${minutes}m ${seconds}s`;
-
-  const avgSecPerQ =
-    results.total > 0 ? (totalSec / results.total).toFixed(1) : "0";
-
   const incorrectCount = results.total - results.score;
 
-  const filteredAttempts = results.attempts.filter((att) => {
-    if (filter === "wrong") return !att.isCorrect;
-    if (filter === "correct") return att.isCorrect;
-    return true;
-  });
+  const { summary, enrichedAttempts } = useMemo(
+    () => analyzeSessionPacing(results.attempts),
+    [results.attempts]
+  );
 
-  const getStatusText = (pct: number) => {
-    if (pct >= 85) return { text: "OUTSTANDING / QUALIFIED", color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10" };
-    if (pct >= 70) return { text: "MERIT PASS", color: "text-sky-400 border-sky-500/30 bg-sky-500/10" };
-    if (pct >= 50) return { text: "SATISFACTORY", color: "text-amber-400 border-amber-500/30 bg-amber-500/10" };
-    return { text: "REVISION RECOMMENDED", color: "text-red-400 border-red-500/30 bg-red-500/10" };
+  const enrichedMap = useMemo(() => {
+    const map = new Map<number, (typeof enrichedAttempts)[0]>();
+    for (const item of enrichedAttempts) map.set(item.qNumber, item);
+    return map;
+  }, [enrichedAttempts]);
+
+  const filteredAttempts = useMemo(() => {
+    return results.attempts.filter((att) => {
+      const pacing = enrichedMap.get(att.qNumber);
+      if (filter === "wrong") return !att.isCorrect;
+      if (filter === "correct") return att.isCorrect;
+      if (filter === "speed_demon") return pacing?.quadrant === "speed_demon";
+      if (filter === "careless_trap") return pacing?.quadrant === "careless_trap";
+      if (filter === "time_grind") return pacing?.quadrant === "time_grind";
+      if (filter === "time_sink") return pacing?.quadrant === "time_sink";
+      return true;
+    });
+  }, [results.attempts, filter, enrichedMap]);
+
+  const getStatus = (pct: number) => {
+    if (pct >= 85)
+      return { text: "OUTSTANDING / QUALIFIED", colorClass: "text-emerald-600 dark:text-emerald-400", badgeClass: "bg-emerald-500/10 border-emerald-500/25 text-emerald-600 dark:text-emerald-400", barClass: "from-emerald-400 to-emerald-600" };
+    if (pct >= 70)
+      return { text: "MERIT PASS", colorClass: "text-primary", badgeClass: "bg-primary/10 border-primary/25 text-primary", barClass: "from-primary to-blue-600" };
+    if (pct >= 50)
+      return { text: "SATISFACTORY", colorClass: "text-amber-600 dark:text-amber-400", badgeClass: "bg-amber-500/10 border-amber-500/25 text-amber-600 dark:text-amber-400", barClass: "from-amber-400 to-orange-500" };
+    return { text: "REVISION RECOMMENDED", colorClass: "text-red-600 dark:text-red-400", badgeClass: "bg-red-500/10 border-red-500/25 text-red-600 dark:text-red-400", barClass: "from-red-400 to-red-600" };
   };
 
-  const status = getStatusText(results.percentage);
+  const status = getStatus(results.percentage);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-in fade-in-50 duration-300">
+    <div className="max-w-4xl mx-auto space-y-6 animate-in-up">
       {/* Score Summary Card */}
-      <div className="relative rounded-3xl border border-border/50 bg-gradient-to-b from-card/80 to-card/40 backdrop-blur-xl p-8 shadow-2xl text-center space-y-6 overflow-hidden">
-        <div className="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-sky-500 via-indigo-500 to-emerald-500" />
+      <div className="relative rounded-3xl border border-border/60 bg-card overflow-hidden shadow-xl">
+        {/* Gradient accent top */}
+        <div className={`h-1.5 w-full bg-gradient-to-r ${status.barClass}`} />
 
-        <div className="space-y-2">
-          <Badge variant="outline" className={`font-mono text-xs uppercase px-3 py-1 ${status.color}`}>
-            <Award className="h-3.5 w-3.5 mr-1" />
-            {status.text}
-          </Badge>
-          <h2 className="text-xl sm:text-2xl font-bold text-foreground">
-            {quizTitle}
-          </h2>
-          <p className="text-xs text-muted-foreground font-mono">
-            COMPLETED EXAMINATION ATTEMPT
-          </p>
-        </div>
+        <div className="p-6 sm:p-8 space-y-6">
+          {/* Status + title */}
+          <div className="text-center space-y-3">
+            <Badge
+              variant="outline"
+              className={`font-bold text-xs uppercase px-4 py-1.5 border font-mono ${status.badgeClass}`}
+            >
+              <Award className="h-3.5 w-3.5 mr-1.5" />
+              {status.text}
+            </Badge>
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground">{quizTitle}</h2>
+            <p className="text-xs text-muted-foreground font-mono font-semibold uppercase tracking-widest">
+              Completed Examination Attempt
+            </p>
+          </div>
 
-        {/* Big Score Numbers */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-6 sm:gap-12 py-4">
-          <div className="text-center">
-            <span className="text-5xl sm:text-7xl font-extrabold tracking-tight text-foreground font-mono">
-              {results.score}
-              <span className="text-2xl sm:text-3xl font-medium text-muted-foreground">
-                /{results.total}
+          {/* Big Numbers */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-8 sm:gap-16 py-2">
+            <div className="text-center">
+              <span className="text-5xl sm:text-7xl font-extrabold tracking-tight text-foreground font-mono leading-none">
+                {results.score}
+                <span className="text-2xl sm:text-3xl font-semibold text-muted-foreground">
+                  /{results.total}
+                </span>
               </span>
-            </span>
-            <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mt-1">
-              Final Score
-            </p>
+              <p className="text-xs text-muted-foreground font-semibold uppercase tracking-widest mt-2">
+                Final Marks
+              </p>
+            </div>
+
+            <div className="hidden sm:block h-14 w-px bg-border/50" />
+
+            <div className="text-center">
+              <span className={`text-5xl sm:text-7xl font-extrabold tracking-tight font-mono leading-none ${status.colorClass}`}>
+                {results.percentage}%
+              </span>
+              <p className="text-xs text-muted-foreground font-semibold uppercase tracking-widest mt-2">
+                Accuracy Rate
+              </p>
+            </div>
           </div>
 
-          <div className="h-12 w-px bg-border/40 hidden sm:block" />
-
-          <div className="text-center">
-            <span className="text-5xl sm:text-7xl font-extrabold tracking-tight font-mono text-sky-400">
-              {results.percentage}%
-            </span>
-            <p className="text-xs text-muted-foreground font-semibold uppercase tracking-wider mt-1">
-              Accuracy Rate
-            </p>
-          </div>
-        </div>
-
-        {/* Quick Metrics Bar */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 pt-4 border-t border-border/30">
-          <div className="p-3 rounded-xl bg-background/60 border border-border/40 space-y-0.5">
-            <span className="text-xs text-muted-foreground">Total Time</span>
-            <p className="font-mono font-bold text-foreground text-sm flex items-center justify-center gap-1">
-              <Clock className="h-3.5 w-3.5 text-sky-400" />
-              {formattedTotalTime}
-            </p>
-          </div>
-          <div className="p-3 rounded-xl bg-background/60 border border-border/40 space-y-0.5">
-            <span className="text-xs text-muted-foreground">Avg Speed</span>
-            <p className="font-mono font-bold text-foreground text-sm">
-              {avgSecPerQ}s / Q
-            </p>
-          </div>
-          <div className="p-3 rounded-xl bg-background/60 border border-border/40 space-y-0.5">
-            <span className="text-xs text-muted-foreground">Correct</span>
-            <p className="font-mono font-bold text-emerald-400 text-sm flex items-center justify-center gap-1">
-              <CheckCircle2 className="h-3.5 w-3.5" />
-              {results.score} Questions
-            </p>
-          </div>
-          <div className="p-3 rounded-xl bg-background/60 border border-border/40 space-y-0.5">
-            <span className="text-xs text-muted-foreground">Incorrect</span>
-            <p className="font-mono font-bold text-red-400 text-sm flex items-center justify-center gap-1">
-              <XCircle className="h-3.5 w-3.5" />
-              {incorrectCount} Questions
-            </p>
-          </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          <Button
-            type="button"
-            onClick={onRetry}
-            className="gap-2 bg-gradient-to-r from-sky-600 to-indigo-600 hover:from-sky-500 hover:to-indigo-500 text-white shadow-lg shadow-sky-500/20"
-          >
-            <RotateCcw className="h-4 w-4" />
-            <span>Retake Practice</span>
-          </Button>
-
-          <Link
-            href="/dashboard"
-            className={buttonVariants({
-              variant: "outline",
-              className: "gap-2 hover:border-sky-500/50",
-            })}
-          >
-            <BarChart3 className="h-4 w-4 text-sky-400" />
-            <span>View Analytics</span>
-          </Link>
-
-          <Link
-            href="/quiz"
-            className={buttonVariants({
-              variant: "ghost",
-              className: "gap-2 text-muted-foreground hover:text-foreground",
-            })}
-          >
-            <BookOpen className="h-4 w-4" />
-            <span>All Question Sets</span>
-          </Link>
-        </div>
-      </div>
-
-      {/* Results Breakdown */}
-      <div className="space-y-4">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-          <h3 className="text-lg font-bold text-foreground flex items-center gap-2">
-            <Filter className="h-4 w-4 text-sky-400" />
-            <span>Question-by-Question Breakdown</span>
-          </h3>
-
-          <Tabs
-            value={filter}
-            onValueChange={(val) => setFilter(val as "all" | "wrong" | "correct")}
-          >
-            <TabsList className="bg-card border border-border/40 p-1">
-              <TabsTrigger value="all" className="text-xs">
-                All ({results.total})
-              </TabsTrigger>
-              <TabsTrigger value="wrong" className="text-xs text-red-400">
-                Wrong ({incorrectCount})
-              </TabsTrigger>
-              <TabsTrigger value="correct" className="text-xs text-emerald-400">
-                Correct ({results.score})
-              </TabsTrigger>
-            </TabsList>
-          </Tabs>
-        </div>
-
-        <div className="rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm overflow-hidden">
-          <div className="divide-y divide-border/30 max-h-[480px] overflow-y-auto">
-            {filteredAttempts.length === 0 ? (
-              <div className="p-8 text-center text-sm text-muted-foreground">
-                No questions match the current filter.
-              </div>
-            ) : (
-              filteredAttempts.map((att) => (
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            {[
+              {
+                label: "Total Time",
+                value: formattedTotalTime,
+                icon: Clock,
+                color: "text-primary",
+              },
+              {
+                label: "Avg Speed",
+                value: `${summary.avgTimeSec}s / Q`,
+                icon: TrendingUp,
+                color: "text-violet-500 dark:text-violet-400",
+              },
+              {
+                label: "Correct",
+                value: `${results.score} Qs`,
+                icon: CheckCircle2,
+                color: "text-emerald-500 dark:text-emerald-400",
+              },
+              {
+                label: "Incorrect",
+                value: `${incorrectCount} Qs`,
+                icon: XCircle,
+                color: "text-red-500 dark:text-red-400",
+              },
+            ].map((m) => {
+              const Icon = m.icon;
+              return (
                 <div
-                  key={att.qNumber}
-                  className={`p-4 flex items-center justify-between gap-4 transition-colors ${
-                    att.isCorrect
-                      ? "hover:bg-emerald-500/5"
-                      : "bg-red-500/5 hover:bg-red-500/10"
-                  }`}
+                  key={m.label}
+                  className="p-3 rounded-xl bg-muted/30 border border-border/40 text-center space-y-1"
                 >
-                  <div className="flex items-center gap-3">
-                    <div
-                      className={`h-8 w-8 rounded-lg flex items-center justify-center font-mono font-bold text-xs ${
-                        att.isCorrect
-                          ? "bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
-                          : "bg-red-500/10 text-red-400 border border-red-500/20"
-                      }`}
-                    >
-                      {att.isCorrect ? (
-                        <CheckCircle2 className="h-4 w-4" />
-                      ) : (
-                        <XCircle className="h-4 w-4" />
-                      )}
-                    </div>
-                    <div>
-                      <span className="font-mono font-bold text-foreground text-sm">
-                        Question #{att.qNumber}
-                      </span>
-                      <div className="text-xs text-muted-foreground flex items-center gap-2 mt-0.5">
-                        <span>
-                          Time: {(att.timeTakenMs / 1000).toFixed(1)}s
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-4 text-sm font-mono">
-                    <div className="text-right">
-                      <span className="text-[11px] text-muted-foreground block">
-                        Your Answer
-                      </span>
-                      <span
-                        className={`font-bold ${
-                          att.isCorrect ? "text-emerald-400" : "text-red-400"
-                        }`}
-                      >
-                        {att.userAnswer || "(skipped)"}
-                      </span>
-                    </div>
-
-                    {!att.isCorrect && (
-                      <div className="text-right pl-2 border-l border-border/40">
-                        <span className="text-[11px] text-muted-foreground block">
-                          Correct Answer
-                        </span>
-                        <span className="font-bold text-emerald-400">
-                          {att.correctAnswer}
-                        </span>
-                      </div>
-                    )}
-                  </div>
+                  <span className="text-xs text-muted-foreground font-medium">{m.label}</span>
+                  <p className={`font-mono font-bold text-sm flex items-center justify-center gap-1 ${m.color}`}>
+                    <Icon className="h-3.5 w-3.5" />
+                    {m.value}
+                  </p>
                 </div>
-              ))
-            )}
+              );
+            })}
+          </div>
+
+          {/* Action Buttons */}
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <Button
+              type="button"
+              onClick={onRetry}
+              className="gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-primary-foreground shadow-lg shadow-primary/20 font-semibold"
+            >
+              <RotateCcw className="h-4 w-4" />
+              <span>Retake Practice</span>
+            </Button>
+
+            <Link
+              href="/dashboard"
+              className={buttonVariants({
+                variant: "outline",
+                className: "gap-2 hover:border-primary/40 hover:bg-accent",
+              })}
+            >
+              <BarChart3 className="h-4 w-4 text-primary" />
+              <span>View Analytics</span>
+            </Link>
+
+            <Link
+              href="/quiz"
+              className={buttonVariants({
+                variant: "ghost",
+                className: "gap-2 text-muted-foreground hover:text-foreground",
+              })}
+            >
+              <BookOpen className="h-4 w-4" />
+              <span>All Question Sets</span>
+            </Link>
           </div>
         </div>
       </div>
+
+      {/* Pacing Matrix */}
+      <QuizPacingMatrix summary={summary} filter={filter} onSelectFilter={setFilter} />
+
+      {/* Question Review */}
+      <QuizQuestionReviewList
+        attempts={filteredAttempts}
+        enrichedMap={enrichedMap}
+        summary={summary}
+        filter={filter}
+        total={results.total}
+        score={results.score}
+        incorrectCount={incorrectCount}
+        onSelectFilter={setFilter}
+      />
     </div>
   );
 }

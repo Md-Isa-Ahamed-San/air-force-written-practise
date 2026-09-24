@@ -27,6 +27,24 @@ export const ENGLISH_TO_BENGALI_OPTION: Record<string, string> = {
   "D": "ঘ",
 };
 
+export const NUMBER_TO_ENGLISH_OPTION: Record<string, string> = {
+  "1": "A",
+  "2": "B",
+  "3": "C",
+  "4": "D",
+  "১": "A",
+  "২": "B",
+  "৩": "C",
+  "৪": "D",
+};
+
+export const OPTION_INDEX_TO_LETTER: Record<number, string> = {
+  1: "A",
+  2: "B",
+  3: "C",
+  4: "D",
+};
+
 /**
  * Cleans an answer string token, stripping leading/trailing punctuation
  * like periods, commas, colons, Bengali dari, and brackets.
@@ -38,6 +56,11 @@ export function cleanAnswerToken(token: string): string {
     .replace(/^[\(\[\"\'\`]+/, "")
     .replace(/[\.।,;\)\:\]\"\'\`]+$/, "")
     .trim();
+
+  // If it's a number 1-4, convert to A-D
+  if (NUMBER_TO_ENGLISH_OPTION[cleaned]) {
+    return NUMBER_TO_ENGLISH_OPTION[cleaned]!;
+  }
 
   // If it's a standard single letter a-d / A-D, standardize to uppercase
   const upper = cleaned.toUpperCase();
@@ -57,6 +80,9 @@ export function normalizeAnswer(ans: string): string {
   const upper = cleaned.toUpperCase();
   if (["A", "B", "C", "D"].includes(upper)) {
     return upper;
+  }
+  if (NUMBER_TO_ENGLISH_OPTION[cleaned]) {
+    return NUMBER_TO_ENGLISH_OPTION[cleaned]!;
   }
   if (BENGALI_TO_ENGLISH_OPTION[cleaned]) {
     return BENGALI_TO_ENGLISH_OPTION[cleaned]!;

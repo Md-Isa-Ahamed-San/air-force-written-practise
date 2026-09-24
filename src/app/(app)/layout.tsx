@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
@@ -16,7 +16,6 @@ export default function AppLayout({
   const pathname = usePathname();
 
   // Full-screen distraction-free mode on active exam pages (/quiz/[quizSetId])
-  // Hides sidebar and top navigation to maximize scanned book page viewing area
   const isExamPage = /^\/quiz\/[^/]+$/.test(pathname);
 
   if (isExamPage) {
@@ -38,16 +37,16 @@ export default function AppLayout({
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-50 flex md:hidden">
           <div
-            className="fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity"
+            className="fixed inset-0 bg-black/50 backdrop-blur-sm"
             onClick={() => setMobileMenuOpen(false)}
           />
-          <div className="relative flex-1 flex flex-col max-w-xs w-full bg-card">
+          <div className="relative flex-1 flex flex-col max-w-xs w-full bg-sidebar shadow-2xl">
             <div className="absolute top-3 right-3 z-10">
               <Button
                 variant="ghost"
                 size="icon"
                 onClick={() => setMobileMenuOpen(false)}
-                className="h-8 w-8 text-muted-foreground"
+                className="h-8 w-8 text-muted-foreground rounded-xl hover:bg-accent"
               >
                 <X className="h-4 w-4" />
               </Button>

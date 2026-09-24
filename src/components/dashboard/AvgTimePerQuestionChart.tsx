@@ -48,8 +48,11 @@ function CustomBarTooltip({ active, payload }: CustomTooltipProps) {
   return null;
 }
 
+import { useState } from "react";
+
 export function AvgTimePerQuestionChart() {
   const { data: qStats, isLoading } = api.stats.getQuestionAccuracy.useQuery();
+  const [rangeIndex, setRangeIndex] = useState(0);
 
   if (isLoading) {
     return (
@@ -61,17 +64,47 @@ export function AvgTimePerQuestionChart() {
   }
 
   const hasData = qStats && qStats.length > 0;
+  const pageSize = 20;
+  const totalPages = Math.ceil((qStats?.length ?? 0) / pageSize);
+  const displayedStats =
+    qStats?.slice(rangeIndex * pageSize, (rangeIndex + 1) * pageSize) ?? [];
 
   return (
     <div className="p-6 rounded-2xl border border-border/50 bg-card/60 backdrop-blur-sm space-y-4 flex flex-col justify-between">
-      <div className="space-y-0.5">
-        <h3 className="text-base font-bold text-foreground flex items-center gap-2">
-          <Clock className="h-4 w-4 text-indigo-400" />
-          <span>Average Time per Question Number</span>
-        </h3>
-        <p className="text-xs text-muted-foreground">
-          Identify pacing bottlenecks across consecutive test questions
-        </p>
+      <div className="flex items-start justify-between gap-2">
+        <div className="space-y-0.5">
+          <h3 className="text-base font-bold text-foreground flex items-center gap-2">
+            <Clock className="h-4 w-4 text-indigo-400" />
+            <span>Average Time per Question Number</span>
+          </h3>
+          <p className="text-xs text-muted-foreground">
+            Identify pacing bottlenecks across consecutive test questions
+          </p>
+        </div>
+
+        {totalPages > 1 && (
+          <div className="flex items-center gap-1 bg-background/60 border border-border/40 p-0.5 rounded-lg text-xs font-mono">
+            {Array.from({ length: totalPages }).map((_, idx) => {
+              const start = idx * pageSize + 1;
+              const end = Math.min((idx + 1) * pageSize, qStats?.length ?? 0);
+              const isActive = idx === rangeIndex;
+              return (
+                <button
+                  key={idx}
+                  type="button"
+                  onClick={() => setRangeIndex(idx)}
+                  className={`px-2 py-0.5 rounded transition-colors ${
+                    isActive
+                      ? "bg-indigo-500 text-white font-bold"
+                      : "text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  Q{start}-{end}
+                </button>
+              );
+            })}
+          </div>
+        )}
       </div>
 
       <div className="h-[280px] w-full pt-2">
@@ -83,7 +116,7 @@ export function AvgTimePerQuestionChart() {
         ) : (
           <ResponsiveContainer width="100%" height="100%">
             <BarChart
-              data={qStats.slice(0, 20)}
+              data={displayedStats}
               margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
             >
               <CartesianGrid

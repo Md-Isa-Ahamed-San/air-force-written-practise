@@ -1,5 +1,11 @@
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import {
+  analyzeSessionPacing,
+  calculateBenchmarkMs,
+  classifyAttemptQuadrant,
+} from "~/lib/pacing";
 
 export const statsRouter = createTRPCRouter({
   getOverview: publicProcedure.query(async ({ ctx }) => {
@@ -76,7 +82,214 @@ export const statsRouter = createTRPCRouter({
         month: "short",
         day: "numeric",
       }),
+      avgSecPerQ:
+        s.total > 0 ? +(s.timeTakenMs / s.total / 1000).toFixed(1) : "0",
     }));
+  }),
+
+  getRecentSessionsList: publicProcedure
+    .input(z.object({ limit: z.number().int().default(10) }).optional())
+    .query(async ({ ctx, input }) => {
+      const limit = input?.limit ?? 10;
+      const sessions = await ctx.db.session.findMany({
+        take: limit,
+        orderBy: { createdAt: "desc" },
+        include: {
+          quizSet: {
+            select: { id: true, title: true },
+          },
+          attempts: {
+            select: {
+              isCorrect: true,
+              timeTakenMs: true,
+            },
+          },
+        },
+      });
+
+      return sessions.map((s) => {
+        const totalSec = Math.round(s.timeTakenMs / 1000);
+        const avgSecPerQ =
+          s.total > 0 ? +(s.timeTakenMs / s.total / 1000).toFixed(1) : "0";
+        const benchmarkMs = calculateBenchmarkMs(s.attempts);
+
+        let speedDemon = 0;
+        let carelessTrap = 0;
+        let timeGrind = 0;
+        let timeSink = 0;
+
+        for (const att of s.attempts) {
+          const q = classifyAttemptQuadrant(
+            att.isCorrect,
+            att.timeTakenMs,
+            benchmarkMs
+          );
+          if (q === "speed_demon") speedDemon++;
+          else if (q === "careless_trap") carelessTrap++;
+          else if (q === "time_grind") timeGrind++;
+          else if (q === "time_sink") timeSink++;
+        }
+
+        return {
+          id: s.id,
+          quizSetId: s.quizSetId,
+          quizSetTitle: s.quizSet.title,
+          score: s.score,
+          total: s.total,
+          percentage: s.total > 0 ? Math.round((s.score / s.total) * 100) : 0,
+          timeTakenMs: s.timeTakenMs,
+          totalSec,
+          avgSecPerQ,
+          quadrants: {
+            speedDemon,
+            carelessTrap,
+            timeGrind,
+            timeSink,
+          },
+          createdAt: s.createdAt.toISOString(),
+          formattedDate: s.createdAt.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          }),
+          formattedTime: s.createdAt.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+      });
+    }),
+
+  getSessionDetail: publicProcedure
+    .input(z.object({ sessionId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const session = await ctx.db.session.findUnique({
+        where: { id: input.sessionId },
+        include: {
+          quizSet: {
+            select: { id: true, title: true },
+          },
+          attempts: {
+            orderBy: { qNumber: "asc" },
+          },
+        },
+      });
+
+      if (!session) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Session not found",
+        });
+      }
+
+      const { summary, enrichedAttempts } = analyzeSessionPacing(session.attempts);
+
+      return {
+        session: {
+          id: session.id,
+          quizSetId: session.quizSetId,
+          quizSetTitle: session.quizSet.title,
+          score: session.score,
+          total: session.total,
+          percentage:
+            session.total > 0 ? Math.round((session.score / session.total) * 100) : 0,
+          timeTakenMs: session.timeTakenMs,
+          createdAt: session.createdAt.toISOString(),
+          formattedDate: session.createdAt.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+          }),
+          formattedTime: session.createdAt.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        },
+        summary,
+        attempts: session.attempts.map((att, idx) => {
+          const pacing = enrichedAttempts[idx];
+          return {
+            id: att.id,
+            qNumber: att.qNumber,
+            userAnswer: att.userAnswer,
+            correctAnswer: att.correctAnswer,
+            isCorrect: att.isCorrect,
+            timeTakenMs: att.timeTakenMs,
+            timeSec: pacing ? pacing.timeSec : +(att.timeTakenMs / 1000).toFixed(1),
+            quadrant: pacing ? pacing.quadrant : "speed_demon",
+            relativePct: pacing ? pacing.relativePct : 50,
+          };
+        }),
+      };
+    }),
+
+  getPacingOverview: publicProcedure.query(async ({ ctx }) => {
+    const attempts = await ctx.db.attempt.findMany({
+      select: {
+        qNumber: true,
+        isCorrect: true,
+        timeTakenMs: true,
+      },
+    });
+
+    const total = attempts.length;
+    if (total === 0) {
+      return {
+        totalAttempts: 0,
+        avgTimeSec: 0,
+        avgTimeCorrectSec: 0,
+        avgTimeWrongSec: 0,
+        wastedTimeSec: 0,
+        productiveTimeSec: 0,
+        quadrantCounts: {
+          speed_demon: 0,
+          careless_trap: 0,
+          time_grind: 0,
+          time_sink: 0,
+        },
+        quadrantPercentages: {
+          speed_demon: 0,
+          careless_trap: 0,
+          time_grind: 0,
+          time_sink: 0,
+        },
+        timeBrackets: {
+          under15s: { count: 0, correct: 0, accuracy: 0 },
+          from15to30s: { count: 0, correct: 0, accuracy: 0 },
+          from30to60s: { count: 0, correct: 0, accuracy: 0 },
+          over60s: { count: 0, correct: 0, accuracy: 0 },
+        },
+      };
+    }
+
+    const { summary } = analyzeSessionPacing(attempts);
+
+    let correctTimeMs = 0;
+    let correctCount = 0;
+    let wrongTimeMs = 0;
+    let wrongCount = 0;
+
+    for (const a of attempts) {
+      if (a.isCorrect) {
+        correctTimeMs += a.timeTakenMs;
+        correctCount++;
+      } else {
+        wrongTimeMs += a.timeTakenMs;
+        wrongCount++;
+      }
+    }
+
+    return {
+      totalAttempts: total,
+      avgTimeSec: summary.avgTimeSec,
+      avgTimeCorrectSec:
+        correctCount > 0 ? +(correctTimeMs / correctCount / 1000).toFixed(1) : 0,
+      avgTimeWrongSec:
+        wrongCount > 0 ? +(wrongTimeMs / wrongCount / 1000).toFixed(1) : 0,
+      wastedTimeSec: summary.wastedTimeSec,
+      productiveTimeSec: summary.productiveTimeSec,
+      quadrantCounts: summary.quadrantCounts,
+      quadrantPercentages: summary.quadrantPercentages,
+      timeBrackets: summary.timeBrackets,
+    };
   }),
 
   getQuestionAccuracy: publicProcedure.query(async ({ ctx }) => {
