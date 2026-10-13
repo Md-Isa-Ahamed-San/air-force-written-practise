@@ -61,7 +61,7 @@ export function SessionDetailModal({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-3xl max-h-[85vh] overflow-y-auto bg-card/95 border-border/60 backdrop-blur-xl p-6">
+      <DialogContent className="w-[95vw] max-w-4xl sm:max-w-4xl max-h-[88vh] overflow-y-auto bg-card/95 border-border/60 backdrop-blur-xl p-6">
         <DialogHeader className="border-b border-border/40 pb-4">
           <div className="flex items-center justify-between gap-3">
             <div>

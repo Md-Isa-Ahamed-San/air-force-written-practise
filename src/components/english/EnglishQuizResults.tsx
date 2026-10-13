@@ -13,6 +13,8 @@ import {
   TrendingUp,
   Filter,
   Lightbulb,
+  History,
+  ArrowLeft,
 } from "lucide-react";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -48,10 +50,16 @@ export function EnglishQuizResults({
   quizTitle,
   results,
   onRetry,
+  onViewHistory,
+  onBack,
+  subtitle,
 }: {
   quizTitle: string;
   results: EnglishSessionResult;
-  onRetry: () => void;
+  onRetry?: () => void;
+  onViewHistory?: () => void;
+  onBack?: () => void;
+  subtitle?: string;
 }) {
   const [filter, setFilter] = useState<FilterOption>("all");
 
@@ -118,7 +126,7 @@ export function EnglishQuizResults({
   const status = getStatus(results.percentage);
 
   return (
-    <div className="max-w-4xl mx-auto space-y-6 animate-in-up">
+    <div className="w-full max-w-5xl mx-auto space-y-6 animate-in-up">
       {/* 1. Score Summary Glass Card */}
       <div className="relative rounded-3xl border border-white/20 dark:border-white/10 glass-panel overflow-hidden shadow-2xl">
         <div className={`h-1.5 w-full bg-gradient-to-r ${status.barClass}`} />
@@ -137,7 +145,7 @@ export function EnglishQuizResults({
               {quizTitle}
             </h2>
             <p className="text-xs text-muted-foreground font-mono font-semibold uppercase tracking-widest">
-              Completed English Practice Examination
+              {subtitle ?? "Completed English Practice Examination"}
             </p>
           </div>
 
@@ -219,14 +227,40 @@ export function EnglishQuizResults({
 
           {/* Action Buttons */}
           <div className="flex flex-wrap items-center justify-center gap-3">
-            <Button
-              type="button"
-              onClick={onRetry}
-              className="gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white shadow-lg shadow-primary/20 font-semibold rounded-xl text-xs"
-            >
-              <RotateCcw className="h-4 w-4" />
-              <span>Retake Quiz</span>
-            </Button>
+            {onBack && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onBack}
+                className="gap-2 rounded-xl text-xs hover:border-primary/40 font-semibold"
+              >
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Attempts</span>
+              </Button>
+            )}
+
+            {onRetry && (
+              <Button
+                type="button"
+                onClick={onRetry}
+                className="gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white shadow-lg shadow-primary/20 font-semibold rounded-xl text-xs"
+              >
+                <RotateCcw className="h-4 w-4" />
+                <span>Retake Quiz</span>
+              </Button>
+            )}
+
+            {onViewHistory && (
+              <Button
+                type="button"
+                variant="outline"
+                onClick={onViewHistory}
+                className="gap-2 hover:border-primary/40 hover:bg-accent rounded-xl text-xs font-semibold"
+              >
+                <History className="h-4 w-4 text-primary" />
+                <span>Past Attempts</span>
+              </Button>
+            )}
 
             <Link
               href="/dashboard"
@@ -330,7 +364,18 @@ export function EnglishQuizResults({
                 ? pacing.timeSec
                 : +(att.timeTakenMs / 1000).toFixed(1);
 
-              const optionsList = Object.entries(att.options || {});
+              const rawOpts = att.options;
+              const optionsList: [string, string][] = Array.isArray(rawOpts)
+                ? rawOpts.map((val, idx) => [
+                    ["A", "B", "C", "D"][idx] ?? String(idx + 1),
+                    String(val ?? ""),
+                  ])
+                : typeof rawOpts === "object" && rawOpts !== null
+                ? Object.entries(rawOpts as Record<string, unknown>).map(([k, v]) => [
+                    k.toUpperCase(),
+                    String(v ?? ""),
+                  ])
+                : [];
 
               return (
                 <div
@@ -385,17 +430,17 @@ export function EnglishQuizResults({
                   </div>
 
                   {/* Question Prompt */}
-                  <p className="text-sm sm:text-base font-semibold text-foreground mb-4 leading-relaxed">
-                    {att.question}
+                  <p className="text-sm sm:text-base font-semibold text-foreground mb-4 leading-relaxed whitespace-pre-line">
+                    {att.question ?? "Question text unavailable"}
                   </p>
 
                   {/* Options List */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-3">
                     {optionsList.map(([key, val]) => {
                       const isUserChoice =
-                        att.userAnswer?.trim().toUpperCase() === key.toUpperCase();
+                        (att.userAnswer ?? "").trim().toUpperCase() === key.toUpperCase();
                       const isCorrectKey =
-                        att.correctAnswer?.trim().toUpperCase() ===
+                        (att.correctAnswer ?? "").trim().toUpperCase() ===
                         key.toUpperCase();
 
                       let cardStyle =
@@ -444,12 +489,12 @@ export function EnglishQuizResults({
                   </div>
 
                   {/* Explanation Callout */}
-                  {att.explanation && (
-                    <div className="mt-3 p-3 rounded-xl bg-card/60 border border-primary/20 flex items-start gap-2.5 text-xs">
+                  {(att.explanation ?? "").trim().length > 0 && (
+                    <div className="mt-3 p-3.5 rounded-xl bg-card/60 border border-primary/20 flex items-start gap-2.5 text-xs">
                       <Lightbulb className="h-4 w-4 text-amber-400 flex-shrink-0 mt-0.5" />
-                      <div className="leading-relaxed text-muted-foreground">
+                      <div className="leading-relaxed text-muted-foreground whitespace-pre-line space-y-1">
                         <strong className="text-foreground">Explanation: </strong>
-                        {att.explanation}
+                        <span>{att.explanation}</span>
                       </div>
                     </div>
                   )}

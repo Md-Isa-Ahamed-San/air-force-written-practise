@@ -138,6 +138,57 @@ export const englishQuizRouter = createTRPCRouter({
       return created;
     }),
 
+  createBatch: publicProcedure
+    .input(
+      z.object({
+        quizzes: z
+          .array(
+            z.object({
+              title: z.string().min(1, "Title is required"),
+              description: z.string().optional(),
+              questions: z
+                .array(
+                  z.object({
+                    qNumber: z.number().int(),
+                    question: z.string().min(1),
+                    options: z.record(z.string()),
+                    correctAnswer: z.string().min(1),
+                    explanation: z.string().optional(),
+                  })
+                )
+                .min(1, "At least one question is required"),
+            })
+          )
+          .min(1, "At least one quiz set is required"),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      const createdQuizzes = await ctx.db.$transaction(async (tx) => {
+        const results = [];
+        for (const q of input.quizzes) {
+          const quiz = await tx.englishQuiz.create({
+            data: {
+              title: q.title,
+              description: q.description,
+              questions: {
+                create: q.questions.map((question) => ({
+                  qNumber: question.qNumber,
+                  question: question.question,
+                  options: question.options,
+                  correctAnswer: question.correctAnswer,
+                  explanation: question.explanation,
+                })),
+              },
+            },
+          });
+          results.push(quiz);
+        }
+        return results;
+      });
+
+      return { count: createdQuizzes.length, quizzes: createdQuizzes };
+    }),
+
   submitSession: publicProcedure
     .input(
       z.object({
@@ -271,6 +322,133 @@ export const englishQuizRouter = createTRPCRouter({
     .mutation(async ({ ctx, input }) => {
       await ctx.db.englishQuiz.delete({
         where: { id: input.id },
+      });
+      return { success: true };
+    }),
+
+  getSessionsByQuizId: publicProcedure
+    .input(z.object({ quizId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const quiz = await ctx.db.englishQuiz.findUnique({
+        where: { id: input.quizId },
+        select: { id: true, title: true, description: true },
+      });
+
+      if (!quiz) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "English quiz not found",
+        });
+      }
+
+      const sessionsAsc = await ctx.db.englishSession.findMany({
+        where: { quizId: input.quizId },
+        orderBy: { createdAt: "asc" },
+      });
+
+      const sessions = sessionsAsc.map((s, idx) => {
+        const percentage =
+          s.total > 0 ? Math.round((s.score / s.total) * 100) : 0;
+        return {
+          id: s.id,
+          attemptNumber: idx + 1,
+          score: s.score,
+          total: s.total,
+          percentage,
+          timeTakenMs: s.timeTakenMs,
+          createdAt: s.createdAt.toISOString(),
+          formattedDate: s.createdAt.toLocaleDateString("en-US", {
+            month: "short",
+            day: "numeric",
+            year: "numeric",
+          }),
+          formattedTime: s.createdAt.toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+        };
+      }).reverse();
+
+      return {
+        quizId: quiz.id,
+        quizTitle: quiz.title,
+        quizDescription: quiz.description,
+        sessions,
+      };
+    }),
+
+  getSessionDetail: publicProcedure
+    .input(z.object({ sessionId: z.string() }))
+    .query(async ({ ctx, input }) => {
+      const session = await ctx.db.englishSession.findUnique({
+        where: { id: input.sessionId },
+        include: {
+          quiz: {
+            select: { id: true, title: true },
+          },
+          attempts: {
+            orderBy: { qNumber: "asc" },
+            include: {
+              question: true,
+            },
+          },
+        },
+      });
+
+      if (!session) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "English session not found",
+        });
+      }
+
+      const total = session.total;
+      const score = session.score;
+      const percentage = total > 0 ? Math.round((score / total) * 100) : 0;
+
+      const enrichedAttempts = session.attempts.map((att) => {
+        const q = att.question;
+        const optionsMap = (q?.options ?? {}) as EnglishOptionMap;
+        return {
+          questionId: att.questionId ?? undefined,
+          qNumber: att.qNumber,
+          question: q?.question ?? `Question #${att.qNumber}`,
+          options: optionsMap,
+          explanation: q?.explanation ?? null,
+          userAnswer: att.userAnswer,
+          correctAnswer: att.correctAnswer,
+          isCorrect: att.isCorrect,
+          timeTakenMs: att.timeTakenMs,
+        };
+      });
+
+      return {
+        sessionId: session.id,
+        quizId: session.quizId,
+        quizTitle: session.quiz.title,
+        score,
+        total,
+        percentage,
+        timeTakenMs: session.timeTakenMs,
+        createdAt: session.createdAt.toISOString(),
+        formattedDate: session.createdAt.toLocaleDateString("en-US", {
+          month: "short",
+          day: "numeric",
+          year: "numeric",
+        }),
+        formattedTime: session.createdAt.toLocaleTimeString("en-US", {
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
+        attempts: enrichedAttempts,
+      };
+    }),
+
+  deleteSession: publicProcedure
+    .input(z.object({ sessionId: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      await ctx.db.englishSession.delete({
+        where: { id: input.sessionId },
       });
       return { success: true };
     }),

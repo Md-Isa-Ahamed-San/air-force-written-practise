@@ -31,6 +31,7 @@ import {
   EnglishQuizResults,
   type EnglishSessionResult,
 } from "./EnglishQuizResults";
+import { EnglishQuizHistoryModal } from "./EnglishQuizHistoryModal";
 import { useCurrentTimestamp } from "~/hooks/use-timer";
 import type { EnglishOptionMap } from "~/lib/english-utils";
 
@@ -175,6 +176,7 @@ function englishQuizReducer(
 
 export function EnglishQuizEngine({ quizId }: { quizId: string }) {
   const [state, dispatch] = useReducer(englishQuizReducer, null, createInitialState);
+  const [historyModalOpen, setHistoryModalOpen] = useState(false);
   const currentTimestamp = useCurrentTimestamp();
 
   const { data: quiz, isLoading } = api.englishQuiz.getById.useQuery({
@@ -353,11 +355,18 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
 
   if (state.phase === "submitted" && state.results) {
     return (
-      <div className="min-h-screen w-full bg-background p-4 sm:p-6 md:p-8 overflow-y-auto">
+      <div className="h-screen w-full bg-background p-4 sm:p-6 md:p-8 overflow-y-auto">
         <EnglishQuizResults
           quizTitle={quiz.title}
           results={state.results}
           onRetry={() => dispatch({ type: "RESET_QUIZ" })}
+          onViewHistory={() => setHistoryModalOpen(true)}
+        />
+        <EnglishQuizHistoryModal
+          quizId={quiz.id}
+          quizTitle={quiz.title}
+          open={historyModalOpen}
+          onOpenChange={setHistoryModalOpen}
         />
       </div>
     );
@@ -366,8 +375,25 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
   const currentAnswer = state.answers[state.currentQuestion] ?? "";
   const isFlagged = Boolean(state.flagged[state.currentQuestion]);
   const progressPercent = Math.round((answeredCount / totalQuestions) * 100);
-  const optionsMap = (currentQData?.options ?? {}) as EnglishOptionMap;
-  const optionsEntries = Object.entries(optionsMap);
+  const optionsEntries = useMemo<[string, string][]>(() => {
+    const raw = currentQData?.options;
+    if (!raw) return [];
+    if (Array.isArray(raw)) {
+      const letters = ["A", "B", "C", "D"];
+      return raw.map((val, idx): [string, string] => [
+        letters[idx] ?? String(idx + 1),
+        String(val ?? ""),
+      ]);
+    }
+    if (typeof raw === "object") {
+      const entries = Object.entries(raw as Record<string, unknown>);
+      return entries.map(([k, v]): [string, string] => [
+        k.toUpperCase(),
+        String(v ?? ""),
+      ]);
+    }
+    return [];
+  }, [currentQData?.options]);
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden bg-background">
@@ -501,7 +527,7 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
 
             {/* Prompt Text */}
             <div className="py-2">
-              <p className="text-base sm:text-xl font-semibold text-foreground leading-relaxed">
+              <p className="text-base sm:text-xl font-semibold text-foreground leading-relaxed whitespace-pre-line">
                 {currentQData?.question ?? "Question text unavailable"}
               </p>
             </div>

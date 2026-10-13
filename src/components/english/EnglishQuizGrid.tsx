@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import {
   BookA,
@@ -11,18 +11,28 @@ import {
   Trash2,
   Clock,
   Layers,
-  HelpCircle,
   FileCheck2,
+  Search,
+  X,
+  FileCode2,
 } from "lucide-react";
 import { api } from "~/trpc/react";
 import { EnglishUploadDialog } from "./EnglishUploadDialog";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
 import { SAMPLE_ENGLISH_QUIZ } from "~/lib/english-utils";
 import { AiJsonTemplateSection } from "./AiJsonTemplateSection";
+import { EnglishQuizHistoryModal } from "./EnglishQuizHistoryModal";
 
 export function EnglishQuizGrid() {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showAiHelper, setShowAiHelper] = useState(false);
   const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [historyQuiz, setHistoryQuiz] = useState<{
+    id: string;
+    title: string;
+  } | null>(null);
 
   const { data: quizzes, isLoading } = api.englishQuiz.getAll.useQuery();
   const utils = api.useUtils();
@@ -66,211 +76,300 @@ export function EnglishQuizGrid() {
   const totalSessionsAll =
     quizzes?.reduce((sum, q) => sum + q.sessionCount, 0) ?? 0;
 
-  return (
-    <div className="space-y-8 max-w-6xl mx-auto animate-in-up">
-      {/* Top Glassmorphic Hero Banner */}
-      <div className="relative rounded-3xl p-6 sm:p-8 overflow-hidden glass-panel border border-white/20 dark:border-white/10 shadow-2xl">
-        {/* Ambient Gradient Glow */}
-        <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-gradient-to-br from-primary/30 via-indigo-500/20 to-transparent blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-24 -left-24 w-80 h-80 rounded-full bg-gradient-to-tr from-blue-500/20 via-sky-500/10 to-transparent blur-3xl pointer-events-none" />
+  const filteredQuizzes = useMemo(() => {
+    if (!quizzes) return [];
+    if (!searchQuery.trim()) return quizzes;
+    const q = searchQuery.toLowerCase();
+    return quizzes.filter(
+      (item) =>
+        item.title.toLowerCase().includes(q) ||
+        (item.description?.toLowerCase().includes(q) ?? false)
+    );
+  }, [quizzes, searchQuery]);
 
-        <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
-          <div className="space-y-2 max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/25 text-primary text-xs font-semibold">
-              <Sparkles className="h-3.5 w-3.5" />
-              <span>BAF Written Exam • English Wing</span>
+  return (
+    <div className="space-y-6 max-w-6xl mx-auto animate-in-up">
+      {/* 1. Compact Standard Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div className="space-y-1">
+          <div className="flex items-center gap-2.5">
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-primary to-blue-600 flex items-center justify-center shadow-lg shadow-primary/25">
+              <BookA className="h-4.5 w-4.5 text-white" />
             </div>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-              English MCQ Practice Hub
-            </h1>
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
-              Master grammar, vocabulary, idioms, and prepositions. Upload custom
-              JSON question sets or take model exams with instant quadrant
-              pacing analytics.
+            <div className="flex items-center gap-2">
+              <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+                English Practice
+              </h1>
+              <Badge
+                variant="outline"
+                className="font-mono text-xs bg-primary/10 text-primary border-primary/25"
+              >
+                {quizzes?.length ?? 0} Sets
+              </Badge>
+            </div>
+          </div>
+          <p className="text-sm text-muted-foreground pl-0.5">
+            BAF Written Exam practice sets with quadrant pacing analytics.
+          </p>
+        </div>
+
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => setShowAiHelper((v) => !v)}
+            className="gap-2 text-xs hover:border-primary/40 rounded-xl"
+          >
+            <FileCode2 className="h-4 w-4 text-primary" />
+            <span>{showAiHelper ? "Hide Prompt / JSON" : "AI Prompt & JSON"}</span>
+          </Button>
+
+          <EnglishUploadDialog />
+        </div>
+      </div>
+
+      {/* Divider */}
+      <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
+      {/* 2. Optional Collapsible AI JSON Helper */}
+      {showAiHelper && (
+        <div className="animate-in fade-in-50 duration-200">
+          <AiJsonTemplateSection defaultExpanded={true} />
+        </div>
+      )}
+
+      {/* 3. Compact Search & Summary Bar */}
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3">
+        {/* Search Input */}
+        <div className="relative flex-1 max-w-md">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+          <Input
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search sets by title or topic..."
+            className="pl-9 pr-8 h-9 text-xs rounded-xl bg-card/60 border-border/50"
+          />
+          {searchQuery && (
+            <button
+              type="button"
+              onClick={() => setSearchQuery("")}
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+            >
+              <X className="h-3.5 w-3.5" />
+            </button>
+          )}
+        </div>
+
+        {/* Compact Metadata Chips */}
+        <div className="flex items-center gap-2 text-xs font-mono text-muted-foreground flex-wrap">
+          <span className="px-2.5 py-1 rounded-lg bg-card/60 border border-border/40 flex items-center gap-1.5">
+            <Layers className="h-3 w-3 text-primary" />
+            <span>{totalQuestionsAll} Qs</span>
+          </span>
+          <span className="px-2.5 py-1 rounded-lg bg-card/60 border border-border/40 flex items-center gap-1.5">
+            <History className="h-3 w-3 text-emerald-400" />
+            <span>{totalSessionsAll} runs</span>
+          </span>
+        </div>
+      </div>
+
+      {/* 4. Horizontal Standard Rows Layout */}
+      {isLoading ? (
+        <div className="space-y-2">
+          {[1, 2, 3, 4].map((i) => (
+            <div
+              key={i}
+              className="h-16 rounded-2xl bg-card/40 border border-border/40 animate-pulse"
+            />
+          ))}
+        </div>
+      ) : filteredQuizzes.length > 0 ? (
+        <div className="space-y-2">
+          {filteredQuizzes.map((quiz, idx) => (
+            <div
+              key={quiz.id}
+              className="group relative p-3 sm:px-4 sm:py-3 rounded-2xl border border-border/50 bg-card/50 hover:bg-card/90 hover:border-primary/40 transition-all flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-xs"
+            >
+              {/* Left: Index badge + Title & Description + Question Count */}
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="w-8 h-8 rounded-xl bg-primary/10 text-primary font-mono font-bold text-xs flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
+                  {idx + 1}
+                </div>
+
+                <div className="min-w-0 flex-1 space-y-0.5">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <Link
+                      href={`/english/${quiz.id}`}
+                      className="font-bold text-sm sm:text-base text-foreground group-hover:text-primary transition-colors truncate max-w-lg"
+                    >
+                      {quiz.title}
+                    </Link>
+                    <Badge
+                      variant="outline"
+                      className="bg-muted/50 text-muted-foreground border-border/50 font-mono text-[10px] px-1.5 py-0"
+                    >
+                      {quiz.questionCount} Qs
+                    </Badge>
+                  </div>
+
+                  {quiz.description && (
+                    <p className="text-xs text-muted-foreground truncate max-w-xl">
+                      {quiz.description}
+                    </p>
+                  )}
+                </div>
+              </div>
+
+              {/* Middle: Performance Badges (Best score, Attempt count, Last score) */}
+              <div className="flex items-center gap-2 text-xs font-mono flex-shrink-0">
+                {quiz.bestPercentage > 0 ? (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setHistoryQuiz({ id: quiz.id, title: quiz.title })
+                    }
+                    className="px-2 py-0.5 rounded-lg bg-emerald-500/10 text-emerald-500 border border-emerald-500/25 font-bold text-[11px] flex items-center gap-1 hover:scale-105 transition-transform cursor-pointer"
+                    title="Click to view attempt history"
+                  >
+                    <Trophy className="h-3 w-3" />
+                    <span>{quiz.bestPercentage}% Best</span>
+                  </button>
+                ) : (
+                  <span className="text-[11px] text-muted-foreground/60 hidden sm:inline-block">
+                    Not taken yet
+                  </span>
+                )}
+
+                {quiz.sessionCount > 0 && (
+                  <button
+                    type="button"
+                    onClick={() =>
+                      setHistoryQuiz({ id: quiz.id, title: quiz.title })
+                    }
+                    className="px-2 py-0.5 rounded-lg bg-muted/40 hover:bg-muted text-muted-foreground hover:text-foreground text-[11px] transition-colors cursor-pointer flex items-center gap-1"
+                    title="View attempt history"
+                  >
+                    <History className="h-3 w-3 text-primary" />
+                    <span>
+                      {quiz.sessionCount} {quiz.sessionCount === 1 ? "run" : "runs"}
+                    </span>
+                  </button>
+                )}
+
+                {quiz.latestSession && (
+                  <span className="text-[11px] text-muted-foreground/80 hidden lg:inline-flex items-center gap-1">
+                    <Clock className="h-3 w-3" />
+                    <span>
+                      Last: {quiz.latestSession.score}/{quiz.latestSession.total}
+                    </span>
+                  </span>
+                )}
+              </div>
+
+              {/* Right: Actions (Start Practice, Results, Delete) */}
+              <div className="flex items-center gap-2 flex-shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-border/30">
+                <Link
+                  href={`/english/${quiz.id}`}
+                  className={buttonVariants({
+                    size: "sm",
+                    className:
+                      "gap-1.5 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-semibold rounded-xl text-xs shadow-xs",
+                  })}
+                >
+                  <Play className="h-3.5 w-3.5 fill-current" />
+                  <span>Practice</span>
+                </Link>
+
+                {quiz.sessionCount > 0 && (
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="sm"
+                    onClick={() =>
+                      setHistoryQuiz({ id: quiz.id, title: quiz.title })
+                    }
+                    className="gap-1.5 rounded-xl text-xs hover:border-primary/40 font-mono"
+                    title="View past results"
+                  >
+                    <History className="h-3.5 w-3.5 text-primary" />
+                    <span className="hidden sm:inline">Results</span> ({quiz.sessionCount})
+                  </Button>
+                )}
+
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => handleDelete(quiz.id, quiz.title)}
+                  disabled={deletingId === quiz.id}
+                  className="h-8 w-8 rounded-xl text-muted-foreground hover:text-red-400 hover:bg-red-500/10"
+                  title="Delete quiz set"
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : searchQuery ? (
+        /* No Search Match State */
+        <div className="rounded-2xl border border-dashed border-border/60 p-8 text-center space-y-3 bg-card/20">
+          <p className="text-sm font-semibold text-foreground">
+            No question sets match &ldquo;{searchQuery}&rdquo;
+          </p>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            onClick={() => setSearchQuery("")}
+            className="text-xs"
+          >
+            Clear Search
+          </Button>
+        </div>
+      ) : (
+        /* Empty State */
+        <div className="rounded-3xl border border-dashed border-border/70 p-12 text-center space-y-5 bg-card/20 backdrop-blur-sm max-w-xl mx-auto">
+          <div className="h-16 w-16 rounded-3xl bg-primary/10 text-primary flex items-center justify-center mx-auto shadow-inner">
+            <FileCheck2 className="h-8 w-8" />
+          </div>
+
+          <div className="space-y-1.5">
+            <h3 className="text-lg font-bold text-foreground">
+              No English Quizzes Yet
+            </h3>
+            <p className="text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
+              Upload your questions in JSON format, or load the pre-configured
+              Model Test with one click to get started immediately.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
+            <Button
+              type="button"
+              onClick={handleQuickSeed}
+              disabled={createMutation.isPending}
+              className="gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-semibold rounded-xl text-xs shadow-lg shadow-primary/20"
+            >
+              <Sparkles className="h-3.5 w-3.5" />
+              <span>Load Model English Test (10 Qs)</span>
+            </Button>
+
             <EnglishUploadDialog />
           </div>
         </div>
+      )}
 
-        {/* Quick Stats Strip */}
-        <div className="relative z-10 grid grid-cols-2 sm:grid-cols-3 gap-3 pt-6 mt-6 border-t border-border/40">
-          <div className="p-3 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/40 space-y-1">
-            <span className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
-              Total Quiz Sets
-            </span>
-            <p className="text-xl sm:text-2xl font-bold font-mono text-foreground">
-              {quizzes?.length ?? 0}
-            </p>
-          </div>
-
-          <div className="p-3 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/40 space-y-1">
-            <span className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
-              Question Bank
-            </span>
-            <p className="text-xl sm:text-2xl font-bold font-mono text-primary">
-              {totalQuestionsAll} Qs
-            </p>
-          </div>
-
-          <div className="p-3 rounded-2xl bg-card/40 backdrop-blur-sm border border-border/40 space-y-1 col-span-2 sm:col-span-1">
-            <span className="text-[11px] text-muted-foreground font-semibold uppercase tracking-wider">
-              Practice Runs
-            </span>
-            <p className="text-xl sm:text-2xl font-bold font-mono text-emerald-500">
-              {totalSessionsAll} attempts
-            </p>
-          </div>
-        </div>
-      </div>
-
-      {/* AI Prompt & JSON Format Generator Section */}
-      <AiJsonTemplateSection defaultExpanded={true} />
-
-      {/* Grid of English Quizzes */}
-      <div className="space-y-4">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <BookA className="h-5 w-5 text-primary" />
-            <h2 className="text-lg font-bold text-foreground">
-              Available Question Sets
-            </h2>
-            <Badge variant="secondary" className="font-mono text-xs">
-              {quizzes?.length ?? 0}
-            </Badge>
-          </div>
-        </div>
-
-        {isLoading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {[1, 2, 3].map((i) => (
-              <div
-                key={i}
-                className="h-56 rounded-3xl bg-muted/30 border border-border/50 animate-pulse"
-              />
-            ))}
-          </div>
-        ) : quizzes && quizzes.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            {quizzes.map((quiz) => (
-              <div
-                key={quiz.id}
-                className="group relative flex flex-col justify-between rounded-3xl p-6 glass-card border border-white/20 dark:border-white/10 hover:border-primary/40 shadow-xl transition-all duration-300"
-              >
-                {/* Top badges + Delete button */}
-                <div className="space-y-3">
-                  <div className="flex items-center justify-between gap-2">
-                    <Badge
-                      variant="outline"
-                      className="bg-primary/10 text-primary border-primary/25 font-mono text-xs font-semibold px-2.5 py-0.5 rounded-lg"
-                    >
-                      <Layers className="h-3 w-3 mr-1" />
-                      {quiz.questionCount} Questions
-                    </Badge>
-
-                    {quiz.bestPercentage > 0 && (
-                      <Badge
-                        variant="outline"
-                        className="bg-emerald-500/10 text-emerald-500 border-emerald-500/30 font-mono text-xs font-bold px-2 py-0.5 rounded-lg"
-                      >
-                        <Trophy className="h-3 w-3 mr-1 text-emerald-500" />
-                        {quiz.bestPercentage}% Best
-                      </Badge>
-                    )}
-                  </div>
-
-                  <div>
-                    <h3 className="text-base sm:text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                      {quiz.title}
-                    </h3>
-                    {quiz.description && (
-                      <p className="text-xs text-muted-foreground mt-1 line-clamp-2 leading-relaxed">
-                        {quiz.description}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                {/* Bottom Stats & Action */}
-                <div className="pt-5 mt-4 border-t border-border/40 space-y-3">
-                  <div className="flex items-center justify-between text-xs text-muted-foreground font-mono">
-                    <span className="flex items-center gap-1.5">
-                      <History className="h-3.5 w-3.5 text-primary/70" />
-                      {quiz.sessionCount}{" "}
-                      {quiz.sessionCount === 1 ? "attempt" : "attempts"}
-                    </span>
-
-                    {quiz.latestSession && (
-                      <span className="flex items-center gap-1 text-[11px] opacity-80">
-                        <Clock className="h-3 w-3" />
-                        Last: {quiz.latestSession.score}/{quiz.latestSession.total}
-                      </span>
-                    )}
-                  </div>
-
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/english/${quiz.id}`}
-                      className={buttonVariants({
-                        className:
-                          "flex-1 gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-semibold rounded-xl text-xs shadow-md shadow-primary/20",
-                      })}
-                    >
-                      <Play className="h-3.5 w-3.5 fill-current" />
-                      <span>Start Practice</span>
-                    </Link>
-
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => handleDelete(quiz.id, quiz.title)}
-                      disabled={deletingId === quiz.id}
-                      className="h-9 w-9 rounded-xl text-muted-foreground hover:text-red-400 hover:bg-red-500/10"
-                      title="Delete quiz"
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        ) : (
-          /* Empty State */
-          <div className="rounded-3xl border border-dashed border-border/70 p-12 text-center space-y-5 bg-card/20 backdrop-blur-sm max-w-xl mx-auto">
-            <div className="h-16 w-16 rounded-3xl bg-primary/10 text-primary flex items-center justify-center mx-auto shadow-inner">
-              <FileCheck2 className="h-8 w-8" />
-            </div>
-
-            <div className="space-y-1.5">
-              <h3 className="text-lg font-bold text-foreground">
-                No English Quizzes Yet
-              </h3>
-              <p className="text-xs text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                Upload your questions in JSON format, or load the pre-configured
-                Model Test with one click to get started immediately.
-              </p>
-            </div>
-
-            <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-              <Button
-                type="button"
-                onClick={handleQuickSeed}
-                disabled={createMutation.isPending}
-                className="gap-2 bg-gradient-to-r from-primary to-blue-600 hover:from-primary/90 hover:to-blue-600/90 text-white font-semibold rounded-xl text-xs shadow-lg shadow-primary/20"
-              >
-                <Sparkles className="h-3.5 w-3.5" />
-                <span>Load Model English Test (10 Qs)</span>
-              </Button>
-
-              <EnglishUploadDialog />
-            </div>
-          </div>
-        )}
-      </div>
+      {/* Quiz Attempt History Modal */}
+      <EnglishQuizHistoryModal
+        quizId={historyQuiz?.id ?? null}
+        quizTitle={historyQuiz?.title}
+        open={Boolean(historyQuiz)}
+        onOpenChange={(open) => {
+          if (!open) setHistoryQuiz(null);
+        }}
+      />
     </div>
   );
 }
