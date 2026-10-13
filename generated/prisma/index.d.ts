@@ -38,6 +38,26 @@ export type Session = $Result.DefaultSelection<Prisma.$SessionPayload>
  * 
  */
 export type Attempt = $Result.DefaultSelection<Prisma.$AttemptPayload>
+/**
+ * Model EnglishQuiz
+ * 
+ */
+export type EnglishQuiz = $Result.DefaultSelection<Prisma.$EnglishQuizPayload>
+/**
+ * Model EnglishQuestion
+ * 
+ */
+export type EnglishQuestion = $Result.DefaultSelection<Prisma.$EnglishQuestionPayload>
+/**
+ * Model EnglishSession
+ * 
+ */
+export type EnglishSession = $Result.DefaultSelection<Prisma.$EnglishSessionPayload>
+/**
+ * Model EnglishAttempt
+ * 
+ */
+export type EnglishAttempt = $Result.DefaultSelection<Prisma.$EnglishAttemptPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -206,6 +226,46 @@ export class PrismaClient<
     * ```
     */
   get attempt(): Prisma.AttemptDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.englishQuiz`: Exposes CRUD operations for the **EnglishQuiz** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EnglishQuizs
+    * const englishQuizs = await prisma.englishQuiz.findMany()
+    * ```
+    */
+  get englishQuiz(): Prisma.EnglishQuizDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.englishQuestion`: Exposes CRUD operations for the **EnglishQuestion** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EnglishQuestions
+    * const englishQuestions = await prisma.englishQuestion.findMany()
+    * ```
+    */
+  get englishQuestion(): Prisma.EnglishQuestionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.englishSession`: Exposes CRUD operations for the **EnglishSession** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EnglishSessions
+    * const englishSessions = await prisma.englishSession.findMany()
+    * ```
+    */
+  get englishSession(): Prisma.EnglishSessionDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.englishAttempt`: Exposes CRUD operations for the **EnglishAttempt** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more EnglishAttempts
+    * const englishAttempts = await prisma.englishAttempt.findMany()
+    * ```
+    */
+  get englishAttempt(): Prisma.EnglishAttemptDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -651,7 +711,11 @@ export namespace Prisma {
     Image: 'Image',
     Answer: 'Answer',
     Session: 'Session',
-    Attempt: 'Attempt'
+    Attempt: 'Attempt',
+    EnglishQuiz: 'EnglishQuiz',
+    EnglishQuestion: 'EnglishQuestion',
+    EnglishSession: 'EnglishSession',
+    EnglishAttempt: 'EnglishAttempt'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -670,7 +734,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "quizSet" | "image" | "answer" | "session" | "attempt"
+      modelProps: "quizSet" | "image" | "answer" | "session" | "attempt" | "englishQuiz" | "englishQuestion" | "englishSession" | "englishAttempt"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -1044,6 +1108,302 @@ export namespace Prisma {
           }
         }
       }
+      EnglishQuiz: {
+        payload: Prisma.$EnglishQuizPayload<ExtArgs>
+        fields: Prisma.EnglishQuizFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnglishQuizFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnglishQuizFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>
+          }
+          findFirst: {
+            args: Prisma.EnglishQuizFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnglishQuizFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>
+          }
+          findMany: {
+            args: Prisma.EnglishQuizFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>[]
+          }
+          create: {
+            args: Prisma.EnglishQuizCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>
+          }
+          createMany: {
+            args: Prisma.EnglishQuizCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnglishQuizCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>[]
+          }
+          delete: {
+            args: Prisma.EnglishQuizDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>
+          }
+          update: {
+            args: Prisma.EnglishQuizUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnglishQuizDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnglishQuizUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnglishQuizUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnglishQuizUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuizPayload>
+          }
+          aggregate: {
+            args: Prisma.EnglishQuizAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEnglishQuiz>
+          }
+          groupBy: {
+            args: Prisma.EnglishQuizGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnglishQuizGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnglishQuizCountArgs<ExtArgs>
+            result: $Utils.Optional<EnglishQuizCountAggregateOutputType> | number
+          }
+        }
+      }
+      EnglishQuestion: {
+        payload: Prisma.$EnglishQuestionPayload<ExtArgs>
+        fields: Prisma.EnglishQuestionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnglishQuestionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnglishQuestionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>
+          }
+          findFirst: {
+            args: Prisma.EnglishQuestionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnglishQuestionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>
+          }
+          findMany: {
+            args: Prisma.EnglishQuestionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>[]
+          }
+          create: {
+            args: Prisma.EnglishQuestionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>
+          }
+          createMany: {
+            args: Prisma.EnglishQuestionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnglishQuestionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>[]
+          }
+          delete: {
+            args: Prisma.EnglishQuestionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>
+          }
+          update: {
+            args: Prisma.EnglishQuestionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnglishQuestionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnglishQuestionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnglishQuestionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnglishQuestionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishQuestionPayload>
+          }
+          aggregate: {
+            args: Prisma.EnglishQuestionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEnglishQuestion>
+          }
+          groupBy: {
+            args: Prisma.EnglishQuestionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnglishQuestionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnglishQuestionCountArgs<ExtArgs>
+            result: $Utils.Optional<EnglishQuestionCountAggregateOutputType> | number
+          }
+        }
+      }
+      EnglishSession: {
+        payload: Prisma.$EnglishSessionPayload<ExtArgs>
+        fields: Prisma.EnglishSessionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnglishSessionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnglishSessionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>
+          }
+          findFirst: {
+            args: Prisma.EnglishSessionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnglishSessionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>
+          }
+          findMany: {
+            args: Prisma.EnglishSessionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>[]
+          }
+          create: {
+            args: Prisma.EnglishSessionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>
+          }
+          createMany: {
+            args: Prisma.EnglishSessionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnglishSessionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>[]
+          }
+          delete: {
+            args: Prisma.EnglishSessionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>
+          }
+          update: {
+            args: Prisma.EnglishSessionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnglishSessionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnglishSessionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnglishSessionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnglishSessionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishSessionPayload>
+          }
+          aggregate: {
+            args: Prisma.EnglishSessionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEnglishSession>
+          }
+          groupBy: {
+            args: Prisma.EnglishSessionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnglishSessionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnglishSessionCountArgs<ExtArgs>
+            result: $Utils.Optional<EnglishSessionCountAggregateOutputType> | number
+          }
+        }
+      }
+      EnglishAttempt: {
+        payload: Prisma.$EnglishAttemptPayload<ExtArgs>
+        fields: Prisma.EnglishAttemptFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.EnglishAttemptFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.EnglishAttemptFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>
+          }
+          findFirst: {
+            args: Prisma.EnglishAttemptFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.EnglishAttemptFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>
+          }
+          findMany: {
+            args: Prisma.EnglishAttemptFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>[]
+          }
+          create: {
+            args: Prisma.EnglishAttemptCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>
+          }
+          createMany: {
+            args: Prisma.EnglishAttemptCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.EnglishAttemptCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>[]
+          }
+          delete: {
+            args: Prisma.EnglishAttemptDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>
+          }
+          update: {
+            args: Prisma.EnglishAttemptUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>
+          }
+          deleteMany: {
+            args: Prisma.EnglishAttemptDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.EnglishAttemptUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.EnglishAttemptUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>[]
+          }
+          upsert: {
+            args: Prisma.EnglishAttemptUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$EnglishAttemptPayload>
+          }
+          aggregate: {
+            args: Prisma.EnglishAttemptAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEnglishAttempt>
+          }
+          groupBy: {
+            args: Prisma.EnglishAttemptGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EnglishAttemptGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.EnglishAttemptCountArgs<ExtArgs>
+            result: $Utils.Optional<EnglishAttemptCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1145,6 +1505,10 @@ export namespace Prisma {
     answer?: AnswerOmit
     session?: SessionOmit
     attempt?: AttemptOmit
+    englishQuiz?: EnglishQuizOmit
+    englishQuestion?: EnglishQuestionOmit
+    englishSession?: EnglishSessionOmit
+    englishAttempt?: EnglishAttemptOmit
   }
 
   /* Types for Logging */
@@ -1328,6 +1692,108 @@ export namespace Prisma {
    */
   export type SessionCountOutputTypeCountAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AttemptWhereInput
+  }
+
+
+  /**
+   * Count Type EnglishQuizCountOutputType
+   */
+
+  export type EnglishQuizCountOutputType = {
+    questions: number
+    sessions: number
+  }
+
+  export type EnglishQuizCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    questions?: boolean | EnglishQuizCountOutputTypeCountQuestionsArgs
+    sessions?: boolean | EnglishQuizCountOutputTypeCountSessionsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EnglishQuizCountOutputType without action
+   */
+  export type EnglishQuizCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuizCountOutputType
+     */
+    select?: EnglishQuizCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EnglishQuizCountOutputType without action
+   */
+  export type EnglishQuizCountOutputTypeCountQuestionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishQuestionWhereInput
+  }
+
+  /**
+   * EnglishQuizCountOutputType without action
+   */
+  export type EnglishQuizCountOutputTypeCountSessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishSessionWhereInput
+  }
+
+
+  /**
+   * Count Type EnglishQuestionCountOutputType
+   */
+
+  export type EnglishQuestionCountOutputType = {
+    attempts: number
+  }
+
+  export type EnglishQuestionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attempts?: boolean | EnglishQuestionCountOutputTypeCountAttemptsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EnglishQuestionCountOutputType without action
+   */
+  export type EnglishQuestionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestionCountOutputType
+     */
+    select?: EnglishQuestionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EnglishQuestionCountOutputType without action
+   */
+  export type EnglishQuestionCountOutputTypeCountAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishAttemptWhereInput
+  }
+
+
+  /**
+   * Count Type EnglishSessionCountOutputType
+   */
+
+  export type EnglishSessionCountOutputType = {
+    attempts: number
+  }
+
+  export type EnglishSessionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    attempts?: boolean | EnglishSessionCountOutputTypeCountAttemptsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EnglishSessionCountOutputType without action
+   */
+  export type EnglishSessionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSessionCountOutputType
+     */
+    select?: EnglishSessionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EnglishSessionCountOutputType without action
+   */
+  export type EnglishSessionCountOutputTypeCountAttemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishAttemptWhereInput
   }
 
 
@@ -7020,6 +7486,4579 @@ export namespace Prisma {
 
 
   /**
+   * Model EnglishQuiz
+   */
+
+  export type AggregateEnglishQuiz = {
+    _count: EnglishQuizCountAggregateOutputType | null
+    _min: EnglishQuizMinAggregateOutputType | null
+    _max: EnglishQuizMaxAggregateOutputType | null
+  }
+
+  export type EnglishQuizMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EnglishQuizMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type EnglishQuizCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type EnglishQuizMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EnglishQuizMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type EnglishQuizCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type EnglishQuizAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishQuiz to aggregate.
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuizs to fetch.
+     */
+    orderBy?: EnglishQuizOrderByWithRelationInput | EnglishQuizOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnglishQuizWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuizs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuizs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EnglishQuizs
+    **/
+    _count?: true | EnglishQuizCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnglishQuizMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnglishQuizMaxAggregateInputType
+  }
+
+  export type GetEnglishQuizAggregateType<T extends EnglishQuizAggregateArgs> = {
+        [P in keyof T & keyof AggregateEnglishQuiz]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEnglishQuiz[P]>
+      : GetScalarType<T[P], AggregateEnglishQuiz[P]>
+  }
+
+
+
+
+  export type EnglishQuizGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishQuizWhereInput
+    orderBy?: EnglishQuizOrderByWithAggregationInput | EnglishQuizOrderByWithAggregationInput[]
+    by: EnglishQuizScalarFieldEnum[] | EnglishQuizScalarFieldEnum
+    having?: EnglishQuizScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnglishQuizCountAggregateInputType | true
+    _min?: EnglishQuizMinAggregateInputType
+    _max?: EnglishQuizMaxAggregateInputType
+  }
+
+  export type EnglishQuizGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    createdAt: Date
+    updatedAt: Date
+    _count: EnglishQuizCountAggregateOutputType | null
+    _min: EnglishQuizMinAggregateOutputType | null
+    _max: EnglishQuizMaxAggregateOutputType | null
+  }
+
+  type GetEnglishQuizGroupByPayload<T extends EnglishQuizGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnglishQuizGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnglishQuizGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnglishQuizGroupByOutputType[P]>
+            : GetScalarType<T[P], EnglishQuizGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnglishQuizSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    questions?: boolean | EnglishQuiz$questionsArgs<ExtArgs>
+    sessions?: boolean | EnglishQuiz$sessionsArgs<ExtArgs>
+    _count?: boolean | EnglishQuizCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishQuiz"]>
+
+  export type EnglishQuizSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["englishQuiz"]>
+
+  export type EnglishQuizSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }, ExtArgs["result"]["englishQuiz"]>
+
+  export type EnglishQuizSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type EnglishQuizOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["englishQuiz"]>
+  export type EnglishQuizInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    questions?: boolean | EnglishQuiz$questionsArgs<ExtArgs>
+    sessions?: boolean | EnglishQuiz$sessionsArgs<ExtArgs>
+    _count?: boolean | EnglishQuizCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EnglishQuizIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type EnglishQuizIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $EnglishQuizPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EnglishQuiz"
+    objects: {
+      questions: Prisma.$EnglishQuestionPayload<ExtArgs>[]
+      sessions: Prisma.$EnglishSessionPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["englishQuiz"]>
+    composites: {}
+  }
+
+  type EnglishQuizGetPayload<S extends boolean | null | undefined | EnglishQuizDefaultArgs> = $Result.GetResult<Prisma.$EnglishQuizPayload, S>
+
+  type EnglishQuizCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnglishQuizFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnglishQuizCountAggregateInputType | true
+    }
+
+  export interface EnglishQuizDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EnglishQuiz'], meta: { name: 'EnglishQuiz' } }
+    /**
+     * Find zero or one EnglishQuiz that matches the filter.
+     * @param {EnglishQuizFindUniqueArgs} args - Arguments to find a EnglishQuiz
+     * @example
+     * // Get one EnglishQuiz
+     * const englishQuiz = await prisma.englishQuiz.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnglishQuizFindUniqueArgs>(args: SelectSubset<T, EnglishQuizFindUniqueArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EnglishQuiz that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnglishQuizFindUniqueOrThrowArgs} args - Arguments to find a EnglishQuiz
+     * @example
+     * // Get one EnglishQuiz
+     * const englishQuiz = await prisma.englishQuiz.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnglishQuizFindUniqueOrThrowArgs>(args: SelectSubset<T, EnglishQuizFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishQuiz that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizFindFirstArgs} args - Arguments to find a EnglishQuiz
+     * @example
+     * // Get one EnglishQuiz
+     * const englishQuiz = await prisma.englishQuiz.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnglishQuizFindFirstArgs>(args?: SelectSubset<T, EnglishQuizFindFirstArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishQuiz that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizFindFirstOrThrowArgs} args - Arguments to find a EnglishQuiz
+     * @example
+     * // Get one EnglishQuiz
+     * const englishQuiz = await prisma.englishQuiz.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnglishQuizFindFirstOrThrowArgs>(args?: SelectSubset<T, EnglishQuizFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EnglishQuizs that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EnglishQuizs
+     * const englishQuizs = await prisma.englishQuiz.findMany()
+     * 
+     * // Get first 10 EnglishQuizs
+     * const englishQuizs = await prisma.englishQuiz.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const englishQuizWithIdOnly = await prisma.englishQuiz.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EnglishQuizFindManyArgs>(args?: SelectSubset<T, EnglishQuizFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EnglishQuiz.
+     * @param {EnglishQuizCreateArgs} args - Arguments to create a EnglishQuiz.
+     * @example
+     * // Create one EnglishQuiz
+     * const EnglishQuiz = await prisma.englishQuiz.create({
+     *   data: {
+     *     // ... data to create a EnglishQuiz
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnglishQuizCreateArgs>(args: SelectSubset<T, EnglishQuizCreateArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EnglishQuizs.
+     * @param {EnglishQuizCreateManyArgs} args - Arguments to create many EnglishQuizs.
+     * @example
+     * // Create many EnglishQuizs
+     * const englishQuiz = await prisma.englishQuiz.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnglishQuizCreateManyArgs>(args?: SelectSubset<T, EnglishQuizCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EnglishQuizs and returns the data saved in the database.
+     * @param {EnglishQuizCreateManyAndReturnArgs} args - Arguments to create many EnglishQuizs.
+     * @example
+     * // Create many EnglishQuizs
+     * const englishQuiz = await prisma.englishQuiz.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EnglishQuizs and only return the `id`
+     * const englishQuizWithIdOnly = await prisma.englishQuiz.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnglishQuizCreateManyAndReturnArgs>(args?: SelectSubset<T, EnglishQuizCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EnglishQuiz.
+     * @param {EnglishQuizDeleteArgs} args - Arguments to delete one EnglishQuiz.
+     * @example
+     * // Delete one EnglishQuiz
+     * const EnglishQuiz = await prisma.englishQuiz.delete({
+     *   where: {
+     *     // ... filter to delete one EnglishQuiz
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnglishQuizDeleteArgs>(args: SelectSubset<T, EnglishQuizDeleteArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EnglishQuiz.
+     * @param {EnglishQuizUpdateArgs} args - Arguments to update one EnglishQuiz.
+     * @example
+     * // Update one EnglishQuiz
+     * const englishQuiz = await prisma.englishQuiz.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnglishQuizUpdateArgs>(args: SelectSubset<T, EnglishQuizUpdateArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EnglishQuizs.
+     * @param {EnglishQuizDeleteManyArgs} args - Arguments to filter EnglishQuizs to delete.
+     * @example
+     * // Delete a few EnglishQuizs
+     * const { count } = await prisma.englishQuiz.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnglishQuizDeleteManyArgs>(args?: SelectSubset<T, EnglishQuizDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishQuizs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EnglishQuizs
+     * const englishQuiz = await prisma.englishQuiz.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnglishQuizUpdateManyArgs>(args: SelectSubset<T, EnglishQuizUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishQuizs and returns the data updated in the database.
+     * @param {EnglishQuizUpdateManyAndReturnArgs} args - Arguments to update many EnglishQuizs.
+     * @example
+     * // Update many EnglishQuizs
+     * const englishQuiz = await prisma.englishQuiz.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EnglishQuizs and only return the `id`
+     * const englishQuizWithIdOnly = await prisma.englishQuiz.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnglishQuizUpdateManyAndReturnArgs>(args: SelectSubset<T, EnglishQuizUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EnglishQuiz.
+     * @param {EnglishQuizUpsertArgs} args - Arguments to update or create a EnglishQuiz.
+     * @example
+     * // Update or create a EnglishQuiz
+     * const englishQuiz = await prisma.englishQuiz.upsert({
+     *   create: {
+     *     // ... data to create a EnglishQuiz
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EnglishQuiz we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnglishQuizUpsertArgs>(args: SelectSubset<T, EnglishQuizUpsertArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EnglishQuizs.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizCountArgs} args - Arguments to filter EnglishQuizs to count.
+     * @example
+     * // Count the number of EnglishQuizs
+     * const count = await prisma.englishQuiz.count({
+     *   where: {
+     *     // ... the filter for the EnglishQuizs we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnglishQuizCountArgs>(
+      args?: Subset<T, EnglishQuizCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnglishQuizCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EnglishQuiz.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnglishQuizAggregateArgs>(args: Subset<T, EnglishQuizAggregateArgs>): Prisma.PrismaPromise<GetEnglishQuizAggregateType<T>>
+
+    /**
+     * Group by EnglishQuiz.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuizGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnglishQuizGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnglishQuizGroupByArgs['orderBy'] }
+        : { orderBy?: EnglishQuizGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnglishQuizGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnglishQuizGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EnglishQuiz model
+   */
+  readonly fields: EnglishQuizFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EnglishQuiz.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnglishQuizClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    questions<T extends EnglishQuiz$questionsArgs<ExtArgs> = {}>(args?: Subset<T, EnglishQuiz$questionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sessions<T extends EnglishQuiz$sessionsArgs<ExtArgs> = {}>(args?: Subset<T, EnglishQuiz$sessionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EnglishQuiz model
+   */
+  interface EnglishQuizFieldRefs {
+    readonly id: FieldRef<"EnglishQuiz", 'String'>
+    readonly title: FieldRef<"EnglishQuiz", 'String'>
+    readonly description: FieldRef<"EnglishQuiz", 'String'>
+    readonly createdAt: FieldRef<"EnglishQuiz", 'DateTime'>
+    readonly updatedAt: FieldRef<"EnglishQuiz", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EnglishQuiz findUnique
+   */
+  export type EnglishQuizFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuiz to fetch.
+     */
+    where: EnglishQuizWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuiz findUniqueOrThrow
+   */
+  export type EnglishQuizFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuiz to fetch.
+     */
+    where: EnglishQuizWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuiz findFirst
+   */
+  export type EnglishQuizFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuiz to fetch.
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuizs to fetch.
+     */
+    orderBy?: EnglishQuizOrderByWithRelationInput | EnglishQuizOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishQuizs.
+     */
+    cursor?: EnglishQuizWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuizs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuizs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishQuizs.
+     */
+    distinct?: EnglishQuizScalarFieldEnum | EnglishQuizScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuiz findFirstOrThrow
+   */
+  export type EnglishQuizFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuiz to fetch.
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuizs to fetch.
+     */
+    orderBy?: EnglishQuizOrderByWithRelationInput | EnglishQuizOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishQuizs.
+     */
+    cursor?: EnglishQuizWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuizs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuizs.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishQuizs.
+     */
+    distinct?: EnglishQuizScalarFieldEnum | EnglishQuizScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuiz findMany
+   */
+  export type EnglishQuizFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuizs to fetch.
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuizs to fetch.
+     */
+    orderBy?: EnglishQuizOrderByWithRelationInput | EnglishQuizOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EnglishQuizs.
+     */
+    cursor?: EnglishQuizWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuizs from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuizs.
+     */
+    skip?: number
+    distinct?: EnglishQuizScalarFieldEnum | EnglishQuizScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuiz create
+   */
+  export type EnglishQuizCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EnglishQuiz.
+     */
+    data: XOR<EnglishQuizCreateInput, EnglishQuizUncheckedCreateInput>
+  }
+
+  /**
+   * EnglishQuiz createMany
+   */
+  export type EnglishQuizCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EnglishQuizs.
+     */
+    data: EnglishQuizCreateManyInput | EnglishQuizCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EnglishQuiz createManyAndReturn
+   */
+  export type EnglishQuizCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * The data used to create many EnglishQuizs.
+     */
+    data: EnglishQuizCreateManyInput | EnglishQuizCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EnglishQuiz update
+   */
+  export type EnglishQuizUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EnglishQuiz.
+     */
+    data: XOR<EnglishQuizUpdateInput, EnglishQuizUncheckedUpdateInput>
+    /**
+     * Choose, which EnglishQuiz to update.
+     */
+    where: EnglishQuizWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuiz updateMany
+   */
+  export type EnglishQuizUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EnglishQuizs.
+     */
+    data: XOR<EnglishQuizUpdateManyMutationInput, EnglishQuizUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishQuizs to update
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * Limit how many EnglishQuizs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishQuiz updateManyAndReturn
+   */
+  export type EnglishQuizUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * The data used to update EnglishQuizs.
+     */
+    data: XOR<EnglishQuizUpdateManyMutationInput, EnglishQuizUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishQuizs to update
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * Limit how many EnglishQuizs to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishQuiz upsert
+   */
+  export type EnglishQuizUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EnglishQuiz to update in case it exists.
+     */
+    where: EnglishQuizWhereUniqueInput
+    /**
+     * In case the EnglishQuiz found by the `where` argument doesn't exist, create a new EnglishQuiz with this data.
+     */
+    create: XOR<EnglishQuizCreateInput, EnglishQuizUncheckedCreateInput>
+    /**
+     * In case the EnglishQuiz was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnglishQuizUpdateInput, EnglishQuizUncheckedUpdateInput>
+  }
+
+  /**
+   * EnglishQuiz delete
+   */
+  export type EnglishQuizDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+    /**
+     * Filter which EnglishQuiz to delete.
+     */
+    where: EnglishQuizWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuiz deleteMany
+   */
+  export type EnglishQuizDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishQuizs to delete
+     */
+    where?: EnglishQuizWhereInput
+    /**
+     * Limit how many EnglishQuizs to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishQuiz.questions
+   */
+  export type EnglishQuiz$questionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    where?: EnglishQuestionWhereInput
+    orderBy?: EnglishQuestionOrderByWithRelationInput | EnglishQuestionOrderByWithRelationInput[]
+    cursor?: EnglishQuestionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnglishQuestionScalarFieldEnum | EnglishQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuiz.sessions
+   */
+  export type EnglishQuiz$sessionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    where?: EnglishSessionWhereInput
+    orderBy?: EnglishSessionOrderByWithRelationInput | EnglishSessionOrderByWithRelationInput[]
+    cursor?: EnglishSessionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnglishSessionScalarFieldEnum | EnglishSessionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuiz without action
+   */
+  export type EnglishQuizDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuiz
+     */
+    select?: EnglishQuizSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuiz
+     */
+    omit?: EnglishQuizOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuizInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EnglishQuestion
+   */
+
+  export type AggregateEnglishQuestion = {
+    _count: EnglishQuestionCountAggregateOutputType | null
+    _avg: EnglishQuestionAvgAggregateOutputType | null
+    _sum: EnglishQuestionSumAggregateOutputType | null
+    _min: EnglishQuestionMinAggregateOutputType | null
+    _max: EnglishQuestionMaxAggregateOutputType | null
+  }
+
+  export type EnglishQuestionAvgAggregateOutputType = {
+    qNumber: number | null
+  }
+
+  export type EnglishQuestionSumAggregateOutputType = {
+    qNumber: number | null
+  }
+
+  export type EnglishQuestionMinAggregateOutputType = {
+    id: string | null
+    quizId: string | null
+    qNumber: number | null
+    question: string | null
+    correctAnswer: string | null
+    explanation: string | null
+    createdAt: Date | null
+  }
+
+  export type EnglishQuestionMaxAggregateOutputType = {
+    id: string | null
+    quizId: string | null
+    qNumber: number | null
+    question: string | null
+    correctAnswer: string | null
+    explanation: string | null
+    createdAt: Date | null
+  }
+
+  export type EnglishQuestionCountAggregateOutputType = {
+    id: number
+    quizId: number
+    qNumber: number
+    question: number
+    options: number
+    correctAnswer: number
+    explanation: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EnglishQuestionAvgAggregateInputType = {
+    qNumber?: true
+  }
+
+  export type EnglishQuestionSumAggregateInputType = {
+    qNumber?: true
+  }
+
+  export type EnglishQuestionMinAggregateInputType = {
+    id?: true
+    quizId?: true
+    qNumber?: true
+    question?: true
+    correctAnswer?: true
+    explanation?: true
+    createdAt?: true
+  }
+
+  export type EnglishQuestionMaxAggregateInputType = {
+    id?: true
+    quizId?: true
+    qNumber?: true
+    question?: true
+    correctAnswer?: true
+    explanation?: true
+    createdAt?: true
+  }
+
+  export type EnglishQuestionCountAggregateInputType = {
+    id?: true
+    quizId?: true
+    qNumber?: true
+    question?: true
+    options?: true
+    correctAnswer?: true
+    explanation?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EnglishQuestionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishQuestion to aggregate.
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuestions to fetch.
+     */
+    orderBy?: EnglishQuestionOrderByWithRelationInput | EnglishQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnglishQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EnglishQuestions
+    **/
+    _count?: true | EnglishQuestionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnglishQuestionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnglishQuestionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnglishQuestionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnglishQuestionMaxAggregateInputType
+  }
+
+  export type GetEnglishQuestionAggregateType<T extends EnglishQuestionAggregateArgs> = {
+        [P in keyof T & keyof AggregateEnglishQuestion]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEnglishQuestion[P]>
+      : GetScalarType<T[P], AggregateEnglishQuestion[P]>
+  }
+
+
+
+
+  export type EnglishQuestionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishQuestionWhereInput
+    orderBy?: EnglishQuestionOrderByWithAggregationInput | EnglishQuestionOrderByWithAggregationInput[]
+    by: EnglishQuestionScalarFieldEnum[] | EnglishQuestionScalarFieldEnum
+    having?: EnglishQuestionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnglishQuestionCountAggregateInputType | true
+    _avg?: EnglishQuestionAvgAggregateInputType
+    _sum?: EnglishQuestionSumAggregateInputType
+    _min?: EnglishQuestionMinAggregateInputType
+    _max?: EnglishQuestionMaxAggregateInputType
+  }
+
+  export type EnglishQuestionGroupByOutputType = {
+    id: string
+    quizId: string
+    qNumber: number
+    question: string
+    options: JsonValue
+    correctAnswer: string
+    explanation: string | null
+    createdAt: Date
+    _count: EnglishQuestionCountAggregateOutputType | null
+    _avg: EnglishQuestionAvgAggregateOutputType | null
+    _sum: EnglishQuestionSumAggregateOutputType | null
+    _min: EnglishQuestionMinAggregateOutputType | null
+    _max: EnglishQuestionMaxAggregateOutputType | null
+  }
+
+  type GetEnglishQuestionGroupByPayload<T extends EnglishQuestionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnglishQuestionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnglishQuestionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnglishQuestionGroupByOutputType[P]>
+            : GetScalarType<T[P], EnglishQuestionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnglishQuestionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quizId?: boolean
+    qNumber?: boolean
+    question?: boolean
+    options?: boolean
+    correctAnswer?: boolean
+    explanation?: boolean
+    createdAt?: boolean
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+    attempts?: boolean | EnglishQuestion$attemptsArgs<ExtArgs>
+    _count?: boolean | EnglishQuestionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishQuestion"]>
+
+  export type EnglishQuestionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quizId?: boolean
+    qNumber?: boolean
+    question?: boolean
+    options?: boolean
+    correctAnswer?: boolean
+    explanation?: boolean
+    createdAt?: boolean
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishQuestion"]>
+
+  export type EnglishQuestionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quizId?: boolean
+    qNumber?: boolean
+    question?: boolean
+    options?: boolean
+    correctAnswer?: boolean
+    explanation?: boolean
+    createdAt?: boolean
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishQuestion"]>
+
+  export type EnglishQuestionSelectScalar = {
+    id?: boolean
+    quizId?: boolean
+    qNumber?: boolean
+    question?: boolean
+    options?: boolean
+    correctAnswer?: boolean
+    explanation?: boolean
+    createdAt?: boolean
+  }
+
+  export type EnglishQuestionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quizId" | "qNumber" | "question" | "options" | "correctAnswer" | "explanation" | "createdAt", ExtArgs["result"]["englishQuestion"]>
+  export type EnglishQuestionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+    attempts?: boolean | EnglishQuestion$attemptsArgs<ExtArgs>
+    _count?: boolean | EnglishQuestionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EnglishQuestionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }
+  export type EnglishQuestionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }
+
+  export type $EnglishQuestionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EnglishQuestion"
+    objects: {
+      quiz: Prisma.$EnglishQuizPayload<ExtArgs>
+      attempts: Prisma.$EnglishAttemptPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      quizId: string
+      qNumber: number
+      question: string
+      options: Prisma.JsonValue
+      correctAnswer: string
+      explanation: string | null
+      createdAt: Date
+    }, ExtArgs["result"]["englishQuestion"]>
+    composites: {}
+  }
+
+  type EnglishQuestionGetPayload<S extends boolean | null | undefined | EnglishQuestionDefaultArgs> = $Result.GetResult<Prisma.$EnglishQuestionPayload, S>
+
+  type EnglishQuestionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnglishQuestionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnglishQuestionCountAggregateInputType | true
+    }
+
+  export interface EnglishQuestionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EnglishQuestion'], meta: { name: 'EnglishQuestion' } }
+    /**
+     * Find zero or one EnglishQuestion that matches the filter.
+     * @param {EnglishQuestionFindUniqueArgs} args - Arguments to find a EnglishQuestion
+     * @example
+     * // Get one EnglishQuestion
+     * const englishQuestion = await prisma.englishQuestion.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnglishQuestionFindUniqueArgs>(args: SelectSubset<T, EnglishQuestionFindUniqueArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EnglishQuestion that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnglishQuestionFindUniqueOrThrowArgs} args - Arguments to find a EnglishQuestion
+     * @example
+     * // Get one EnglishQuestion
+     * const englishQuestion = await prisma.englishQuestion.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnglishQuestionFindUniqueOrThrowArgs>(args: SelectSubset<T, EnglishQuestionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishQuestion that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionFindFirstArgs} args - Arguments to find a EnglishQuestion
+     * @example
+     * // Get one EnglishQuestion
+     * const englishQuestion = await prisma.englishQuestion.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnglishQuestionFindFirstArgs>(args?: SelectSubset<T, EnglishQuestionFindFirstArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishQuestion that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionFindFirstOrThrowArgs} args - Arguments to find a EnglishQuestion
+     * @example
+     * // Get one EnglishQuestion
+     * const englishQuestion = await prisma.englishQuestion.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnglishQuestionFindFirstOrThrowArgs>(args?: SelectSubset<T, EnglishQuestionFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EnglishQuestions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EnglishQuestions
+     * const englishQuestions = await prisma.englishQuestion.findMany()
+     * 
+     * // Get first 10 EnglishQuestions
+     * const englishQuestions = await prisma.englishQuestion.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const englishQuestionWithIdOnly = await prisma.englishQuestion.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EnglishQuestionFindManyArgs>(args?: SelectSubset<T, EnglishQuestionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EnglishQuestion.
+     * @param {EnglishQuestionCreateArgs} args - Arguments to create a EnglishQuestion.
+     * @example
+     * // Create one EnglishQuestion
+     * const EnglishQuestion = await prisma.englishQuestion.create({
+     *   data: {
+     *     // ... data to create a EnglishQuestion
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnglishQuestionCreateArgs>(args: SelectSubset<T, EnglishQuestionCreateArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EnglishQuestions.
+     * @param {EnglishQuestionCreateManyArgs} args - Arguments to create many EnglishQuestions.
+     * @example
+     * // Create many EnglishQuestions
+     * const englishQuestion = await prisma.englishQuestion.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnglishQuestionCreateManyArgs>(args?: SelectSubset<T, EnglishQuestionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EnglishQuestions and returns the data saved in the database.
+     * @param {EnglishQuestionCreateManyAndReturnArgs} args - Arguments to create many EnglishQuestions.
+     * @example
+     * // Create many EnglishQuestions
+     * const englishQuestion = await prisma.englishQuestion.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EnglishQuestions and only return the `id`
+     * const englishQuestionWithIdOnly = await prisma.englishQuestion.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnglishQuestionCreateManyAndReturnArgs>(args?: SelectSubset<T, EnglishQuestionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EnglishQuestion.
+     * @param {EnglishQuestionDeleteArgs} args - Arguments to delete one EnglishQuestion.
+     * @example
+     * // Delete one EnglishQuestion
+     * const EnglishQuestion = await prisma.englishQuestion.delete({
+     *   where: {
+     *     // ... filter to delete one EnglishQuestion
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnglishQuestionDeleteArgs>(args: SelectSubset<T, EnglishQuestionDeleteArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EnglishQuestion.
+     * @param {EnglishQuestionUpdateArgs} args - Arguments to update one EnglishQuestion.
+     * @example
+     * // Update one EnglishQuestion
+     * const englishQuestion = await prisma.englishQuestion.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnglishQuestionUpdateArgs>(args: SelectSubset<T, EnglishQuestionUpdateArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EnglishQuestions.
+     * @param {EnglishQuestionDeleteManyArgs} args - Arguments to filter EnglishQuestions to delete.
+     * @example
+     * // Delete a few EnglishQuestions
+     * const { count } = await prisma.englishQuestion.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnglishQuestionDeleteManyArgs>(args?: SelectSubset<T, EnglishQuestionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishQuestions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EnglishQuestions
+     * const englishQuestion = await prisma.englishQuestion.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnglishQuestionUpdateManyArgs>(args: SelectSubset<T, EnglishQuestionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishQuestions and returns the data updated in the database.
+     * @param {EnglishQuestionUpdateManyAndReturnArgs} args - Arguments to update many EnglishQuestions.
+     * @example
+     * // Update many EnglishQuestions
+     * const englishQuestion = await prisma.englishQuestion.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EnglishQuestions and only return the `id`
+     * const englishQuestionWithIdOnly = await prisma.englishQuestion.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnglishQuestionUpdateManyAndReturnArgs>(args: SelectSubset<T, EnglishQuestionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EnglishQuestion.
+     * @param {EnglishQuestionUpsertArgs} args - Arguments to update or create a EnglishQuestion.
+     * @example
+     * // Update or create a EnglishQuestion
+     * const englishQuestion = await prisma.englishQuestion.upsert({
+     *   create: {
+     *     // ... data to create a EnglishQuestion
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EnglishQuestion we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnglishQuestionUpsertArgs>(args: SelectSubset<T, EnglishQuestionUpsertArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EnglishQuestions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionCountArgs} args - Arguments to filter EnglishQuestions to count.
+     * @example
+     * // Count the number of EnglishQuestions
+     * const count = await prisma.englishQuestion.count({
+     *   where: {
+     *     // ... the filter for the EnglishQuestions we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnglishQuestionCountArgs>(
+      args?: Subset<T, EnglishQuestionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnglishQuestionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EnglishQuestion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnglishQuestionAggregateArgs>(args: Subset<T, EnglishQuestionAggregateArgs>): Prisma.PrismaPromise<GetEnglishQuestionAggregateType<T>>
+
+    /**
+     * Group by EnglishQuestion.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishQuestionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnglishQuestionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnglishQuestionGroupByArgs['orderBy'] }
+        : { orderBy?: EnglishQuestionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnglishQuestionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnglishQuestionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EnglishQuestion model
+   */
+  readonly fields: EnglishQuestionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EnglishQuestion.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnglishQuestionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quiz<T extends EnglishQuizDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EnglishQuizDefaultArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    attempts<T extends EnglishQuestion$attemptsArgs<ExtArgs> = {}>(args?: Subset<T, EnglishQuestion$attemptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EnglishQuestion model
+   */
+  interface EnglishQuestionFieldRefs {
+    readonly id: FieldRef<"EnglishQuestion", 'String'>
+    readonly quizId: FieldRef<"EnglishQuestion", 'String'>
+    readonly qNumber: FieldRef<"EnglishQuestion", 'Int'>
+    readonly question: FieldRef<"EnglishQuestion", 'String'>
+    readonly options: FieldRef<"EnglishQuestion", 'Json'>
+    readonly correctAnswer: FieldRef<"EnglishQuestion", 'String'>
+    readonly explanation: FieldRef<"EnglishQuestion", 'String'>
+    readonly createdAt: FieldRef<"EnglishQuestion", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EnglishQuestion findUnique
+   */
+  export type EnglishQuestionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuestion to fetch.
+     */
+    where: EnglishQuestionWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuestion findUniqueOrThrow
+   */
+  export type EnglishQuestionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuestion to fetch.
+     */
+    where: EnglishQuestionWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuestion findFirst
+   */
+  export type EnglishQuestionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuestion to fetch.
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuestions to fetch.
+     */
+    orderBy?: EnglishQuestionOrderByWithRelationInput | EnglishQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishQuestions.
+     */
+    cursor?: EnglishQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishQuestions.
+     */
+    distinct?: EnglishQuestionScalarFieldEnum | EnglishQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuestion findFirstOrThrow
+   */
+  export type EnglishQuestionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuestion to fetch.
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuestions to fetch.
+     */
+    orderBy?: EnglishQuestionOrderByWithRelationInput | EnglishQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishQuestions.
+     */
+    cursor?: EnglishQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuestions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishQuestions.
+     */
+    distinct?: EnglishQuestionScalarFieldEnum | EnglishQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuestion findMany
+   */
+  export type EnglishQuestionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishQuestions to fetch.
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishQuestions to fetch.
+     */
+    orderBy?: EnglishQuestionOrderByWithRelationInput | EnglishQuestionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EnglishQuestions.
+     */
+    cursor?: EnglishQuestionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishQuestions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishQuestions.
+     */
+    skip?: number
+    distinct?: EnglishQuestionScalarFieldEnum | EnglishQuestionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuestion create
+   */
+  export type EnglishQuestionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EnglishQuestion.
+     */
+    data: XOR<EnglishQuestionCreateInput, EnglishQuestionUncheckedCreateInput>
+  }
+
+  /**
+   * EnglishQuestion createMany
+   */
+  export type EnglishQuestionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EnglishQuestions.
+     */
+    data: EnglishQuestionCreateManyInput | EnglishQuestionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EnglishQuestion createManyAndReturn
+   */
+  export type EnglishQuestionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * The data used to create many EnglishQuestions.
+     */
+    data: EnglishQuestionCreateManyInput | EnglishQuestionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishQuestion update
+   */
+  export type EnglishQuestionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EnglishQuestion.
+     */
+    data: XOR<EnglishQuestionUpdateInput, EnglishQuestionUncheckedUpdateInput>
+    /**
+     * Choose, which EnglishQuestion to update.
+     */
+    where: EnglishQuestionWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuestion updateMany
+   */
+  export type EnglishQuestionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EnglishQuestions.
+     */
+    data: XOR<EnglishQuestionUpdateManyMutationInput, EnglishQuestionUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishQuestions to update
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * Limit how many EnglishQuestions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishQuestion updateManyAndReturn
+   */
+  export type EnglishQuestionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * The data used to update EnglishQuestions.
+     */
+    data: XOR<EnglishQuestionUpdateManyMutationInput, EnglishQuestionUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishQuestions to update
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * Limit how many EnglishQuestions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishQuestion upsert
+   */
+  export type EnglishQuestionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EnglishQuestion to update in case it exists.
+     */
+    where: EnglishQuestionWhereUniqueInput
+    /**
+     * In case the EnglishQuestion found by the `where` argument doesn't exist, create a new EnglishQuestion with this data.
+     */
+    create: XOR<EnglishQuestionCreateInput, EnglishQuestionUncheckedCreateInput>
+    /**
+     * In case the EnglishQuestion was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnglishQuestionUpdateInput, EnglishQuestionUncheckedUpdateInput>
+  }
+
+  /**
+   * EnglishQuestion delete
+   */
+  export type EnglishQuestionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    /**
+     * Filter which EnglishQuestion to delete.
+     */
+    where: EnglishQuestionWhereUniqueInput
+  }
+
+  /**
+   * EnglishQuestion deleteMany
+   */
+  export type EnglishQuestionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishQuestions to delete
+     */
+    where?: EnglishQuestionWhereInput
+    /**
+     * Limit how many EnglishQuestions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishQuestion.attempts
+   */
+  export type EnglishQuestion$attemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    where?: EnglishAttemptWhereInput
+    orderBy?: EnglishAttemptOrderByWithRelationInput | EnglishAttemptOrderByWithRelationInput[]
+    cursor?: EnglishAttemptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnglishAttemptScalarFieldEnum | EnglishAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishQuestion without action
+   */
+  export type EnglishQuestionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EnglishSession
+   */
+
+  export type AggregateEnglishSession = {
+    _count: EnglishSessionCountAggregateOutputType | null
+    _avg: EnglishSessionAvgAggregateOutputType | null
+    _sum: EnglishSessionSumAggregateOutputType | null
+    _min: EnglishSessionMinAggregateOutputType | null
+    _max: EnglishSessionMaxAggregateOutputType | null
+  }
+
+  export type EnglishSessionAvgAggregateOutputType = {
+    score: number | null
+    total: number | null
+    timeTakenMs: number | null
+  }
+
+  export type EnglishSessionSumAggregateOutputType = {
+    score: number | null
+    total: number | null
+    timeTakenMs: number | null
+  }
+
+  export type EnglishSessionMinAggregateOutputType = {
+    id: string | null
+    quizId: string | null
+    score: number | null
+    total: number | null
+    timeTakenMs: number | null
+    createdAt: Date | null
+  }
+
+  export type EnglishSessionMaxAggregateOutputType = {
+    id: string | null
+    quizId: string | null
+    score: number | null
+    total: number | null
+    timeTakenMs: number | null
+    createdAt: Date | null
+  }
+
+  export type EnglishSessionCountAggregateOutputType = {
+    id: number
+    quizId: number
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EnglishSessionAvgAggregateInputType = {
+    score?: true
+    total?: true
+    timeTakenMs?: true
+  }
+
+  export type EnglishSessionSumAggregateInputType = {
+    score?: true
+    total?: true
+    timeTakenMs?: true
+  }
+
+  export type EnglishSessionMinAggregateInputType = {
+    id?: true
+    quizId?: true
+    score?: true
+    total?: true
+    timeTakenMs?: true
+    createdAt?: true
+  }
+
+  export type EnglishSessionMaxAggregateInputType = {
+    id?: true
+    quizId?: true
+    score?: true
+    total?: true
+    timeTakenMs?: true
+    createdAt?: true
+  }
+
+  export type EnglishSessionCountAggregateInputType = {
+    id?: true
+    quizId?: true
+    score?: true
+    total?: true
+    timeTakenMs?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EnglishSessionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishSession to aggregate.
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishSessions to fetch.
+     */
+    orderBy?: EnglishSessionOrderByWithRelationInput | EnglishSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnglishSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EnglishSessions
+    **/
+    _count?: true | EnglishSessionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnglishSessionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnglishSessionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnglishSessionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnglishSessionMaxAggregateInputType
+  }
+
+  export type GetEnglishSessionAggregateType<T extends EnglishSessionAggregateArgs> = {
+        [P in keyof T & keyof AggregateEnglishSession]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEnglishSession[P]>
+      : GetScalarType<T[P], AggregateEnglishSession[P]>
+  }
+
+
+
+
+  export type EnglishSessionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishSessionWhereInput
+    orderBy?: EnglishSessionOrderByWithAggregationInput | EnglishSessionOrderByWithAggregationInput[]
+    by: EnglishSessionScalarFieldEnum[] | EnglishSessionScalarFieldEnum
+    having?: EnglishSessionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnglishSessionCountAggregateInputType | true
+    _avg?: EnglishSessionAvgAggregateInputType
+    _sum?: EnglishSessionSumAggregateInputType
+    _min?: EnglishSessionMinAggregateInputType
+    _max?: EnglishSessionMaxAggregateInputType
+  }
+
+  export type EnglishSessionGroupByOutputType = {
+    id: string
+    quizId: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt: Date
+    _count: EnglishSessionCountAggregateOutputType | null
+    _avg: EnglishSessionAvgAggregateOutputType | null
+    _sum: EnglishSessionSumAggregateOutputType | null
+    _min: EnglishSessionMinAggregateOutputType | null
+    _max: EnglishSessionMaxAggregateOutputType | null
+  }
+
+  type GetEnglishSessionGroupByPayload<T extends EnglishSessionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnglishSessionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnglishSessionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnglishSessionGroupByOutputType[P]>
+            : GetScalarType<T[P], EnglishSessionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnglishSessionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quizId?: boolean
+    score?: boolean
+    total?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+    attempts?: boolean | EnglishSession$attemptsArgs<ExtArgs>
+    _count?: boolean | EnglishSessionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishSession"]>
+
+  export type EnglishSessionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quizId?: boolean
+    score?: boolean
+    total?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishSession"]>
+
+  export type EnglishSessionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    quizId?: boolean
+    score?: boolean
+    total?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["englishSession"]>
+
+  export type EnglishSessionSelectScalar = {
+    id?: boolean
+    quizId?: boolean
+    score?: boolean
+    total?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+  }
+
+  export type EnglishSessionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quizId" | "score" | "total" | "timeTakenMs" | "createdAt", ExtArgs["result"]["englishSession"]>
+  export type EnglishSessionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+    attempts?: boolean | EnglishSession$attemptsArgs<ExtArgs>
+    _count?: boolean | EnglishSessionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type EnglishSessionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }
+  export type EnglishSessionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    quiz?: boolean | EnglishQuizDefaultArgs<ExtArgs>
+  }
+
+  export type $EnglishSessionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EnglishSession"
+    objects: {
+      quiz: Prisma.$EnglishQuizPayload<ExtArgs>
+      attempts: Prisma.$EnglishAttemptPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      quizId: string
+      score: number
+      total: number
+      timeTakenMs: number
+      createdAt: Date
+    }, ExtArgs["result"]["englishSession"]>
+    composites: {}
+  }
+
+  type EnglishSessionGetPayload<S extends boolean | null | undefined | EnglishSessionDefaultArgs> = $Result.GetResult<Prisma.$EnglishSessionPayload, S>
+
+  type EnglishSessionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnglishSessionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnglishSessionCountAggregateInputType | true
+    }
+
+  export interface EnglishSessionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EnglishSession'], meta: { name: 'EnglishSession' } }
+    /**
+     * Find zero or one EnglishSession that matches the filter.
+     * @param {EnglishSessionFindUniqueArgs} args - Arguments to find a EnglishSession
+     * @example
+     * // Get one EnglishSession
+     * const englishSession = await prisma.englishSession.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnglishSessionFindUniqueArgs>(args: SelectSubset<T, EnglishSessionFindUniqueArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EnglishSession that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnglishSessionFindUniqueOrThrowArgs} args - Arguments to find a EnglishSession
+     * @example
+     * // Get one EnglishSession
+     * const englishSession = await prisma.englishSession.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnglishSessionFindUniqueOrThrowArgs>(args: SelectSubset<T, EnglishSessionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishSession that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionFindFirstArgs} args - Arguments to find a EnglishSession
+     * @example
+     * // Get one EnglishSession
+     * const englishSession = await prisma.englishSession.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnglishSessionFindFirstArgs>(args?: SelectSubset<T, EnglishSessionFindFirstArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishSession that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionFindFirstOrThrowArgs} args - Arguments to find a EnglishSession
+     * @example
+     * // Get one EnglishSession
+     * const englishSession = await prisma.englishSession.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnglishSessionFindFirstOrThrowArgs>(args?: SelectSubset<T, EnglishSessionFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EnglishSessions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EnglishSessions
+     * const englishSessions = await prisma.englishSession.findMany()
+     * 
+     * // Get first 10 EnglishSessions
+     * const englishSessions = await prisma.englishSession.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const englishSessionWithIdOnly = await prisma.englishSession.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EnglishSessionFindManyArgs>(args?: SelectSubset<T, EnglishSessionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EnglishSession.
+     * @param {EnglishSessionCreateArgs} args - Arguments to create a EnglishSession.
+     * @example
+     * // Create one EnglishSession
+     * const EnglishSession = await prisma.englishSession.create({
+     *   data: {
+     *     // ... data to create a EnglishSession
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnglishSessionCreateArgs>(args: SelectSubset<T, EnglishSessionCreateArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EnglishSessions.
+     * @param {EnglishSessionCreateManyArgs} args - Arguments to create many EnglishSessions.
+     * @example
+     * // Create many EnglishSessions
+     * const englishSession = await prisma.englishSession.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnglishSessionCreateManyArgs>(args?: SelectSubset<T, EnglishSessionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EnglishSessions and returns the data saved in the database.
+     * @param {EnglishSessionCreateManyAndReturnArgs} args - Arguments to create many EnglishSessions.
+     * @example
+     * // Create many EnglishSessions
+     * const englishSession = await prisma.englishSession.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EnglishSessions and only return the `id`
+     * const englishSessionWithIdOnly = await prisma.englishSession.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnglishSessionCreateManyAndReturnArgs>(args?: SelectSubset<T, EnglishSessionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EnglishSession.
+     * @param {EnglishSessionDeleteArgs} args - Arguments to delete one EnglishSession.
+     * @example
+     * // Delete one EnglishSession
+     * const EnglishSession = await prisma.englishSession.delete({
+     *   where: {
+     *     // ... filter to delete one EnglishSession
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnglishSessionDeleteArgs>(args: SelectSubset<T, EnglishSessionDeleteArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EnglishSession.
+     * @param {EnglishSessionUpdateArgs} args - Arguments to update one EnglishSession.
+     * @example
+     * // Update one EnglishSession
+     * const englishSession = await prisma.englishSession.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnglishSessionUpdateArgs>(args: SelectSubset<T, EnglishSessionUpdateArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EnglishSessions.
+     * @param {EnglishSessionDeleteManyArgs} args - Arguments to filter EnglishSessions to delete.
+     * @example
+     * // Delete a few EnglishSessions
+     * const { count } = await prisma.englishSession.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnglishSessionDeleteManyArgs>(args?: SelectSubset<T, EnglishSessionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EnglishSessions
+     * const englishSession = await prisma.englishSession.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnglishSessionUpdateManyArgs>(args: SelectSubset<T, EnglishSessionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishSessions and returns the data updated in the database.
+     * @param {EnglishSessionUpdateManyAndReturnArgs} args - Arguments to update many EnglishSessions.
+     * @example
+     * // Update many EnglishSessions
+     * const englishSession = await prisma.englishSession.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EnglishSessions and only return the `id`
+     * const englishSessionWithIdOnly = await prisma.englishSession.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnglishSessionUpdateManyAndReturnArgs>(args: SelectSubset<T, EnglishSessionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EnglishSession.
+     * @param {EnglishSessionUpsertArgs} args - Arguments to update or create a EnglishSession.
+     * @example
+     * // Update or create a EnglishSession
+     * const englishSession = await prisma.englishSession.upsert({
+     *   create: {
+     *     // ... data to create a EnglishSession
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EnglishSession we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnglishSessionUpsertArgs>(args: SelectSubset<T, EnglishSessionUpsertArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EnglishSessions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionCountArgs} args - Arguments to filter EnglishSessions to count.
+     * @example
+     * // Count the number of EnglishSessions
+     * const count = await prisma.englishSession.count({
+     *   where: {
+     *     // ... the filter for the EnglishSessions we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnglishSessionCountArgs>(
+      args?: Subset<T, EnglishSessionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnglishSessionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EnglishSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnglishSessionAggregateArgs>(args: Subset<T, EnglishSessionAggregateArgs>): Prisma.PrismaPromise<GetEnglishSessionAggregateType<T>>
+
+    /**
+     * Group by EnglishSession.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishSessionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnglishSessionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnglishSessionGroupByArgs['orderBy'] }
+        : { orderBy?: EnglishSessionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnglishSessionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnglishSessionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EnglishSession model
+   */
+  readonly fields: EnglishSessionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EnglishSession.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnglishSessionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    quiz<T extends EnglishQuizDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EnglishQuizDefaultArgs<ExtArgs>>): Prisma__EnglishQuizClient<$Result.GetResult<Prisma.$EnglishQuizPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    attempts<T extends EnglishSession$attemptsArgs<ExtArgs> = {}>(args?: Subset<T, EnglishSession$attemptsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EnglishSession model
+   */
+  interface EnglishSessionFieldRefs {
+    readonly id: FieldRef<"EnglishSession", 'String'>
+    readonly quizId: FieldRef<"EnglishSession", 'String'>
+    readonly score: FieldRef<"EnglishSession", 'Int'>
+    readonly total: FieldRef<"EnglishSession", 'Int'>
+    readonly timeTakenMs: FieldRef<"EnglishSession", 'Int'>
+    readonly createdAt: FieldRef<"EnglishSession", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EnglishSession findUnique
+   */
+  export type EnglishSessionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishSession to fetch.
+     */
+    where: EnglishSessionWhereUniqueInput
+  }
+
+  /**
+   * EnglishSession findUniqueOrThrow
+   */
+  export type EnglishSessionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishSession to fetch.
+     */
+    where: EnglishSessionWhereUniqueInput
+  }
+
+  /**
+   * EnglishSession findFirst
+   */
+  export type EnglishSessionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishSession to fetch.
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishSessions to fetch.
+     */
+    orderBy?: EnglishSessionOrderByWithRelationInput | EnglishSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishSessions.
+     */
+    cursor?: EnglishSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishSessions.
+     */
+    distinct?: EnglishSessionScalarFieldEnum | EnglishSessionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishSession findFirstOrThrow
+   */
+  export type EnglishSessionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishSession to fetch.
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishSessions to fetch.
+     */
+    orderBy?: EnglishSessionOrderByWithRelationInput | EnglishSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishSessions.
+     */
+    cursor?: EnglishSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishSessions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishSessions.
+     */
+    distinct?: EnglishSessionScalarFieldEnum | EnglishSessionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishSession findMany
+   */
+  export type EnglishSessionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishSessions to fetch.
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishSessions to fetch.
+     */
+    orderBy?: EnglishSessionOrderByWithRelationInput | EnglishSessionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EnglishSessions.
+     */
+    cursor?: EnglishSessionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishSessions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishSessions.
+     */
+    skip?: number
+    distinct?: EnglishSessionScalarFieldEnum | EnglishSessionScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishSession create
+   */
+  export type EnglishSessionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EnglishSession.
+     */
+    data: XOR<EnglishSessionCreateInput, EnglishSessionUncheckedCreateInput>
+  }
+
+  /**
+   * EnglishSession createMany
+   */
+  export type EnglishSessionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EnglishSessions.
+     */
+    data: EnglishSessionCreateManyInput | EnglishSessionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EnglishSession createManyAndReturn
+   */
+  export type EnglishSessionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * The data used to create many EnglishSessions.
+     */
+    data: EnglishSessionCreateManyInput | EnglishSessionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishSession update
+   */
+  export type EnglishSessionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EnglishSession.
+     */
+    data: XOR<EnglishSessionUpdateInput, EnglishSessionUncheckedUpdateInput>
+    /**
+     * Choose, which EnglishSession to update.
+     */
+    where: EnglishSessionWhereUniqueInput
+  }
+
+  /**
+   * EnglishSession updateMany
+   */
+  export type EnglishSessionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EnglishSessions.
+     */
+    data: XOR<EnglishSessionUpdateManyMutationInput, EnglishSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishSessions to update
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * Limit how many EnglishSessions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishSession updateManyAndReturn
+   */
+  export type EnglishSessionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * The data used to update EnglishSessions.
+     */
+    data: XOR<EnglishSessionUpdateManyMutationInput, EnglishSessionUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishSessions to update
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * Limit how many EnglishSessions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishSession upsert
+   */
+  export type EnglishSessionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EnglishSession to update in case it exists.
+     */
+    where: EnglishSessionWhereUniqueInput
+    /**
+     * In case the EnglishSession found by the `where` argument doesn't exist, create a new EnglishSession with this data.
+     */
+    create: XOR<EnglishSessionCreateInput, EnglishSessionUncheckedCreateInput>
+    /**
+     * In case the EnglishSession was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnglishSessionUpdateInput, EnglishSessionUncheckedUpdateInput>
+  }
+
+  /**
+   * EnglishSession delete
+   */
+  export type EnglishSessionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+    /**
+     * Filter which EnglishSession to delete.
+     */
+    where: EnglishSessionWhereUniqueInput
+  }
+
+  /**
+   * EnglishSession deleteMany
+   */
+  export type EnglishSessionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishSessions to delete
+     */
+    where?: EnglishSessionWhereInput
+    /**
+     * Limit how many EnglishSessions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishSession.attempts
+   */
+  export type EnglishSession$attemptsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    where?: EnglishAttemptWhereInput
+    orderBy?: EnglishAttemptOrderByWithRelationInput | EnglishAttemptOrderByWithRelationInput[]
+    cursor?: EnglishAttemptWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: EnglishAttemptScalarFieldEnum | EnglishAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishSession without action
+   */
+  export type EnglishSessionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishSession
+     */
+    select?: EnglishSessionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishSession
+     */
+    omit?: EnglishSessionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishSessionInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model EnglishAttempt
+   */
+
+  export type AggregateEnglishAttempt = {
+    _count: EnglishAttemptCountAggregateOutputType | null
+    _avg: EnglishAttemptAvgAggregateOutputType | null
+    _sum: EnglishAttemptSumAggregateOutputType | null
+    _min: EnglishAttemptMinAggregateOutputType | null
+    _max: EnglishAttemptMaxAggregateOutputType | null
+  }
+
+  export type EnglishAttemptAvgAggregateOutputType = {
+    qNumber: number | null
+    timeTakenMs: number | null
+  }
+
+  export type EnglishAttemptSumAggregateOutputType = {
+    qNumber: number | null
+    timeTakenMs: number | null
+  }
+
+  export type EnglishAttemptMinAggregateOutputType = {
+    id: string | null
+    sessionId: string | null
+    questionId: string | null
+    qNumber: number | null
+    userAnswer: string | null
+    correctAnswer: string | null
+    isCorrect: boolean | null
+    timeTakenMs: number | null
+    createdAt: Date | null
+  }
+
+  export type EnglishAttemptMaxAggregateOutputType = {
+    id: string | null
+    sessionId: string | null
+    questionId: string | null
+    qNumber: number | null
+    userAnswer: string | null
+    correctAnswer: string | null
+    isCorrect: boolean | null
+    timeTakenMs: number | null
+    createdAt: Date | null
+  }
+
+  export type EnglishAttemptCountAggregateOutputType = {
+    id: number
+    sessionId: number
+    questionId: number
+    qNumber: number
+    userAnswer: number
+    correctAnswer: number
+    isCorrect: number
+    timeTakenMs: number
+    createdAt: number
+    _all: number
+  }
+
+
+  export type EnglishAttemptAvgAggregateInputType = {
+    qNumber?: true
+    timeTakenMs?: true
+  }
+
+  export type EnglishAttemptSumAggregateInputType = {
+    qNumber?: true
+    timeTakenMs?: true
+  }
+
+  export type EnglishAttemptMinAggregateInputType = {
+    id?: true
+    sessionId?: true
+    questionId?: true
+    qNumber?: true
+    userAnswer?: true
+    correctAnswer?: true
+    isCorrect?: true
+    timeTakenMs?: true
+    createdAt?: true
+  }
+
+  export type EnglishAttemptMaxAggregateInputType = {
+    id?: true
+    sessionId?: true
+    questionId?: true
+    qNumber?: true
+    userAnswer?: true
+    correctAnswer?: true
+    isCorrect?: true
+    timeTakenMs?: true
+    createdAt?: true
+  }
+
+  export type EnglishAttemptCountAggregateInputType = {
+    id?: true
+    sessionId?: true
+    questionId?: true
+    qNumber?: true
+    userAnswer?: true
+    correctAnswer?: true
+    isCorrect?: true
+    timeTakenMs?: true
+    createdAt?: true
+    _all?: true
+  }
+
+  export type EnglishAttemptAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishAttempt to aggregate.
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishAttempts to fetch.
+     */
+    orderBy?: EnglishAttemptOrderByWithRelationInput | EnglishAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: EnglishAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned EnglishAttempts
+    **/
+    _count?: true | EnglishAttemptCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EnglishAttemptAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EnglishAttemptSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EnglishAttemptMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EnglishAttemptMaxAggregateInputType
+  }
+
+  export type GetEnglishAttemptAggregateType<T extends EnglishAttemptAggregateArgs> = {
+        [P in keyof T & keyof AggregateEnglishAttempt]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEnglishAttempt[P]>
+      : GetScalarType<T[P], AggregateEnglishAttempt[P]>
+  }
+
+
+
+
+  export type EnglishAttemptGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: EnglishAttemptWhereInput
+    orderBy?: EnglishAttemptOrderByWithAggregationInput | EnglishAttemptOrderByWithAggregationInput[]
+    by: EnglishAttemptScalarFieldEnum[] | EnglishAttemptScalarFieldEnum
+    having?: EnglishAttemptScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EnglishAttemptCountAggregateInputType | true
+    _avg?: EnglishAttemptAvgAggregateInputType
+    _sum?: EnglishAttemptSumAggregateInputType
+    _min?: EnglishAttemptMinAggregateInputType
+    _max?: EnglishAttemptMaxAggregateInputType
+  }
+
+  export type EnglishAttemptGroupByOutputType = {
+    id: string
+    sessionId: string
+    questionId: string | null
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt: Date
+    _count: EnglishAttemptCountAggregateOutputType | null
+    _avg: EnglishAttemptAvgAggregateOutputType | null
+    _sum: EnglishAttemptSumAggregateOutputType | null
+    _min: EnglishAttemptMinAggregateOutputType | null
+    _max: EnglishAttemptMaxAggregateOutputType | null
+  }
+
+  type GetEnglishAttemptGroupByPayload<T extends EnglishAttemptGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EnglishAttemptGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EnglishAttemptGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EnglishAttemptGroupByOutputType[P]>
+            : GetScalarType<T[P], EnglishAttemptGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type EnglishAttemptSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sessionId?: boolean
+    questionId?: boolean
+    qNumber?: boolean
+    userAnswer?: boolean
+    correctAnswer?: boolean
+    isCorrect?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+    session?: boolean | EnglishSessionDefaultArgs<ExtArgs>
+    question?: boolean | EnglishAttempt$questionArgs<ExtArgs>
+  }, ExtArgs["result"]["englishAttempt"]>
+
+  export type EnglishAttemptSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sessionId?: boolean
+    questionId?: boolean
+    qNumber?: boolean
+    userAnswer?: boolean
+    correctAnswer?: boolean
+    isCorrect?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+    session?: boolean | EnglishSessionDefaultArgs<ExtArgs>
+    question?: boolean | EnglishAttempt$questionArgs<ExtArgs>
+  }, ExtArgs["result"]["englishAttempt"]>
+
+  export type EnglishAttemptSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    sessionId?: boolean
+    questionId?: boolean
+    qNumber?: boolean
+    userAnswer?: boolean
+    correctAnswer?: boolean
+    isCorrect?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+    session?: boolean | EnglishSessionDefaultArgs<ExtArgs>
+    question?: boolean | EnglishAttempt$questionArgs<ExtArgs>
+  }, ExtArgs["result"]["englishAttempt"]>
+
+  export type EnglishAttemptSelectScalar = {
+    id?: boolean
+    sessionId?: boolean
+    questionId?: boolean
+    qNumber?: boolean
+    userAnswer?: boolean
+    correctAnswer?: boolean
+    isCorrect?: boolean
+    timeTakenMs?: boolean
+    createdAt?: boolean
+  }
+
+  export type EnglishAttemptOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "sessionId" | "questionId" | "qNumber" | "userAnswer" | "correctAnswer" | "isCorrect" | "timeTakenMs" | "createdAt", ExtArgs["result"]["englishAttempt"]>
+  export type EnglishAttemptInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session?: boolean | EnglishSessionDefaultArgs<ExtArgs>
+    question?: boolean | EnglishAttempt$questionArgs<ExtArgs>
+  }
+  export type EnglishAttemptIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session?: boolean | EnglishSessionDefaultArgs<ExtArgs>
+    question?: boolean | EnglishAttempt$questionArgs<ExtArgs>
+  }
+  export type EnglishAttemptIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    session?: boolean | EnglishSessionDefaultArgs<ExtArgs>
+    question?: boolean | EnglishAttempt$questionArgs<ExtArgs>
+  }
+
+  export type $EnglishAttemptPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "EnglishAttempt"
+    objects: {
+      session: Prisma.$EnglishSessionPayload<ExtArgs>
+      question: Prisma.$EnglishQuestionPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      sessionId: string
+      questionId: string | null
+      qNumber: number
+      userAnswer: string
+      correctAnswer: string
+      isCorrect: boolean
+      timeTakenMs: number
+      createdAt: Date
+    }, ExtArgs["result"]["englishAttempt"]>
+    composites: {}
+  }
+
+  type EnglishAttemptGetPayload<S extends boolean | null | undefined | EnglishAttemptDefaultArgs> = $Result.GetResult<Prisma.$EnglishAttemptPayload, S>
+
+  type EnglishAttemptCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<EnglishAttemptFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EnglishAttemptCountAggregateInputType | true
+    }
+
+  export interface EnglishAttemptDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['EnglishAttempt'], meta: { name: 'EnglishAttempt' } }
+    /**
+     * Find zero or one EnglishAttempt that matches the filter.
+     * @param {EnglishAttemptFindUniqueArgs} args - Arguments to find a EnglishAttempt
+     * @example
+     * // Get one EnglishAttempt
+     * const englishAttempt = await prisma.englishAttempt.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends EnglishAttemptFindUniqueArgs>(args: SelectSubset<T, EnglishAttemptFindUniqueArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one EnglishAttempt that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {EnglishAttemptFindUniqueOrThrowArgs} args - Arguments to find a EnglishAttempt
+     * @example
+     * // Get one EnglishAttempt
+     * const englishAttempt = await prisma.englishAttempt.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends EnglishAttemptFindUniqueOrThrowArgs>(args: SelectSubset<T, EnglishAttemptFindUniqueOrThrowArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishAttempt that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptFindFirstArgs} args - Arguments to find a EnglishAttempt
+     * @example
+     * // Get one EnglishAttempt
+     * const englishAttempt = await prisma.englishAttempt.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends EnglishAttemptFindFirstArgs>(args?: SelectSubset<T, EnglishAttemptFindFirstArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first EnglishAttempt that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptFindFirstOrThrowArgs} args - Arguments to find a EnglishAttempt
+     * @example
+     * // Get one EnglishAttempt
+     * const englishAttempt = await prisma.englishAttempt.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends EnglishAttemptFindFirstOrThrowArgs>(args?: SelectSubset<T, EnglishAttemptFindFirstOrThrowArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more EnglishAttempts that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all EnglishAttempts
+     * const englishAttempts = await prisma.englishAttempt.findMany()
+     * 
+     * // Get first 10 EnglishAttempts
+     * const englishAttempts = await prisma.englishAttempt.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const englishAttemptWithIdOnly = await prisma.englishAttempt.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends EnglishAttemptFindManyArgs>(args?: SelectSubset<T, EnglishAttemptFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a EnglishAttempt.
+     * @param {EnglishAttemptCreateArgs} args - Arguments to create a EnglishAttempt.
+     * @example
+     * // Create one EnglishAttempt
+     * const EnglishAttempt = await prisma.englishAttempt.create({
+     *   data: {
+     *     // ... data to create a EnglishAttempt
+     *   }
+     * })
+     * 
+     */
+    create<T extends EnglishAttemptCreateArgs>(args: SelectSubset<T, EnglishAttemptCreateArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many EnglishAttempts.
+     * @param {EnglishAttemptCreateManyArgs} args - Arguments to create many EnglishAttempts.
+     * @example
+     * // Create many EnglishAttempts
+     * const englishAttempt = await prisma.englishAttempt.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends EnglishAttemptCreateManyArgs>(args?: SelectSubset<T, EnglishAttemptCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many EnglishAttempts and returns the data saved in the database.
+     * @param {EnglishAttemptCreateManyAndReturnArgs} args - Arguments to create many EnglishAttempts.
+     * @example
+     * // Create many EnglishAttempts
+     * const englishAttempt = await prisma.englishAttempt.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many EnglishAttempts and only return the `id`
+     * const englishAttemptWithIdOnly = await prisma.englishAttempt.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends EnglishAttemptCreateManyAndReturnArgs>(args?: SelectSubset<T, EnglishAttemptCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a EnglishAttempt.
+     * @param {EnglishAttemptDeleteArgs} args - Arguments to delete one EnglishAttempt.
+     * @example
+     * // Delete one EnglishAttempt
+     * const EnglishAttempt = await prisma.englishAttempt.delete({
+     *   where: {
+     *     // ... filter to delete one EnglishAttempt
+     *   }
+     * })
+     * 
+     */
+    delete<T extends EnglishAttemptDeleteArgs>(args: SelectSubset<T, EnglishAttemptDeleteArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one EnglishAttempt.
+     * @param {EnglishAttemptUpdateArgs} args - Arguments to update one EnglishAttempt.
+     * @example
+     * // Update one EnglishAttempt
+     * const englishAttempt = await prisma.englishAttempt.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends EnglishAttemptUpdateArgs>(args: SelectSubset<T, EnglishAttemptUpdateArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more EnglishAttempts.
+     * @param {EnglishAttemptDeleteManyArgs} args - Arguments to filter EnglishAttempts to delete.
+     * @example
+     * // Delete a few EnglishAttempts
+     * const { count } = await prisma.englishAttempt.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends EnglishAttemptDeleteManyArgs>(args?: SelectSubset<T, EnglishAttemptDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishAttempts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many EnglishAttempts
+     * const englishAttempt = await prisma.englishAttempt.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends EnglishAttemptUpdateManyArgs>(args: SelectSubset<T, EnglishAttemptUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more EnglishAttempts and returns the data updated in the database.
+     * @param {EnglishAttemptUpdateManyAndReturnArgs} args - Arguments to update many EnglishAttempts.
+     * @example
+     * // Update many EnglishAttempts
+     * const englishAttempt = await prisma.englishAttempt.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more EnglishAttempts and only return the `id`
+     * const englishAttemptWithIdOnly = await prisma.englishAttempt.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends EnglishAttemptUpdateManyAndReturnArgs>(args: SelectSubset<T, EnglishAttemptUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one EnglishAttempt.
+     * @param {EnglishAttemptUpsertArgs} args - Arguments to update or create a EnglishAttempt.
+     * @example
+     * // Update or create a EnglishAttempt
+     * const englishAttempt = await prisma.englishAttempt.upsert({
+     *   create: {
+     *     // ... data to create a EnglishAttempt
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the EnglishAttempt we want to update
+     *   }
+     * })
+     */
+    upsert<T extends EnglishAttemptUpsertArgs>(args: SelectSubset<T, EnglishAttemptUpsertArgs<ExtArgs>>): Prisma__EnglishAttemptClient<$Result.GetResult<Prisma.$EnglishAttemptPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of EnglishAttempts.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptCountArgs} args - Arguments to filter EnglishAttempts to count.
+     * @example
+     * // Count the number of EnglishAttempts
+     * const count = await prisma.englishAttempt.count({
+     *   where: {
+     *     // ... the filter for the EnglishAttempts we want to count
+     *   }
+     * })
+    **/
+    count<T extends EnglishAttemptCountArgs>(
+      args?: Subset<T, EnglishAttemptCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EnglishAttemptCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a EnglishAttempt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EnglishAttemptAggregateArgs>(args: Subset<T, EnglishAttemptAggregateArgs>): Prisma.PrismaPromise<GetEnglishAttemptAggregateType<T>>
+
+    /**
+     * Group by EnglishAttempt.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EnglishAttemptGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends EnglishAttemptGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: EnglishAttemptGroupByArgs['orderBy'] }
+        : { orderBy?: EnglishAttemptGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, EnglishAttemptGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEnglishAttemptGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the EnglishAttempt model
+   */
+  readonly fields: EnglishAttemptFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for EnglishAttempt.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__EnglishAttemptClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    session<T extends EnglishSessionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, EnglishSessionDefaultArgs<ExtArgs>>): Prisma__EnglishSessionClient<$Result.GetResult<Prisma.$EnglishSessionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    question<T extends EnglishAttempt$questionArgs<ExtArgs> = {}>(args?: Subset<T, EnglishAttempt$questionArgs<ExtArgs>>): Prisma__EnglishQuestionClient<$Result.GetResult<Prisma.$EnglishQuestionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the EnglishAttempt model
+   */
+  interface EnglishAttemptFieldRefs {
+    readonly id: FieldRef<"EnglishAttempt", 'String'>
+    readonly sessionId: FieldRef<"EnglishAttempt", 'String'>
+    readonly questionId: FieldRef<"EnglishAttempt", 'String'>
+    readonly qNumber: FieldRef<"EnglishAttempt", 'Int'>
+    readonly userAnswer: FieldRef<"EnglishAttempt", 'String'>
+    readonly correctAnswer: FieldRef<"EnglishAttempt", 'String'>
+    readonly isCorrect: FieldRef<"EnglishAttempt", 'Boolean'>
+    readonly timeTakenMs: FieldRef<"EnglishAttempt", 'Int'>
+    readonly createdAt: FieldRef<"EnglishAttempt", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * EnglishAttempt findUnique
+   */
+  export type EnglishAttemptFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishAttempt to fetch.
+     */
+    where: EnglishAttemptWhereUniqueInput
+  }
+
+  /**
+   * EnglishAttempt findUniqueOrThrow
+   */
+  export type EnglishAttemptFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishAttempt to fetch.
+     */
+    where: EnglishAttemptWhereUniqueInput
+  }
+
+  /**
+   * EnglishAttempt findFirst
+   */
+  export type EnglishAttemptFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishAttempt to fetch.
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishAttempts to fetch.
+     */
+    orderBy?: EnglishAttemptOrderByWithRelationInput | EnglishAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishAttempts.
+     */
+    cursor?: EnglishAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishAttempts.
+     */
+    distinct?: EnglishAttemptScalarFieldEnum | EnglishAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishAttempt findFirstOrThrow
+   */
+  export type EnglishAttemptFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishAttempt to fetch.
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishAttempts to fetch.
+     */
+    orderBy?: EnglishAttemptOrderByWithRelationInput | EnglishAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for EnglishAttempts.
+     */
+    cursor?: EnglishAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishAttempts.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of EnglishAttempts.
+     */
+    distinct?: EnglishAttemptScalarFieldEnum | EnglishAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishAttempt findMany
+   */
+  export type EnglishAttemptFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * Filter, which EnglishAttempts to fetch.
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of EnglishAttempts to fetch.
+     */
+    orderBy?: EnglishAttemptOrderByWithRelationInput | EnglishAttemptOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing EnglishAttempts.
+     */
+    cursor?: EnglishAttemptWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` EnglishAttempts from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` EnglishAttempts.
+     */
+    skip?: number
+    distinct?: EnglishAttemptScalarFieldEnum | EnglishAttemptScalarFieldEnum[]
+  }
+
+  /**
+   * EnglishAttempt create
+   */
+  export type EnglishAttemptCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * The data needed to create a EnglishAttempt.
+     */
+    data: XOR<EnglishAttemptCreateInput, EnglishAttemptUncheckedCreateInput>
+  }
+
+  /**
+   * EnglishAttempt createMany
+   */
+  export type EnglishAttemptCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many EnglishAttempts.
+     */
+    data: EnglishAttemptCreateManyInput | EnglishAttemptCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * EnglishAttempt createManyAndReturn
+   */
+  export type EnglishAttemptCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * The data used to create many EnglishAttempts.
+     */
+    data: EnglishAttemptCreateManyInput | EnglishAttemptCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishAttempt update
+   */
+  export type EnglishAttemptUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * The data needed to update a EnglishAttempt.
+     */
+    data: XOR<EnglishAttemptUpdateInput, EnglishAttemptUncheckedUpdateInput>
+    /**
+     * Choose, which EnglishAttempt to update.
+     */
+    where: EnglishAttemptWhereUniqueInput
+  }
+
+  /**
+   * EnglishAttempt updateMany
+   */
+  export type EnglishAttemptUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update EnglishAttempts.
+     */
+    data: XOR<EnglishAttemptUpdateManyMutationInput, EnglishAttemptUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishAttempts to update
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * Limit how many EnglishAttempts to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishAttempt updateManyAndReturn
+   */
+  export type EnglishAttemptUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * The data used to update EnglishAttempts.
+     */
+    data: XOR<EnglishAttemptUpdateManyMutationInput, EnglishAttemptUncheckedUpdateManyInput>
+    /**
+     * Filter which EnglishAttempts to update
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * Limit how many EnglishAttempts to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * EnglishAttempt upsert
+   */
+  export type EnglishAttemptUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * The filter to search for the EnglishAttempt to update in case it exists.
+     */
+    where: EnglishAttemptWhereUniqueInput
+    /**
+     * In case the EnglishAttempt found by the `where` argument doesn't exist, create a new EnglishAttempt with this data.
+     */
+    create: XOR<EnglishAttemptCreateInput, EnglishAttemptUncheckedCreateInput>
+    /**
+     * In case the EnglishAttempt was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<EnglishAttemptUpdateInput, EnglishAttemptUncheckedUpdateInput>
+  }
+
+  /**
+   * EnglishAttempt delete
+   */
+  export type EnglishAttemptDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+    /**
+     * Filter which EnglishAttempt to delete.
+     */
+    where: EnglishAttemptWhereUniqueInput
+  }
+
+  /**
+   * EnglishAttempt deleteMany
+   */
+  export type EnglishAttemptDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which EnglishAttempts to delete
+     */
+    where?: EnglishAttemptWhereInput
+    /**
+     * Limit how many EnglishAttempts to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * EnglishAttempt.question
+   */
+  export type EnglishAttempt$questionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishQuestion
+     */
+    select?: EnglishQuestionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishQuestion
+     */
+    omit?: EnglishQuestionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishQuestionInclude<ExtArgs> | null
+    where?: EnglishQuestionWhereInput
+  }
+
+  /**
+   * EnglishAttempt without action
+   */
+  export type EnglishAttemptDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EnglishAttempt
+     */
+    select?: EnglishAttemptSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the EnglishAttempt
+     */
+    omit?: EnglishAttemptOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: EnglishAttemptInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -7095,12 +12134,71 @@ export namespace Prisma {
   export type AttemptScalarFieldEnum = (typeof AttemptScalarFieldEnum)[keyof typeof AttemptScalarFieldEnum]
 
 
+  export const EnglishQuizScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type EnglishQuizScalarFieldEnum = (typeof EnglishQuizScalarFieldEnum)[keyof typeof EnglishQuizScalarFieldEnum]
+
+
+  export const EnglishQuestionScalarFieldEnum: {
+    id: 'id',
+    quizId: 'quizId',
+    qNumber: 'qNumber',
+    question: 'question',
+    options: 'options',
+    correctAnswer: 'correctAnswer',
+    explanation: 'explanation',
+    createdAt: 'createdAt'
+  };
+
+  export type EnglishQuestionScalarFieldEnum = (typeof EnglishQuestionScalarFieldEnum)[keyof typeof EnglishQuestionScalarFieldEnum]
+
+
+  export const EnglishSessionScalarFieldEnum: {
+    id: 'id',
+    quizId: 'quizId',
+    score: 'score',
+    total: 'total',
+    timeTakenMs: 'timeTakenMs',
+    createdAt: 'createdAt'
+  };
+
+  export type EnglishSessionScalarFieldEnum = (typeof EnglishSessionScalarFieldEnum)[keyof typeof EnglishSessionScalarFieldEnum]
+
+
+  export const EnglishAttemptScalarFieldEnum: {
+    id: 'id',
+    sessionId: 'sessionId',
+    questionId: 'questionId',
+    qNumber: 'qNumber',
+    userAnswer: 'userAnswer',
+    correctAnswer: 'correctAnswer',
+    isCorrect: 'isCorrect',
+    timeTakenMs: 'timeTakenMs',
+    createdAt: 'createdAt'
+  };
+
+  export type EnglishAttemptScalarFieldEnum = (typeof EnglishAttemptScalarFieldEnum)[keyof typeof EnglishAttemptScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
   };
 
   export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+  export const JsonNullValueInput: {
+    JsonNull: typeof JsonNull
+  };
+
+  export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
   export const QueryMode: {
@@ -7117,6 +12215,15 @@ export namespace Prisma {
   };
 
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+  export const JsonNullValueFilter: {
+    DbNull: typeof DbNull,
+    JsonNull: typeof JsonNull,
+    AnyNull: typeof AnyNull
+  };
+
+  export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 
 
   /**
@@ -7170,6 +12277,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'Json'
+   */
+  export type JsonFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Json'>
+    
+
+
+  /**
+   * Reference to a field of type 'QueryMode'
+   */
+  export type EnumQueryModeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'QueryMode'>
     
 
 
@@ -7524,6 +12645,285 @@ export namespace Prisma {
     createdAt?: DateTimeWithAggregatesFilter<"Attempt"> | Date | string
   }
 
+  export type EnglishQuizWhereInput = {
+    AND?: EnglishQuizWhereInput | EnglishQuizWhereInput[]
+    OR?: EnglishQuizWhereInput[]
+    NOT?: EnglishQuizWhereInput | EnglishQuizWhereInput[]
+    id?: StringFilter<"EnglishQuiz"> | string
+    title?: StringFilter<"EnglishQuiz"> | string
+    description?: StringNullableFilter<"EnglishQuiz"> | string | null
+    createdAt?: DateTimeFilter<"EnglishQuiz"> | Date | string
+    updatedAt?: DateTimeFilter<"EnglishQuiz"> | Date | string
+    questions?: EnglishQuestionListRelationFilter
+    sessions?: EnglishSessionListRelationFilter
+  }
+
+  export type EnglishQuizOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    questions?: EnglishQuestionOrderByRelationAggregateInput
+    sessions?: EnglishSessionOrderByRelationAggregateInput
+  }
+
+  export type EnglishQuizWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EnglishQuizWhereInput | EnglishQuizWhereInput[]
+    OR?: EnglishQuizWhereInput[]
+    NOT?: EnglishQuizWhereInput | EnglishQuizWhereInput[]
+    title?: StringFilter<"EnglishQuiz"> | string
+    description?: StringNullableFilter<"EnglishQuiz"> | string | null
+    createdAt?: DateTimeFilter<"EnglishQuiz"> | Date | string
+    updatedAt?: DateTimeFilter<"EnglishQuiz"> | Date | string
+    questions?: EnglishQuestionListRelationFilter
+    sessions?: EnglishSessionListRelationFilter
+  }, "id">
+
+  export type EnglishQuizOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: EnglishQuizCountOrderByAggregateInput
+    _max?: EnglishQuizMaxOrderByAggregateInput
+    _min?: EnglishQuizMinOrderByAggregateInput
+  }
+
+  export type EnglishQuizScalarWhereWithAggregatesInput = {
+    AND?: EnglishQuizScalarWhereWithAggregatesInput | EnglishQuizScalarWhereWithAggregatesInput[]
+    OR?: EnglishQuizScalarWhereWithAggregatesInput[]
+    NOT?: EnglishQuizScalarWhereWithAggregatesInput | EnglishQuizScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EnglishQuiz"> | string
+    title?: StringWithAggregatesFilter<"EnglishQuiz"> | string
+    description?: StringNullableWithAggregatesFilter<"EnglishQuiz"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"EnglishQuiz"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"EnglishQuiz"> | Date | string
+  }
+
+  export type EnglishQuestionWhereInput = {
+    AND?: EnglishQuestionWhereInput | EnglishQuestionWhereInput[]
+    OR?: EnglishQuestionWhereInput[]
+    NOT?: EnglishQuestionWhereInput | EnglishQuestionWhereInput[]
+    id?: StringFilter<"EnglishQuestion"> | string
+    quizId?: StringFilter<"EnglishQuestion"> | string
+    qNumber?: IntFilter<"EnglishQuestion"> | number
+    question?: StringFilter<"EnglishQuestion"> | string
+    options?: JsonFilter<"EnglishQuestion">
+    correctAnswer?: StringFilter<"EnglishQuestion"> | string
+    explanation?: StringNullableFilter<"EnglishQuestion"> | string | null
+    createdAt?: DateTimeFilter<"EnglishQuestion"> | Date | string
+    quiz?: XOR<EnglishQuizScalarRelationFilter, EnglishQuizWhereInput>
+    attempts?: EnglishAttemptListRelationFilter
+  }
+
+  export type EnglishQuestionOrderByWithRelationInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    qNumber?: SortOrder
+    question?: SortOrder
+    options?: SortOrder
+    correctAnswer?: SortOrder
+    explanation?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    quiz?: EnglishQuizOrderByWithRelationInput
+    attempts?: EnglishAttemptOrderByRelationAggregateInput
+  }
+
+  export type EnglishQuestionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    quizId_qNumber?: EnglishQuestionQuizIdQNumberCompoundUniqueInput
+    AND?: EnglishQuestionWhereInput | EnglishQuestionWhereInput[]
+    OR?: EnglishQuestionWhereInput[]
+    NOT?: EnglishQuestionWhereInput | EnglishQuestionWhereInput[]
+    quizId?: StringFilter<"EnglishQuestion"> | string
+    qNumber?: IntFilter<"EnglishQuestion"> | number
+    question?: StringFilter<"EnglishQuestion"> | string
+    options?: JsonFilter<"EnglishQuestion">
+    correctAnswer?: StringFilter<"EnglishQuestion"> | string
+    explanation?: StringNullableFilter<"EnglishQuestion"> | string | null
+    createdAt?: DateTimeFilter<"EnglishQuestion"> | Date | string
+    quiz?: XOR<EnglishQuizScalarRelationFilter, EnglishQuizWhereInput>
+    attempts?: EnglishAttemptListRelationFilter
+  }, "id" | "quizId_qNumber">
+
+  export type EnglishQuestionOrderByWithAggregationInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    qNumber?: SortOrder
+    question?: SortOrder
+    options?: SortOrder
+    correctAnswer?: SortOrder
+    explanation?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    _count?: EnglishQuestionCountOrderByAggregateInput
+    _avg?: EnglishQuestionAvgOrderByAggregateInput
+    _max?: EnglishQuestionMaxOrderByAggregateInput
+    _min?: EnglishQuestionMinOrderByAggregateInput
+    _sum?: EnglishQuestionSumOrderByAggregateInput
+  }
+
+  export type EnglishQuestionScalarWhereWithAggregatesInput = {
+    AND?: EnglishQuestionScalarWhereWithAggregatesInput | EnglishQuestionScalarWhereWithAggregatesInput[]
+    OR?: EnglishQuestionScalarWhereWithAggregatesInput[]
+    NOT?: EnglishQuestionScalarWhereWithAggregatesInput | EnglishQuestionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EnglishQuestion"> | string
+    quizId?: StringWithAggregatesFilter<"EnglishQuestion"> | string
+    qNumber?: IntWithAggregatesFilter<"EnglishQuestion"> | number
+    question?: StringWithAggregatesFilter<"EnglishQuestion"> | string
+    options?: JsonWithAggregatesFilter<"EnglishQuestion">
+    correctAnswer?: StringWithAggregatesFilter<"EnglishQuestion"> | string
+    explanation?: StringNullableWithAggregatesFilter<"EnglishQuestion"> | string | null
+    createdAt?: DateTimeWithAggregatesFilter<"EnglishQuestion"> | Date | string
+  }
+
+  export type EnglishSessionWhereInput = {
+    AND?: EnglishSessionWhereInput | EnglishSessionWhereInput[]
+    OR?: EnglishSessionWhereInput[]
+    NOT?: EnglishSessionWhereInput | EnglishSessionWhereInput[]
+    id?: StringFilter<"EnglishSession"> | string
+    quizId?: StringFilter<"EnglishSession"> | string
+    score?: IntFilter<"EnglishSession"> | number
+    total?: IntFilter<"EnglishSession"> | number
+    timeTakenMs?: IntFilter<"EnglishSession"> | number
+    createdAt?: DateTimeFilter<"EnglishSession"> | Date | string
+    quiz?: XOR<EnglishQuizScalarRelationFilter, EnglishQuizWhereInput>
+    attempts?: EnglishAttemptListRelationFilter
+  }
+
+  export type EnglishSessionOrderByWithRelationInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+    quiz?: EnglishQuizOrderByWithRelationInput
+    attempts?: EnglishAttemptOrderByRelationAggregateInput
+  }
+
+  export type EnglishSessionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EnglishSessionWhereInput | EnglishSessionWhereInput[]
+    OR?: EnglishSessionWhereInput[]
+    NOT?: EnglishSessionWhereInput | EnglishSessionWhereInput[]
+    quizId?: StringFilter<"EnglishSession"> | string
+    score?: IntFilter<"EnglishSession"> | number
+    total?: IntFilter<"EnglishSession"> | number
+    timeTakenMs?: IntFilter<"EnglishSession"> | number
+    createdAt?: DateTimeFilter<"EnglishSession"> | Date | string
+    quiz?: XOR<EnglishQuizScalarRelationFilter, EnglishQuizWhereInput>
+    attempts?: EnglishAttemptListRelationFilter
+  }, "id">
+
+  export type EnglishSessionOrderByWithAggregationInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+    _count?: EnglishSessionCountOrderByAggregateInput
+    _avg?: EnglishSessionAvgOrderByAggregateInput
+    _max?: EnglishSessionMaxOrderByAggregateInput
+    _min?: EnglishSessionMinOrderByAggregateInput
+    _sum?: EnglishSessionSumOrderByAggregateInput
+  }
+
+  export type EnglishSessionScalarWhereWithAggregatesInput = {
+    AND?: EnglishSessionScalarWhereWithAggregatesInput | EnglishSessionScalarWhereWithAggregatesInput[]
+    OR?: EnglishSessionScalarWhereWithAggregatesInput[]
+    NOT?: EnglishSessionScalarWhereWithAggregatesInput | EnglishSessionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EnglishSession"> | string
+    quizId?: StringWithAggregatesFilter<"EnglishSession"> | string
+    score?: IntWithAggregatesFilter<"EnglishSession"> | number
+    total?: IntWithAggregatesFilter<"EnglishSession"> | number
+    timeTakenMs?: IntWithAggregatesFilter<"EnglishSession"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"EnglishSession"> | Date | string
+  }
+
+  export type EnglishAttemptWhereInput = {
+    AND?: EnglishAttemptWhereInput | EnglishAttemptWhereInput[]
+    OR?: EnglishAttemptWhereInput[]
+    NOT?: EnglishAttemptWhereInput | EnglishAttemptWhereInput[]
+    id?: StringFilter<"EnglishAttempt"> | string
+    sessionId?: StringFilter<"EnglishAttempt"> | string
+    questionId?: StringNullableFilter<"EnglishAttempt"> | string | null
+    qNumber?: IntFilter<"EnglishAttempt"> | number
+    userAnswer?: StringFilter<"EnglishAttempt"> | string
+    correctAnswer?: StringFilter<"EnglishAttempt"> | string
+    isCorrect?: BoolFilter<"EnglishAttempt"> | boolean
+    timeTakenMs?: IntFilter<"EnglishAttempt"> | number
+    createdAt?: DateTimeFilter<"EnglishAttempt"> | Date | string
+    session?: XOR<EnglishSessionScalarRelationFilter, EnglishSessionWhereInput>
+    question?: XOR<EnglishQuestionNullableScalarRelationFilter, EnglishQuestionWhereInput> | null
+  }
+
+  export type EnglishAttemptOrderByWithRelationInput = {
+    id?: SortOrder
+    sessionId?: SortOrder
+    questionId?: SortOrderInput | SortOrder
+    qNumber?: SortOrder
+    userAnswer?: SortOrder
+    correctAnswer?: SortOrder
+    isCorrect?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+    session?: EnglishSessionOrderByWithRelationInput
+    question?: EnglishQuestionOrderByWithRelationInput
+  }
+
+  export type EnglishAttemptWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: EnglishAttemptWhereInput | EnglishAttemptWhereInput[]
+    OR?: EnglishAttemptWhereInput[]
+    NOT?: EnglishAttemptWhereInput | EnglishAttemptWhereInput[]
+    sessionId?: StringFilter<"EnglishAttempt"> | string
+    questionId?: StringNullableFilter<"EnglishAttempt"> | string | null
+    qNumber?: IntFilter<"EnglishAttempt"> | number
+    userAnswer?: StringFilter<"EnglishAttempt"> | string
+    correctAnswer?: StringFilter<"EnglishAttempt"> | string
+    isCorrect?: BoolFilter<"EnglishAttempt"> | boolean
+    timeTakenMs?: IntFilter<"EnglishAttempt"> | number
+    createdAt?: DateTimeFilter<"EnglishAttempt"> | Date | string
+    session?: XOR<EnglishSessionScalarRelationFilter, EnglishSessionWhereInput>
+    question?: XOR<EnglishQuestionNullableScalarRelationFilter, EnglishQuestionWhereInput> | null
+  }, "id">
+
+  export type EnglishAttemptOrderByWithAggregationInput = {
+    id?: SortOrder
+    sessionId?: SortOrder
+    questionId?: SortOrderInput | SortOrder
+    qNumber?: SortOrder
+    userAnswer?: SortOrder
+    correctAnswer?: SortOrder
+    isCorrect?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+    _count?: EnglishAttemptCountOrderByAggregateInput
+    _avg?: EnglishAttemptAvgOrderByAggregateInput
+    _max?: EnglishAttemptMaxOrderByAggregateInput
+    _min?: EnglishAttemptMinOrderByAggregateInput
+    _sum?: EnglishAttemptSumOrderByAggregateInput
+  }
+
+  export type EnglishAttemptScalarWhereWithAggregatesInput = {
+    AND?: EnglishAttemptScalarWhereWithAggregatesInput | EnglishAttemptScalarWhereWithAggregatesInput[]
+    OR?: EnglishAttemptScalarWhereWithAggregatesInput[]
+    NOT?: EnglishAttemptScalarWhereWithAggregatesInput | EnglishAttemptScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"EnglishAttempt"> | string
+    sessionId?: StringWithAggregatesFilter<"EnglishAttempt"> | string
+    questionId?: StringNullableWithAggregatesFilter<"EnglishAttempt"> | string | null
+    qNumber?: IntWithAggregatesFilter<"EnglishAttempt"> | number
+    userAnswer?: StringWithAggregatesFilter<"EnglishAttempt"> | string
+    correctAnswer?: StringWithAggregatesFilter<"EnglishAttempt"> | string
+    isCorrect?: BoolWithAggregatesFilter<"EnglishAttempt"> | boolean
+    timeTakenMs?: IntWithAggregatesFilter<"EnglishAttempt"> | number
+    createdAt?: DateTimeWithAggregatesFilter<"EnglishAttempt"> | Date | string
+  }
+
   export type QuizSetCreateInput = {
     id?: string
     title: string
@@ -7865,6 +13265,298 @@ export namespace Prisma {
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     timeTakenMs?: IntFieldUpdateOperationsInput | number
     answerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishQuizCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: EnglishQuestionCreateNestedManyWithoutQuizInput
+    sessions?: EnglishSessionCreateNestedManyWithoutQuizInput
+  }
+
+  export type EnglishQuizUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: EnglishQuestionUncheckedCreateNestedManyWithoutQuizInput
+    sessions?: EnglishSessionUncheckedCreateNestedManyWithoutQuizInput
+  }
+
+  export type EnglishQuizUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: EnglishQuestionUpdateManyWithoutQuizNestedInput
+    sessions?: EnglishSessionUpdateManyWithoutQuizNestedInput
+  }
+
+  export type EnglishQuizUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: EnglishQuestionUncheckedUpdateManyWithoutQuizNestedInput
+    sessions?: EnglishSessionUncheckedUpdateManyWithoutQuizNestedInput
+  }
+
+  export type EnglishQuizCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type EnglishQuizUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishQuizUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishQuestionCreateInput = {
+    id?: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+    quiz: EnglishQuizCreateNestedOneWithoutQuestionsInput
+    attempts?: EnglishAttemptCreateNestedManyWithoutQuestionInput
+  }
+
+  export type EnglishQuestionUncheckedCreateInput = {
+    id?: string
+    quizId: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+    attempts?: EnglishAttemptUncheckedCreateNestedManyWithoutQuestionInput
+  }
+
+  export type EnglishQuestionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quiz?: EnglishQuizUpdateOneRequiredWithoutQuestionsNestedInput
+    attempts?: EnglishAttemptUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type EnglishQuestionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: EnglishAttemptUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type EnglishQuestionCreateManyInput = {
+    id?: string
+    quizId: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+  }
+
+  export type EnglishQuestionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishQuestionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishSessionCreateInput = {
+    id?: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+    quiz: EnglishQuizCreateNestedOneWithoutSessionsInput
+    attempts?: EnglishAttemptCreateNestedManyWithoutSessionInput
+  }
+
+  export type EnglishSessionUncheckedCreateInput = {
+    id?: string
+    quizId: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+    attempts?: EnglishAttemptUncheckedCreateNestedManyWithoutSessionInput
+  }
+
+  export type EnglishSessionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quiz?: EnglishQuizUpdateOneRequiredWithoutSessionsNestedInput
+    attempts?: EnglishAttemptUpdateManyWithoutSessionNestedInput
+  }
+
+  export type EnglishSessionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: EnglishAttemptUncheckedUpdateManyWithoutSessionNestedInput
+  }
+
+  export type EnglishSessionCreateManyInput = {
+    id?: string
+    quizId: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishSessionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishSessionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptCreateInput = {
+    id?: string
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+    session: EnglishSessionCreateNestedOneWithoutAttemptsInput
+    question?: EnglishQuestionCreateNestedOneWithoutAttemptsInput
+  }
+
+  export type EnglishAttemptUncheckedCreateInput = {
+    id?: string
+    sessionId: string
+    questionId?: string | null
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishAttemptUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    session?: EnglishSessionUpdateOneRequiredWithoutAttemptsNestedInput
+    question?: EnglishQuestionUpdateOneWithoutAttemptsNestedInput
+  }
+
+  export type EnglishAttemptUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: StringFieldUpdateOperationsInput | string
+    questionId?: NullableStringFieldUpdateOperationsInput | string | null
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptCreateManyInput = {
+    id?: string
+    sessionId: string
+    questionId?: string | null
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishAttemptUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: StringFieldUpdateOperationsInput | string
+    questionId?: NullableStringFieldUpdateOperationsInput | string | null
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
@@ -8243,6 +13935,253 @@ export namespace Prisma {
     _max?: NestedBoolFilter<$PrismaModel>
   }
 
+  export type EnglishQuestionListRelationFilter = {
+    every?: EnglishQuestionWhereInput
+    some?: EnglishQuestionWhereInput
+    none?: EnglishQuestionWhereInput
+  }
+
+  export type EnglishSessionListRelationFilter = {
+    every?: EnglishSessionWhereInput
+    some?: EnglishSessionWhereInput
+    none?: EnglishSessionWhereInput
+  }
+
+  export type EnglishQuestionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EnglishSessionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EnglishQuizCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnglishQuizMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type EnglishQuizMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+  export type JsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+  }
+
+  export type EnglishQuizScalarRelationFilter = {
+    is?: EnglishQuizWhereInput
+    isNot?: EnglishQuizWhereInput
+  }
+
+  export type EnglishAttemptListRelationFilter = {
+    every?: EnglishAttemptWhereInput
+    some?: EnglishAttemptWhereInput
+    none?: EnglishAttemptWhereInput
+  }
+
+  export type EnglishAttemptOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type EnglishQuestionQuizIdQNumberCompoundUniqueInput = {
+    quizId: string
+    qNumber: number
+  }
+
+  export type EnglishQuestionCountOrderByAggregateInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    qNumber?: SortOrder
+    question?: SortOrder
+    options?: SortOrder
+    correctAnswer?: SortOrder
+    explanation?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishQuestionAvgOrderByAggregateInput = {
+    qNumber?: SortOrder
+  }
+
+  export type EnglishQuestionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    qNumber?: SortOrder
+    question?: SortOrder
+    correctAnswer?: SortOrder
+    explanation?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishQuestionMinOrderByAggregateInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    qNumber?: SortOrder
+    question?: SortOrder
+    correctAnswer?: SortOrder
+    explanation?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishQuestionSumOrderByAggregateInput = {
+    qNumber?: SortOrder
+  }
+  export type JsonWithAggregatesFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>,
+        Required<JsonWithAggregatesFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<JsonWithAggregatesFilterBase<$PrismaModel>>, 'path'>>
+
+  export type JsonWithAggregatesFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedJsonFilter<$PrismaModel>
+    _max?: NestedJsonFilter<$PrismaModel>
+  }
+
+  export type EnglishSessionCountOrderByAggregateInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishSessionAvgOrderByAggregateInput = {
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+  }
+
+  export type EnglishSessionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishSessionMinOrderByAggregateInput = {
+    id?: SortOrder
+    quizId?: SortOrder
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishSessionSumOrderByAggregateInput = {
+    score?: SortOrder
+    total?: SortOrder
+    timeTakenMs?: SortOrder
+  }
+
+  export type EnglishSessionScalarRelationFilter = {
+    is?: EnglishSessionWhereInput
+    isNot?: EnglishSessionWhereInput
+  }
+
+  export type EnglishQuestionNullableScalarRelationFilter = {
+    is?: EnglishQuestionWhereInput | null
+    isNot?: EnglishQuestionWhereInput | null
+  }
+
+  export type EnglishAttemptCountOrderByAggregateInput = {
+    id?: SortOrder
+    sessionId?: SortOrder
+    questionId?: SortOrder
+    qNumber?: SortOrder
+    userAnswer?: SortOrder
+    correctAnswer?: SortOrder
+    isCorrect?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishAttemptAvgOrderByAggregateInput = {
+    qNumber?: SortOrder
+    timeTakenMs?: SortOrder
+  }
+
+  export type EnglishAttemptMaxOrderByAggregateInput = {
+    id?: SortOrder
+    sessionId?: SortOrder
+    questionId?: SortOrder
+    qNumber?: SortOrder
+    userAnswer?: SortOrder
+    correctAnswer?: SortOrder
+    isCorrect?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishAttemptMinOrderByAggregateInput = {
+    id?: SortOrder
+    sessionId?: SortOrder
+    questionId?: SortOrder
+    qNumber?: SortOrder
+    userAnswer?: SortOrder
+    correctAnswer?: SortOrder
+    isCorrect?: SortOrder
+    timeTakenMs?: SortOrder
+    createdAt?: SortOrder
+  }
+
+  export type EnglishAttemptSumOrderByAggregateInput = {
+    qNumber?: SortOrder
+    timeTakenMs?: SortOrder
+  }
+
   export type ImageCreateNestedManyWithoutQuizSetInput = {
     create?: XOR<ImageCreateWithoutQuizSetInput, ImageUncheckedCreateWithoutQuizSetInput> | ImageCreateWithoutQuizSetInput[] | ImageUncheckedCreateWithoutQuizSetInput[]
     connectOrCreate?: ImageCreateOrConnectWithoutQuizSetInput | ImageCreateOrConnectWithoutQuizSetInput[]
@@ -8549,6 +14488,232 @@ export namespace Prisma {
     update?: XOR<XOR<AnswerUpdateToOneWithWhereWithoutAttemptsInput, AnswerUpdateWithoutAttemptsInput>, AnswerUncheckedUpdateWithoutAttemptsInput>
   }
 
+  export type EnglishQuestionCreateNestedManyWithoutQuizInput = {
+    create?: XOR<EnglishQuestionCreateWithoutQuizInput, EnglishQuestionUncheckedCreateWithoutQuizInput> | EnglishQuestionCreateWithoutQuizInput[] | EnglishQuestionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishQuestionCreateOrConnectWithoutQuizInput | EnglishQuestionCreateOrConnectWithoutQuizInput[]
+    createMany?: EnglishQuestionCreateManyQuizInputEnvelope
+    connect?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+  }
+
+  export type EnglishSessionCreateNestedManyWithoutQuizInput = {
+    create?: XOR<EnglishSessionCreateWithoutQuizInput, EnglishSessionUncheckedCreateWithoutQuizInput> | EnglishSessionCreateWithoutQuizInput[] | EnglishSessionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishSessionCreateOrConnectWithoutQuizInput | EnglishSessionCreateOrConnectWithoutQuizInput[]
+    createMany?: EnglishSessionCreateManyQuizInputEnvelope
+    connect?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+  }
+
+  export type EnglishQuestionUncheckedCreateNestedManyWithoutQuizInput = {
+    create?: XOR<EnglishQuestionCreateWithoutQuizInput, EnglishQuestionUncheckedCreateWithoutQuizInput> | EnglishQuestionCreateWithoutQuizInput[] | EnglishQuestionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishQuestionCreateOrConnectWithoutQuizInput | EnglishQuestionCreateOrConnectWithoutQuizInput[]
+    createMany?: EnglishQuestionCreateManyQuizInputEnvelope
+    connect?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+  }
+
+  export type EnglishSessionUncheckedCreateNestedManyWithoutQuizInput = {
+    create?: XOR<EnglishSessionCreateWithoutQuizInput, EnglishSessionUncheckedCreateWithoutQuizInput> | EnglishSessionCreateWithoutQuizInput[] | EnglishSessionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishSessionCreateOrConnectWithoutQuizInput | EnglishSessionCreateOrConnectWithoutQuizInput[]
+    createMany?: EnglishSessionCreateManyQuizInputEnvelope
+    connect?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+  }
+
+  export type EnglishQuestionUpdateManyWithoutQuizNestedInput = {
+    create?: XOR<EnglishQuestionCreateWithoutQuizInput, EnglishQuestionUncheckedCreateWithoutQuizInput> | EnglishQuestionCreateWithoutQuizInput[] | EnglishQuestionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishQuestionCreateOrConnectWithoutQuizInput | EnglishQuestionCreateOrConnectWithoutQuizInput[]
+    upsert?: EnglishQuestionUpsertWithWhereUniqueWithoutQuizInput | EnglishQuestionUpsertWithWhereUniqueWithoutQuizInput[]
+    createMany?: EnglishQuestionCreateManyQuizInputEnvelope
+    set?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    disconnect?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    delete?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    connect?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    update?: EnglishQuestionUpdateWithWhereUniqueWithoutQuizInput | EnglishQuestionUpdateWithWhereUniqueWithoutQuizInput[]
+    updateMany?: EnglishQuestionUpdateManyWithWhereWithoutQuizInput | EnglishQuestionUpdateManyWithWhereWithoutQuizInput[]
+    deleteMany?: EnglishQuestionScalarWhereInput | EnglishQuestionScalarWhereInput[]
+  }
+
+  export type EnglishSessionUpdateManyWithoutQuizNestedInput = {
+    create?: XOR<EnglishSessionCreateWithoutQuizInput, EnglishSessionUncheckedCreateWithoutQuizInput> | EnglishSessionCreateWithoutQuizInput[] | EnglishSessionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishSessionCreateOrConnectWithoutQuizInput | EnglishSessionCreateOrConnectWithoutQuizInput[]
+    upsert?: EnglishSessionUpsertWithWhereUniqueWithoutQuizInput | EnglishSessionUpsertWithWhereUniqueWithoutQuizInput[]
+    createMany?: EnglishSessionCreateManyQuizInputEnvelope
+    set?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    disconnect?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    delete?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    connect?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    update?: EnglishSessionUpdateWithWhereUniqueWithoutQuizInput | EnglishSessionUpdateWithWhereUniqueWithoutQuizInput[]
+    updateMany?: EnglishSessionUpdateManyWithWhereWithoutQuizInput | EnglishSessionUpdateManyWithWhereWithoutQuizInput[]
+    deleteMany?: EnglishSessionScalarWhereInput | EnglishSessionScalarWhereInput[]
+  }
+
+  export type EnglishQuestionUncheckedUpdateManyWithoutQuizNestedInput = {
+    create?: XOR<EnglishQuestionCreateWithoutQuizInput, EnglishQuestionUncheckedCreateWithoutQuizInput> | EnglishQuestionCreateWithoutQuizInput[] | EnglishQuestionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishQuestionCreateOrConnectWithoutQuizInput | EnglishQuestionCreateOrConnectWithoutQuizInput[]
+    upsert?: EnglishQuestionUpsertWithWhereUniqueWithoutQuizInput | EnglishQuestionUpsertWithWhereUniqueWithoutQuizInput[]
+    createMany?: EnglishQuestionCreateManyQuizInputEnvelope
+    set?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    disconnect?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    delete?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    connect?: EnglishQuestionWhereUniqueInput | EnglishQuestionWhereUniqueInput[]
+    update?: EnglishQuestionUpdateWithWhereUniqueWithoutQuizInput | EnglishQuestionUpdateWithWhereUniqueWithoutQuizInput[]
+    updateMany?: EnglishQuestionUpdateManyWithWhereWithoutQuizInput | EnglishQuestionUpdateManyWithWhereWithoutQuizInput[]
+    deleteMany?: EnglishQuestionScalarWhereInput | EnglishQuestionScalarWhereInput[]
+  }
+
+  export type EnglishSessionUncheckedUpdateManyWithoutQuizNestedInput = {
+    create?: XOR<EnglishSessionCreateWithoutQuizInput, EnglishSessionUncheckedCreateWithoutQuizInput> | EnglishSessionCreateWithoutQuizInput[] | EnglishSessionUncheckedCreateWithoutQuizInput[]
+    connectOrCreate?: EnglishSessionCreateOrConnectWithoutQuizInput | EnglishSessionCreateOrConnectWithoutQuizInput[]
+    upsert?: EnglishSessionUpsertWithWhereUniqueWithoutQuizInput | EnglishSessionUpsertWithWhereUniqueWithoutQuizInput[]
+    createMany?: EnglishSessionCreateManyQuizInputEnvelope
+    set?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    disconnect?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    delete?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    connect?: EnglishSessionWhereUniqueInput | EnglishSessionWhereUniqueInput[]
+    update?: EnglishSessionUpdateWithWhereUniqueWithoutQuizInput | EnglishSessionUpdateWithWhereUniqueWithoutQuizInput[]
+    updateMany?: EnglishSessionUpdateManyWithWhereWithoutQuizInput | EnglishSessionUpdateManyWithWhereWithoutQuizInput[]
+    deleteMany?: EnglishSessionScalarWhereInput | EnglishSessionScalarWhereInput[]
+  }
+
+  export type EnglishQuizCreateNestedOneWithoutQuestionsInput = {
+    create?: XOR<EnglishQuizCreateWithoutQuestionsInput, EnglishQuizUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: EnglishQuizCreateOrConnectWithoutQuestionsInput
+    connect?: EnglishQuizWhereUniqueInput
+  }
+
+  export type EnglishAttemptCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<EnglishAttemptCreateWithoutQuestionInput, EnglishAttemptUncheckedCreateWithoutQuestionInput> | EnglishAttemptCreateWithoutQuestionInput[] | EnglishAttemptUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutQuestionInput | EnglishAttemptCreateOrConnectWithoutQuestionInput[]
+    createMany?: EnglishAttemptCreateManyQuestionInputEnvelope
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+  }
+
+  export type EnglishAttemptUncheckedCreateNestedManyWithoutQuestionInput = {
+    create?: XOR<EnglishAttemptCreateWithoutQuestionInput, EnglishAttemptUncheckedCreateWithoutQuestionInput> | EnglishAttemptCreateWithoutQuestionInput[] | EnglishAttemptUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutQuestionInput | EnglishAttemptCreateOrConnectWithoutQuestionInput[]
+    createMany?: EnglishAttemptCreateManyQuestionInputEnvelope
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+  }
+
+  export type EnglishQuizUpdateOneRequiredWithoutQuestionsNestedInput = {
+    create?: XOR<EnglishQuizCreateWithoutQuestionsInput, EnglishQuizUncheckedCreateWithoutQuestionsInput>
+    connectOrCreate?: EnglishQuizCreateOrConnectWithoutQuestionsInput
+    upsert?: EnglishQuizUpsertWithoutQuestionsInput
+    connect?: EnglishQuizWhereUniqueInput
+    update?: XOR<XOR<EnglishQuizUpdateToOneWithWhereWithoutQuestionsInput, EnglishQuizUpdateWithoutQuestionsInput>, EnglishQuizUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type EnglishAttemptUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<EnglishAttemptCreateWithoutQuestionInput, EnglishAttemptUncheckedCreateWithoutQuestionInput> | EnglishAttemptCreateWithoutQuestionInput[] | EnglishAttemptUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutQuestionInput | EnglishAttemptCreateOrConnectWithoutQuestionInput[]
+    upsert?: EnglishAttemptUpsertWithWhereUniqueWithoutQuestionInput | EnglishAttemptUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: EnglishAttemptCreateManyQuestionInputEnvelope
+    set?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    disconnect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    delete?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    update?: EnglishAttemptUpdateWithWhereUniqueWithoutQuestionInput | EnglishAttemptUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: EnglishAttemptUpdateManyWithWhereWithoutQuestionInput | EnglishAttemptUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: EnglishAttemptScalarWhereInput | EnglishAttemptScalarWhereInput[]
+  }
+
+  export type EnglishAttemptUncheckedUpdateManyWithoutQuestionNestedInput = {
+    create?: XOR<EnglishAttemptCreateWithoutQuestionInput, EnglishAttemptUncheckedCreateWithoutQuestionInput> | EnglishAttemptCreateWithoutQuestionInput[] | EnglishAttemptUncheckedCreateWithoutQuestionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutQuestionInput | EnglishAttemptCreateOrConnectWithoutQuestionInput[]
+    upsert?: EnglishAttemptUpsertWithWhereUniqueWithoutQuestionInput | EnglishAttemptUpsertWithWhereUniqueWithoutQuestionInput[]
+    createMany?: EnglishAttemptCreateManyQuestionInputEnvelope
+    set?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    disconnect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    delete?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    update?: EnglishAttemptUpdateWithWhereUniqueWithoutQuestionInput | EnglishAttemptUpdateWithWhereUniqueWithoutQuestionInput[]
+    updateMany?: EnglishAttemptUpdateManyWithWhereWithoutQuestionInput | EnglishAttemptUpdateManyWithWhereWithoutQuestionInput[]
+    deleteMany?: EnglishAttemptScalarWhereInput | EnglishAttemptScalarWhereInput[]
+  }
+
+  export type EnglishQuizCreateNestedOneWithoutSessionsInput = {
+    create?: XOR<EnglishQuizCreateWithoutSessionsInput, EnglishQuizUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: EnglishQuizCreateOrConnectWithoutSessionsInput
+    connect?: EnglishQuizWhereUniqueInput
+  }
+
+  export type EnglishAttemptCreateNestedManyWithoutSessionInput = {
+    create?: XOR<EnglishAttemptCreateWithoutSessionInput, EnglishAttemptUncheckedCreateWithoutSessionInput> | EnglishAttemptCreateWithoutSessionInput[] | EnglishAttemptUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutSessionInput | EnglishAttemptCreateOrConnectWithoutSessionInput[]
+    createMany?: EnglishAttemptCreateManySessionInputEnvelope
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+  }
+
+  export type EnglishAttemptUncheckedCreateNestedManyWithoutSessionInput = {
+    create?: XOR<EnglishAttemptCreateWithoutSessionInput, EnglishAttemptUncheckedCreateWithoutSessionInput> | EnglishAttemptCreateWithoutSessionInput[] | EnglishAttemptUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutSessionInput | EnglishAttemptCreateOrConnectWithoutSessionInput[]
+    createMany?: EnglishAttemptCreateManySessionInputEnvelope
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+  }
+
+  export type EnglishQuizUpdateOneRequiredWithoutSessionsNestedInput = {
+    create?: XOR<EnglishQuizCreateWithoutSessionsInput, EnglishQuizUncheckedCreateWithoutSessionsInput>
+    connectOrCreate?: EnglishQuizCreateOrConnectWithoutSessionsInput
+    upsert?: EnglishQuizUpsertWithoutSessionsInput
+    connect?: EnglishQuizWhereUniqueInput
+    update?: XOR<XOR<EnglishQuizUpdateToOneWithWhereWithoutSessionsInput, EnglishQuizUpdateWithoutSessionsInput>, EnglishQuizUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type EnglishAttemptUpdateManyWithoutSessionNestedInput = {
+    create?: XOR<EnglishAttemptCreateWithoutSessionInput, EnglishAttemptUncheckedCreateWithoutSessionInput> | EnglishAttemptCreateWithoutSessionInput[] | EnglishAttemptUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutSessionInput | EnglishAttemptCreateOrConnectWithoutSessionInput[]
+    upsert?: EnglishAttemptUpsertWithWhereUniqueWithoutSessionInput | EnglishAttemptUpsertWithWhereUniqueWithoutSessionInput[]
+    createMany?: EnglishAttemptCreateManySessionInputEnvelope
+    set?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    disconnect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    delete?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    update?: EnglishAttemptUpdateWithWhereUniqueWithoutSessionInput | EnglishAttemptUpdateWithWhereUniqueWithoutSessionInput[]
+    updateMany?: EnglishAttemptUpdateManyWithWhereWithoutSessionInput | EnglishAttemptUpdateManyWithWhereWithoutSessionInput[]
+    deleteMany?: EnglishAttemptScalarWhereInput | EnglishAttemptScalarWhereInput[]
+  }
+
+  export type EnglishAttemptUncheckedUpdateManyWithoutSessionNestedInput = {
+    create?: XOR<EnglishAttemptCreateWithoutSessionInput, EnglishAttemptUncheckedCreateWithoutSessionInput> | EnglishAttemptCreateWithoutSessionInput[] | EnglishAttemptUncheckedCreateWithoutSessionInput[]
+    connectOrCreate?: EnglishAttemptCreateOrConnectWithoutSessionInput | EnglishAttemptCreateOrConnectWithoutSessionInput[]
+    upsert?: EnglishAttemptUpsertWithWhereUniqueWithoutSessionInput | EnglishAttemptUpsertWithWhereUniqueWithoutSessionInput[]
+    createMany?: EnglishAttemptCreateManySessionInputEnvelope
+    set?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    disconnect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    delete?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    connect?: EnglishAttemptWhereUniqueInput | EnglishAttemptWhereUniqueInput[]
+    update?: EnglishAttemptUpdateWithWhereUniqueWithoutSessionInput | EnglishAttemptUpdateWithWhereUniqueWithoutSessionInput[]
+    updateMany?: EnglishAttemptUpdateManyWithWhereWithoutSessionInput | EnglishAttemptUpdateManyWithWhereWithoutSessionInput[]
+    deleteMany?: EnglishAttemptScalarWhereInput | EnglishAttemptScalarWhereInput[]
+  }
+
+  export type EnglishSessionCreateNestedOneWithoutAttemptsInput = {
+    create?: XOR<EnglishSessionCreateWithoutAttemptsInput, EnglishSessionUncheckedCreateWithoutAttemptsInput>
+    connectOrCreate?: EnglishSessionCreateOrConnectWithoutAttemptsInput
+    connect?: EnglishSessionWhereUniqueInput
+  }
+
+  export type EnglishQuestionCreateNestedOneWithoutAttemptsInput = {
+    create?: XOR<EnglishQuestionCreateWithoutAttemptsInput, EnglishQuestionUncheckedCreateWithoutAttemptsInput>
+    connectOrCreate?: EnglishQuestionCreateOrConnectWithoutAttemptsInput
+    connect?: EnglishQuestionWhereUniqueInput
+  }
+
+  export type EnglishSessionUpdateOneRequiredWithoutAttemptsNestedInput = {
+    create?: XOR<EnglishSessionCreateWithoutAttemptsInput, EnglishSessionUncheckedCreateWithoutAttemptsInput>
+    connectOrCreate?: EnglishSessionCreateOrConnectWithoutAttemptsInput
+    upsert?: EnglishSessionUpsertWithoutAttemptsInput
+    connect?: EnglishSessionWhereUniqueInput
+    update?: XOR<XOR<EnglishSessionUpdateToOneWithWhereWithoutAttemptsInput, EnglishSessionUpdateWithoutAttemptsInput>, EnglishSessionUncheckedUpdateWithoutAttemptsInput>
+  }
+
+  export type EnglishQuestionUpdateOneWithoutAttemptsNestedInput = {
+    create?: XOR<EnglishQuestionCreateWithoutAttemptsInput, EnglishQuestionUncheckedCreateWithoutAttemptsInput>
+    connectOrCreate?: EnglishQuestionCreateOrConnectWithoutAttemptsInput
+    upsert?: EnglishQuestionUpsertWithoutAttemptsInput
+    disconnect?: EnglishQuestionWhereInput | boolean
+    delete?: EnglishQuestionWhereInput | boolean
+    connect?: EnglishQuestionWhereUniqueInput
+    update?: XOR<XOR<EnglishQuestionUpdateToOneWithWhereWithoutAttemptsInput, EnglishQuestionUpdateWithoutAttemptsInput>, EnglishQuestionUncheckedUpdateWithoutAttemptsInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -8696,6 +14861,29 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+  export type NestedJsonFilter<$PrismaModel = never> =
+    | PatchUndefined<
+        Either<Required<NestedJsonFilterBase<$PrismaModel>>, Exclude<keyof Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>,
+        Required<NestedJsonFilterBase<$PrismaModel>>
+      >
+    | OptionalFlat<Omit<Required<NestedJsonFilterBase<$PrismaModel>>, 'path'>>
+
+  export type NestedJsonFilterBase<$PrismaModel = never> = {
+    equals?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
+    path?: string[]
+    mode?: QueryMode | EnumQueryModeFieldRefInput<$PrismaModel>
+    string_contains?: string | StringFieldRefInput<$PrismaModel>
+    string_starts_with?: string | StringFieldRefInput<$PrismaModel>
+    string_ends_with?: string | StringFieldRefInput<$PrismaModel>
+    array_starts_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_ends_with?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    array_contains?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | null
+    lt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    lte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gt?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    gte?: InputJsonValue | JsonFieldRefInput<$PrismaModel>
+    not?: InputJsonValue | JsonFieldRefInput<$PrismaModel> | JsonNullValueFilter
   }
 
   export type ImageCreateWithoutQuizSetInput = {
@@ -9238,6 +15426,451 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type EnglishQuestionCreateWithoutQuizInput = {
+    id?: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+    attempts?: EnglishAttemptCreateNestedManyWithoutQuestionInput
+  }
+
+  export type EnglishQuestionUncheckedCreateWithoutQuizInput = {
+    id?: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+    attempts?: EnglishAttemptUncheckedCreateNestedManyWithoutQuestionInput
+  }
+
+  export type EnglishQuestionCreateOrConnectWithoutQuizInput = {
+    where: EnglishQuestionWhereUniqueInput
+    create: XOR<EnglishQuestionCreateWithoutQuizInput, EnglishQuestionUncheckedCreateWithoutQuizInput>
+  }
+
+  export type EnglishQuestionCreateManyQuizInputEnvelope = {
+    data: EnglishQuestionCreateManyQuizInput | EnglishQuestionCreateManyQuizInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EnglishSessionCreateWithoutQuizInput = {
+    id?: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+    attempts?: EnglishAttemptCreateNestedManyWithoutSessionInput
+  }
+
+  export type EnglishSessionUncheckedCreateWithoutQuizInput = {
+    id?: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+    attempts?: EnglishAttemptUncheckedCreateNestedManyWithoutSessionInput
+  }
+
+  export type EnglishSessionCreateOrConnectWithoutQuizInput = {
+    where: EnglishSessionWhereUniqueInput
+    create: XOR<EnglishSessionCreateWithoutQuizInput, EnglishSessionUncheckedCreateWithoutQuizInput>
+  }
+
+  export type EnglishSessionCreateManyQuizInputEnvelope = {
+    data: EnglishSessionCreateManyQuizInput | EnglishSessionCreateManyQuizInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EnglishQuestionUpsertWithWhereUniqueWithoutQuizInput = {
+    where: EnglishQuestionWhereUniqueInput
+    update: XOR<EnglishQuestionUpdateWithoutQuizInput, EnglishQuestionUncheckedUpdateWithoutQuizInput>
+    create: XOR<EnglishQuestionCreateWithoutQuizInput, EnglishQuestionUncheckedCreateWithoutQuizInput>
+  }
+
+  export type EnglishQuestionUpdateWithWhereUniqueWithoutQuizInput = {
+    where: EnglishQuestionWhereUniqueInput
+    data: XOR<EnglishQuestionUpdateWithoutQuizInput, EnglishQuestionUncheckedUpdateWithoutQuizInput>
+  }
+
+  export type EnglishQuestionUpdateManyWithWhereWithoutQuizInput = {
+    where: EnglishQuestionScalarWhereInput
+    data: XOR<EnglishQuestionUpdateManyMutationInput, EnglishQuestionUncheckedUpdateManyWithoutQuizInput>
+  }
+
+  export type EnglishQuestionScalarWhereInput = {
+    AND?: EnglishQuestionScalarWhereInput | EnglishQuestionScalarWhereInput[]
+    OR?: EnglishQuestionScalarWhereInput[]
+    NOT?: EnglishQuestionScalarWhereInput | EnglishQuestionScalarWhereInput[]
+    id?: StringFilter<"EnglishQuestion"> | string
+    quizId?: StringFilter<"EnglishQuestion"> | string
+    qNumber?: IntFilter<"EnglishQuestion"> | number
+    question?: StringFilter<"EnglishQuestion"> | string
+    options?: JsonFilter<"EnglishQuestion">
+    correctAnswer?: StringFilter<"EnglishQuestion"> | string
+    explanation?: StringNullableFilter<"EnglishQuestion"> | string | null
+    createdAt?: DateTimeFilter<"EnglishQuestion"> | Date | string
+  }
+
+  export type EnglishSessionUpsertWithWhereUniqueWithoutQuizInput = {
+    where: EnglishSessionWhereUniqueInput
+    update: XOR<EnglishSessionUpdateWithoutQuizInput, EnglishSessionUncheckedUpdateWithoutQuizInput>
+    create: XOR<EnglishSessionCreateWithoutQuizInput, EnglishSessionUncheckedCreateWithoutQuizInput>
+  }
+
+  export type EnglishSessionUpdateWithWhereUniqueWithoutQuizInput = {
+    where: EnglishSessionWhereUniqueInput
+    data: XOR<EnglishSessionUpdateWithoutQuizInput, EnglishSessionUncheckedUpdateWithoutQuizInput>
+  }
+
+  export type EnglishSessionUpdateManyWithWhereWithoutQuizInput = {
+    where: EnglishSessionScalarWhereInput
+    data: XOR<EnglishSessionUpdateManyMutationInput, EnglishSessionUncheckedUpdateManyWithoutQuizInput>
+  }
+
+  export type EnglishSessionScalarWhereInput = {
+    AND?: EnglishSessionScalarWhereInput | EnglishSessionScalarWhereInput[]
+    OR?: EnglishSessionScalarWhereInput[]
+    NOT?: EnglishSessionScalarWhereInput | EnglishSessionScalarWhereInput[]
+    id?: StringFilter<"EnglishSession"> | string
+    quizId?: StringFilter<"EnglishSession"> | string
+    score?: IntFilter<"EnglishSession"> | number
+    total?: IntFilter<"EnglishSession"> | number
+    timeTakenMs?: IntFilter<"EnglishSession"> | number
+    createdAt?: DateTimeFilter<"EnglishSession"> | Date | string
+  }
+
+  export type EnglishQuizCreateWithoutQuestionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: EnglishSessionCreateNestedManyWithoutQuizInput
+  }
+
+  export type EnglishQuizUncheckedCreateWithoutQuestionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    sessions?: EnglishSessionUncheckedCreateNestedManyWithoutQuizInput
+  }
+
+  export type EnglishQuizCreateOrConnectWithoutQuestionsInput = {
+    where: EnglishQuizWhereUniqueInput
+    create: XOR<EnglishQuizCreateWithoutQuestionsInput, EnglishQuizUncheckedCreateWithoutQuestionsInput>
+  }
+
+  export type EnglishAttemptCreateWithoutQuestionInput = {
+    id?: string
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+    session: EnglishSessionCreateNestedOneWithoutAttemptsInput
+  }
+
+  export type EnglishAttemptUncheckedCreateWithoutQuestionInput = {
+    id?: string
+    sessionId: string
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishAttemptCreateOrConnectWithoutQuestionInput = {
+    where: EnglishAttemptWhereUniqueInput
+    create: XOR<EnglishAttemptCreateWithoutQuestionInput, EnglishAttemptUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type EnglishAttemptCreateManyQuestionInputEnvelope = {
+    data: EnglishAttemptCreateManyQuestionInput | EnglishAttemptCreateManyQuestionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EnglishQuizUpsertWithoutQuestionsInput = {
+    update: XOR<EnglishQuizUpdateWithoutQuestionsInput, EnglishQuizUncheckedUpdateWithoutQuestionsInput>
+    create: XOR<EnglishQuizCreateWithoutQuestionsInput, EnglishQuizUncheckedCreateWithoutQuestionsInput>
+    where?: EnglishQuizWhereInput
+  }
+
+  export type EnglishQuizUpdateToOneWithWhereWithoutQuestionsInput = {
+    where?: EnglishQuizWhereInput
+    data: XOR<EnglishQuizUpdateWithoutQuestionsInput, EnglishQuizUncheckedUpdateWithoutQuestionsInput>
+  }
+
+  export type EnglishQuizUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: EnglishSessionUpdateManyWithoutQuizNestedInput
+  }
+
+  export type EnglishQuizUncheckedUpdateWithoutQuestionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    sessions?: EnglishSessionUncheckedUpdateManyWithoutQuizNestedInput
+  }
+
+  export type EnglishAttemptUpsertWithWhereUniqueWithoutQuestionInput = {
+    where: EnglishAttemptWhereUniqueInput
+    update: XOR<EnglishAttemptUpdateWithoutQuestionInput, EnglishAttemptUncheckedUpdateWithoutQuestionInput>
+    create: XOR<EnglishAttemptCreateWithoutQuestionInput, EnglishAttemptUncheckedCreateWithoutQuestionInput>
+  }
+
+  export type EnglishAttemptUpdateWithWhereUniqueWithoutQuestionInput = {
+    where: EnglishAttemptWhereUniqueInput
+    data: XOR<EnglishAttemptUpdateWithoutQuestionInput, EnglishAttemptUncheckedUpdateWithoutQuestionInput>
+  }
+
+  export type EnglishAttemptUpdateManyWithWhereWithoutQuestionInput = {
+    where: EnglishAttemptScalarWhereInput
+    data: XOR<EnglishAttemptUpdateManyMutationInput, EnglishAttemptUncheckedUpdateManyWithoutQuestionInput>
+  }
+
+  export type EnglishAttemptScalarWhereInput = {
+    AND?: EnglishAttemptScalarWhereInput | EnglishAttemptScalarWhereInput[]
+    OR?: EnglishAttemptScalarWhereInput[]
+    NOT?: EnglishAttemptScalarWhereInput | EnglishAttemptScalarWhereInput[]
+    id?: StringFilter<"EnglishAttempt"> | string
+    sessionId?: StringFilter<"EnglishAttempt"> | string
+    questionId?: StringNullableFilter<"EnglishAttempt"> | string | null
+    qNumber?: IntFilter<"EnglishAttempt"> | number
+    userAnswer?: StringFilter<"EnglishAttempt"> | string
+    correctAnswer?: StringFilter<"EnglishAttempt"> | string
+    isCorrect?: BoolFilter<"EnglishAttempt"> | boolean
+    timeTakenMs?: IntFilter<"EnglishAttempt"> | number
+    createdAt?: DateTimeFilter<"EnglishAttempt"> | Date | string
+  }
+
+  export type EnglishQuizCreateWithoutSessionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: EnglishQuestionCreateNestedManyWithoutQuizInput
+  }
+
+  export type EnglishQuizUncheckedCreateWithoutSessionsInput = {
+    id?: string
+    title: string
+    description?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    questions?: EnglishQuestionUncheckedCreateNestedManyWithoutQuizInput
+  }
+
+  export type EnglishQuizCreateOrConnectWithoutSessionsInput = {
+    where: EnglishQuizWhereUniqueInput
+    create: XOR<EnglishQuizCreateWithoutSessionsInput, EnglishQuizUncheckedCreateWithoutSessionsInput>
+  }
+
+  export type EnglishAttemptCreateWithoutSessionInput = {
+    id?: string
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+    question?: EnglishQuestionCreateNestedOneWithoutAttemptsInput
+  }
+
+  export type EnglishAttemptUncheckedCreateWithoutSessionInput = {
+    id?: string
+    questionId?: string | null
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishAttemptCreateOrConnectWithoutSessionInput = {
+    where: EnglishAttemptWhereUniqueInput
+    create: XOR<EnglishAttemptCreateWithoutSessionInput, EnglishAttemptUncheckedCreateWithoutSessionInput>
+  }
+
+  export type EnglishAttemptCreateManySessionInputEnvelope = {
+    data: EnglishAttemptCreateManySessionInput | EnglishAttemptCreateManySessionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type EnglishQuizUpsertWithoutSessionsInput = {
+    update: XOR<EnglishQuizUpdateWithoutSessionsInput, EnglishQuizUncheckedUpdateWithoutSessionsInput>
+    create: XOR<EnglishQuizCreateWithoutSessionsInput, EnglishQuizUncheckedCreateWithoutSessionsInput>
+    where?: EnglishQuizWhereInput
+  }
+
+  export type EnglishQuizUpdateToOneWithWhereWithoutSessionsInput = {
+    where?: EnglishQuizWhereInput
+    data: XOR<EnglishQuizUpdateWithoutSessionsInput, EnglishQuizUncheckedUpdateWithoutSessionsInput>
+  }
+
+  export type EnglishQuizUpdateWithoutSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: EnglishQuestionUpdateManyWithoutQuizNestedInput
+  }
+
+  export type EnglishQuizUncheckedUpdateWithoutSessionsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    questions?: EnglishQuestionUncheckedUpdateManyWithoutQuizNestedInput
+  }
+
+  export type EnglishAttemptUpsertWithWhereUniqueWithoutSessionInput = {
+    where: EnglishAttemptWhereUniqueInput
+    update: XOR<EnglishAttemptUpdateWithoutSessionInput, EnglishAttemptUncheckedUpdateWithoutSessionInput>
+    create: XOR<EnglishAttemptCreateWithoutSessionInput, EnglishAttemptUncheckedCreateWithoutSessionInput>
+  }
+
+  export type EnglishAttemptUpdateWithWhereUniqueWithoutSessionInput = {
+    where: EnglishAttemptWhereUniqueInput
+    data: XOR<EnglishAttemptUpdateWithoutSessionInput, EnglishAttemptUncheckedUpdateWithoutSessionInput>
+  }
+
+  export type EnglishAttemptUpdateManyWithWhereWithoutSessionInput = {
+    where: EnglishAttemptScalarWhereInput
+    data: XOR<EnglishAttemptUpdateManyMutationInput, EnglishAttemptUncheckedUpdateManyWithoutSessionInput>
+  }
+
+  export type EnglishSessionCreateWithoutAttemptsInput = {
+    id?: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+    quiz: EnglishQuizCreateNestedOneWithoutSessionsInput
+  }
+
+  export type EnglishSessionUncheckedCreateWithoutAttemptsInput = {
+    id?: string
+    quizId: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishSessionCreateOrConnectWithoutAttemptsInput = {
+    where: EnglishSessionWhereUniqueInput
+    create: XOR<EnglishSessionCreateWithoutAttemptsInput, EnglishSessionUncheckedCreateWithoutAttemptsInput>
+  }
+
+  export type EnglishQuestionCreateWithoutAttemptsInput = {
+    id?: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+    quiz: EnglishQuizCreateNestedOneWithoutQuestionsInput
+  }
+
+  export type EnglishQuestionUncheckedCreateWithoutAttemptsInput = {
+    id?: string
+    quizId: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+  }
+
+  export type EnglishQuestionCreateOrConnectWithoutAttemptsInput = {
+    where: EnglishQuestionWhereUniqueInput
+    create: XOR<EnglishQuestionCreateWithoutAttemptsInput, EnglishQuestionUncheckedCreateWithoutAttemptsInput>
+  }
+
+  export type EnglishSessionUpsertWithoutAttemptsInput = {
+    update: XOR<EnglishSessionUpdateWithoutAttemptsInput, EnglishSessionUncheckedUpdateWithoutAttemptsInput>
+    create: XOR<EnglishSessionCreateWithoutAttemptsInput, EnglishSessionUncheckedCreateWithoutAttemptsInput>
+    where?: EnglishSessionWhereInput
+  }
+
+  export type EnglishSessionUpdateToOneWithWhereWithoutAttemptsInput = {
+    where?: EnglishSessionWhereInput
+    data: XOR<EnglishSessionUpdateWithoutAttemptsInput, EnglishSessionUncheckedUpdateWithoutAttemptsInput>
+  }
+
+  export type EnglishSessionUpdateWithoutAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quiz?: EnglishQuizUpdateOneRequiredWithoutSessionsNestedInput
+  }
+
+  export type EnglishSessionUncheckedUpdateWithoutAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishQuestionUpsertWithoutAttemptsInput = {
+    update: XOR<EnglishQuestionUpdateWithoutAttemptsInput, EnglishQuestionUncheckedUpdateWithoutAttemptsInput>
+    create: XOR<EnglishQuestionCreateWithoutAttemptsInput, EnglishQuestionUncheckedCreateWithoutAttemptsInput>
+    where?: EnglishQuestionWhereInput
+  }
+
+  export type EnglishQuestionUpdateToOneWithWhereWithoutAttemptsInput = {
+    where?: EnglishQuestionWhereInput
+    data: XOR<EnglishQuestionUpdateWithoutAttemptsInput, EnglishQuestionUncheckedUpdateWithoutAttemptsInput>
+  }
+
+  export type EnglishQuestionUpdateWithoutAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    quiz?: EnglishQuizUpdateOneRequiredWithoutQuestionsNestedInput
+  }
+
+  export type EnglishQuestionUncheckedUpdateWithoutAttemptsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    quizId?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type ImageCreateManyQuizSetInput = {
     id?: string
     url: string
@@ -9427,6 +16060,170 @@ export namespace Prisma {
     isCorrect?: BoolFieldUpdateOperationsInput | boolean
     timeTakenMs?: IntFieldUpdateOperationsInput | number
     answerId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishQuestionCreateManyQuizInput = {
+    id?: string
+    qNumber: number
+    question: string
+    options: JsonNullValueInput | InputJsonValue
+    correctAnswer: string
+    explanation?: string | null
+    createdAt?: Date | string
+  }
+
+  export type EnglishSessionCreateManyQuizInput = {
+    id?: string
+    score: number
+    total: number
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishQuestionUpdateWithoutQuizInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: EnglishAttemptUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type EnglishQuestionUncheckedUpdateWithoutQuizInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: EnglishAttemptUncheckedUpdateManyWithoutQuestionNestedInput
+  }
+
+  export type EnglishQuestionUncheckedUpdateManyWithoutQuizInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    question?: StringFieldUpdateOperationsInput | string
+    options?: JsonNullValueInput | InputJsonValue
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    explanation?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishSessionUpdateWithoutQuizInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: EnglishAttemptUpdateManyWithoutSessionNestedInput
+  }
+
+  export type EnglishSessionUncheckedUpdateWithoutQuizInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attempts?: EnglishAttemptUncheckedUpdateManyWithoutSessionNestedInput
+  }
+
+  export type EnglishSessionUncheckedUpdateManyWithoutQuizInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    score?: IntFieldUpdateOperationsInput | number
+    total?: IntFieldUpdateOperationsInput | number
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptCreateManyQuestionInput = {
+    id?: string
+    sessionId: string
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishAttemptUpdateWithoutQuestionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    session?: EnglishSessionUpdateOneRequiredWithoutAttemptsNestedInput
+  }
+
+  export type EnglishAttemptUncheckedUpdateWithoutQuestionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptUncheckedUpdateManyWithoutQuestionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    sessionId?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptCreateManySessionInput = {
+    id?: string
+    questionId?: string | null
+    qNumber: number
+    userAnswer: string
+    correctAnswer: string
+    isCorrect: boolean
+    timeTakenMs: number
+    createdAt?: Date | string
+  }
+
+  export type EnglishAttemptUpdateWithoutSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    question?: EnglishQuestionUpdateOneWithoutAttemptsNestedInput
+  }
+
+  export type EnglishAttemptUncheckedUpdateWithoutSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    questionId?: NullableStringFieldUpdateOperationsInput | string | null
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type EnglishAttemptUncheckedUpdateManyWithoutSessionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    questionId?: NullableStringFieldUpdateOperationsInput | string | null
+    qNumber?: IntFieldUpdateOperationsInput | number
+    userAnswer?: StringFieldUpdateOperationsInput | string
+    correctAnswer?: StringFieldUpdateOperationsInput | string
+    isCorrect?: BoolFieldUpdateOperationsInput | boolean
+    timeTakenMs?: IntFieldUpdateOperationsInput | number
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 

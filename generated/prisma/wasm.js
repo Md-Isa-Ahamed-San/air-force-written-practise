@@ -140,9 +140,53 @@ exports.Prisma.AttemptScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.EnglishQuizScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EnglishQuestionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  qNumber: 'qNumber',
+  question: 'question',
+  options: 'options',
+  correctAnswer: 'correctAnswer',
+  explanation: 'explanation',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EnglishSessionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  score: 'score',
+  total: 'total',
+  timeTakenMs: 'timeTakenMs',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EnglishAttemptScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  questionId: 'questionId',
+  qNumber: 'qNumber',
+  userAnswer: 'userAnswer',
+  correctAnswer: 'correctAnswer',
+  isCorrect: 'isCorrect',
+  timeTakenMs: 'timeTakenMs',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -155,13 +199,23 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   QuizSet: 'QuizSet',
   Image: 'Image',
   Answer: 'Answer',
   Session: 'Session',
-  Attempt: 'Attempt'
+  Attempt: 'Attempt',
+  EnglishQuiz: 'EnglishQuiz',
+  EnglishQuestion: 'EnglishQuestion',
+  EnglishSession: 'EnglishSession',
+  EnglishAttempt: 'EnglishAttempt'
 };
 /**
  * Create the Client
@@ -210,13 +264,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel QuizSet {\n  id        String    @id @default(cuid())\n  title     String\n  images    Image[]\n  answers   Answer[]\n  sessions  Session[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n}\n\nmodel Image {\n  id        String   @id @default(cuid())\n  url       String\n  publicId  String?\n  order     Int\n  quizSetId String\n  quizSet   QuizSet  @relation(fields: [quizSetId], references: [id], onDelete: Cascade)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([quizSetId])\n}\n\nmodel Answer {\n  id        String    @id @default(cuid())\n  qNumber   Int\n  answer    String\n  quizSetId String\n  quizSet   QuizSet   @relation(fields: [quizSetId], references: [id], onDelete: Cascade)\n  attempts  Attempt[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  @@unique([quizSetId, qNumber])\n  @@index([quizSetId])\n}\n\nmodel Session {\n  id          String    @id @default(cuid())\n  quizSetId   String\n  quizSet     QuizSet   @relation(fields: [quizSetId], references: [id], onDelete: Cascade)\n  score       Int\n  total       Int\n  timeTakenMs Int\n  attempts    Attempt[]\n  createdAt   DateTime  @default(now())\n\n  @@index([quizSetId])\n}\n\nmodel Attempt {\n  id            String   @id @default(cuid())\n  sessionId     String\n  session       Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)\n  qNumber       Int\n  userAnswer    String\n  correctAnswer String\n  isCorrect     Boolean\n  timeTakenMs   Int\n  answerId      String?\n  answer        Answer?  @relation(fields: [answerId], references: [id], onDelete: SetNull)\n  createdAt     DateTime @default(now())\n\n  @@index([sessionId])\n  @@index([answerId])\n  @@index([qNumber])\n}\n",
-  "inlineSchemaHash": "062c943d8276ebc881182954a08e5044a1b037ab6b22d32cc70241ff3675ffc8",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel QuizSet {\n  id        String    @id @default(cuid())\n  title     String\n  images    Image[]\n  answers   Answer[]\n  sessions  Session[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n}\n\nmodel Image {\n  id        String   @id @default(cuid())\n  url       String\n  publicId  String?\n  order     Int\n  quizSetId String\n  quizSet   QuizSet  @relation(fields: [quizSetId], references: [id], onDelete: Cascade)\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@index([quizSetId])\n}\n\nmodel Answer {\n  id        String    @id @default(cuid())\n  qNumber   Int\n  answer    String\n  quizSetId String\n  quizSet   QuizSet   @relation(fields: [quizSetId], references: [id], onDelete: Cascade)\n  attempts  Attempt[]\n  createdAt DateTime  @default(now())\n  updatedAt DateTime  @updatedAt\n\n  @@unique([quizSetId, qNumber])\n  @@index([quizSetId])\n}\n\nmodel Session {\n  id          String    @id @default(cuid())\n  quizSetId   String\n  quizSet     QuizSet   @relation(fields: [quizSetId], references: [id], onDelete: Cascade)\n  score       Int\n  total       Int\n  timeTakenMs Int\n  attempts    Attempt[]\n  createdAt   DateTime  @default(now())\n\n  @@index([quizSetId])\n}\n\nmodel Attempt {\n  id            String   @id @default(cuid())\n  sessionId     String\n  session       Session  @relation(fields: [sessionId], references: [id], onDelete: Cascade)\n  qNumber       Int\n  userAnswer    String\n  correctAnswer String\n  isCorrect     Boolean\n  timeTakenMs   Int\n  answerId      String?\n  answer        Answer?  @relation(fields: [answerId], references: [id], onDelete: SetNull)\n  createdAt     DateTime @default(now())\n\n  @@index([sessionId])\n  @@index([answerId])\n  @@index([qNumber])\n}\n\nmodel EnglishQuiz {\n  id          String            @id @default(cuid())\n  title       String\n  description String?\n  questions   EnglishQuestion[]\n  sessions    EnglishSession[]\n  createdAt   DateTime          @default(now())\n  updatedAt   DateTime          @updatedAt\n}\n\nmodel EnglishQuestion {\n  id            String           @id @default(cuid())\n  quizId        String\n  quiz          EnglishQuiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)\n  qNumber       Int\n  question      String\n  options       Json\n  correctAnswer String\n  explanation   String?\n  attempts      EnglishAttempt[]\n  createdAt     DateTime         @default(now())\n\n  @@unique([quizId, qNumber])\n  @@index([quizId])\n}\n\nmodel EnglishSession {\n  id          String           @id @default(cuid())\n  quizId      String\n  quiz        EnglishQuiz      @relation(fields: [quizId], references: [id], onDelete: Cascade)\n  score       Int\n  total       Int\n  timeTakenMs Int\n  attempts    EnglishAttempt[]\n  createdAt   DateTime         @default(now())\n\n  @@index([quizId])\n}\n\nmodel EnglishAttempt {\n  id            String           @id @default(cuid())\n  sessionId     String\n  session       EnglishSession   @relation(fields: [sessionId], references: [id], onDelete: Cascade)\n  questionId    String?\n  question      EnglishQuestion? @relation(fields: [questionId], references: [id], onDelete: SetNull)\n  qNumber       Int\n  userAnswer    String\n  correctAnswer String\n  isCorrect     Boolean\n  timeTakenMs   Int\n  createdAt     DateTime         @default(now())\n\n  @@index([sessionId])\n  @@index([questionId])\n  @@index([qNumber])\n}\n",
+  "inlineSchemaHash": "7a5777225f1fb8d5c8a7f99c4afc707ae108c10abe28d5790a9a3c95070351fc",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"QuizSet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"images\",\"kind\":\"object\",\"type\":\"Image\",\"relationName\":\"ImageToQuizSet\"},{\"name\":\"answers\",\"kind\":\"object\",\"type\":\"Answer\",\"relationName\":\"AnswerToQuizSet\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"QuizSetToSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Image\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"publicId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"order\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"quizSetId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSet\",\"kind\":\"object\",\"type\":\"QuizSet\",\"relationName\":\"ImageToQuizSet\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Answer\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"qNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"answer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSetId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSet\",\"kind\":\"object\",\"type\":\"QuizSet\",\"relationName\":\"AnswerToQuizSet\"},{\"name\":\"attempts\",\"kind\":\"object\",\"type\":\"Attempt\",\"relationName\":\"AnswerToAttempt\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSetId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSet\",\"kind\":\"object\",\"type\":\"QuizSet\",\"relationName\":\"QuizSetToSession\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"timeTakenMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"attempts\",\"kind\":\"object\",\"type\":\"Attempt\",\"relationName\":\"AttemptToSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Attempt\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"AttemptToSession\"},{\"name\":\"qNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"correctAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isCorrect\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"timeTakenMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"answerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"answer\",\"kind\":\"object\",\"type\":\"Answer\",\"relationName\":\"AnswerToAttempt\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"QuizSet\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"images\",\"kind\":\"object\",\"type\":\"Image\",\"relationName\":\"ImageToQuizSet\"},{\"name\":\"answers\",\"kind\":\"object\",\"type\":\"Answer\",\"relationName\":\"AnswerToQuizSet\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"QuizSetToSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Image\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"publicId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"order\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"quizSetId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSet\",\"kind\":\"object\",\"type\":\"QuizSet\",\"relationName\":\"ImageToQuizSet\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Answer\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"qNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"answer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSetId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSet\",\"kind\":\"object\",\"type\":\"QuizSet\",\"relationName\":\"AnswerToQuizSet\"},{\"name\":\"attempts\",\"kind\":\"object\",\"type\":\"Attempt\",\"relationName\":\"AnswerToAttempt\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Session\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSetId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizSet\",\"kind\":\"object\",\"type\":\"QuizSet\",\"relationName\":\"QuizSetToSession\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"timeTakenMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"attempts\",\"kind\":\"object\",\"type\":\"Attempt\",\"relationName\":\"AttemptToSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Attempt\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session\",\"kind\":\"object\",\"type\":\"Session\",\"relationName\":\"AttemptToSession\"},{\"name\":\"qNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"correctAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isCorrect\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"timeTakenMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"answerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"answer\",\"kind\":\"object\",\"type\":\"Answer\",\"relationName\":\"AnswerToAttempt\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"EnglishQuiz\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"questions\",\"kind\":\"object\",\"type\":\"EnglishQuestion\",\"relationName\":\"EnglishQuestionToEnglishQuiz\"},{\"name\":\"sessions\",\"kind\":\"object\",\"type\":\"EnglishSession\",\"relationName\":\"EnglishQuizToEnglishSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"EnglishQuestion\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quiz\",\"kind\":\"object\",\"type\":\"EnglishQuiz\",\"relationName\":\"EnglishQuestionToEnglishQuiz\"},{\"name\":\"qNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"question\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"options\",\"kind\":\"scalar\",\"type\":\"Json\"},{\"name\":\"correctAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"explanation\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"attempts\",\"kind\":\"object\",\"type\":\"EnglishAttempt\",\"relationName\":\"EnglishAttemptToEnglishQuestion\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"EnglishSession\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quizId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"quiz\",\"kind\":\"object\",\"type\":\"EnglishQuiz\",\"relationName\":\"EnglishQuizToEnglishSession\"},{\"name\":\"score\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"total\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"timeTakenMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"attempts\",\"kind\":\"object\",\"type\":\"EnglishAttempt\",\"relationName\":\"EnglishAttemptToEnglishSession\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"EnglishAttempt\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"sessionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"session\",\"kind\":\"object\",\"type\":\"EnglishSession\",\"relationName\":\"EnglishAttemptToEnglishSession\"},{\"name\":\"questionId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"question\",\"kind\":\"object\",\"type\":\"EnglishQuestion\",\"relationName\":\"EnglishAttemptToEnglishQuestion\"},{\"name\":\"qNumber\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"userAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"correctAnswer\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"isCorrect\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"timeTakenMs\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

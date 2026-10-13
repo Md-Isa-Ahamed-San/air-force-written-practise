@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -8,6 +8,7 @@ import {
   Settings,
   ShieldCheck,
   Target,
+  Languages,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -25,6 +26,13 @@ const NAV_ITEMS: NavItemProps[] = [
     label: "Practice Quizzes",
     icon: BookOpen,
     description: "Chapter question sets",
+  },
+  {
+    href: "/english",
+    label: "English Practice",
+    icon: Languages,
+    badge: "MCQ",
+    description: "Grammar & vocab tests",
   },
   {
     href: "/dashboard",

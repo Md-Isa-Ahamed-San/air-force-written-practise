@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import { useState } from "react";
 import { usePathname } from "next/navigation";
@@ -15,8 +15,9 @@ export default function AppLayout({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Full-screen distraction-free mode on active exam pages (/quiz/[quizSetId])
-  const isExamPage = /^\/quiz\/[^/]+$/.test(pathname);
+  // Full-screen distraction-free mode on active exam pages (/quiz/[quizSetId] or /english/[quizId])
+  const isExamPage =
+    /^\/quiz\/[^/]+$/.test(pathname) || /^\/english\/[^/]+$/.test(pathname);
 
   if (isExamPage) {
     return (

@@ -1,4 +1,5 @@
 import { answerRouter } from "~/server/api/routers/answer";
+import { englishQuizRouter } from "~/server/api/routers/englishQuiz";
 import { imageRouter } from "~/server/api/routers/image";
 import { quizRouter } from "~/server/api/routers/quiz";
 import { quizSetRouter } from "~/server/api/routers/quizSet";
@@ -12,6 +13,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   quizSet: quizSetRouter,
+  englishQuiz: englishQuizRouter,
   image: imageRouter,
   answer: answerRouter,
   quiz: quizRouter,

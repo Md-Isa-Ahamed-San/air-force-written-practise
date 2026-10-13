@@ -168,9 +168,53 @@ exports.Prisma.AttemptScalarFieldEnum = {
   createdAt: 'createdAt'
 };
 
+exports.Prisma.EnglishQuizScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+};
+
+exports.Prisma.EnglishQuestionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  qNumber: 'qNumber',
+  question: 'question',
+  options: 'options',
+  correctAnswer: 'correctAnswer',
+  explanation: 'explanation',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EnglishSessionScalarFieldEnum = {
+  id: 'id',
+  quizId: 'quizId',
+  score: 'score',
+  total: 'total',
+  timeTakenMs: 'timeTakenMs',
+  createdAt: 'createdAt'
+};
+
+exports.Prisma.EnglishAttemptScalarFieldEnum = {
+  id: 'id',
+  sessionId: 'sessionId',
+  questionId: 'questionId',
+  qNumber: 'qNumber',
+  userAnswer: 'userAnswer',
+  correctAnswer: 'correctAnswer',
+  isCorrect: 'isCorrect',
+  timeTakenMs: 'timeTakenMs',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
+};
+
+exports.Prisma.JsonNullValueInput = {
+  JsonNull: Prisma.JsonNull
 };
 
 exports.Prisma.QueryMode = {
@@ -183,13 +227,23 @@ exports.Prisma.NullsOrder = {
   last: 'last'
 };
 
+exports.Prisma.JsonNullValueFilter = {
+  DbNull: Prisma.DbNull,
+  JsonNull: Prisma.JsonNull,
+  AnyNull: Prisma.AnyNull
+};
+
 
 exports.Prisma.ModelName = {
   QuizSet: 'QuizSet',
   Image: 'Image',
   Answer: 'Answer',
   Session: 'Session',
-  Attempt: 'Attempt'
+  Attempt: 'Attempt',
+  EnglishQuiz: 'EnglishQuiz',
+  EnglishQuestion: 'EnglishQuestion',
+  EnglishSession: 'EnglishSession',
+  EnglishAttempt: 'EnglishAttempt'
 };
 
 /**
