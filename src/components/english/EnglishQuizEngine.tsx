@@ -209,6 +209,26 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
     );
   }, [quiz, state.currentQuestion]);
 
+  const optionsEntries = useMemo<[string, string][]>(() => {
+    const raw = currentQData?.options;
+    if (!raw) return [];
+    if (Array.isArray(raw)) {
+      const letters = ["A", "B", "C", "D"];
+      return raw.map((val, idx): [string, string] => [
+        letters[idx] ?? String(idx + 1),
+        String(val ?? ""),
+      ]);
+    }
+    if (typeof raw === "object") {
+      const entries = Object.entries(raw as Record<string, unknown>);
+      return entries.map(([k, v]): [string, string] => [
+        k.toUpperCase(),
+        String(v ?? ""),
+      ]);
+    }
+    return [];
+  }, [currentQData?.options]);
+
   const answeredCount = useMemo(() => {
     return Object.keys(state.answers).filter(
       (k) => state.answers[Number(k)]?.trim()
@@ -375,25 +395,6 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
   const currentAnswer = state.answers[state.currentQuestion] ?? "";
   const isFlagged = Boolean(state.flagged[state.currentQuestion]);
   const progressPercent = Math.round((answeredCount / totalQuestions) * 100);
-  const optionsEntries = useMemo<[string, string][]>(() => {
-    const raw = currentQData?.options;
-    if (!raw) return [];
-    if (Array.isArray(raw)) {
-      const letters = ["A", "B", "C", "D"];
-      return raw.map((val, idx): [string, string] => [
-        letters[idx] ?? String(idx + 1),
-        String(val ?? ""),
-      ]);
-    }
-    if (typeof raw === "object") {
-      const entries = Object.entries(raw as Record<string, unknown>);
-      return entries.map(([k, v]): [string, string] => [
-        k.toUpperCase(),
-        String(v ?? ""),
-      ]);
-    }
-    return [];
-  }, [currentQData?.options]);
 
   return (
     <div className="h-screen w-screen flex flex-col overflow-hidden bg-background">
@@ -432,7 +433,7 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
         <div className="flex items-center gap-3 sm:gap-4 flex-shrink-0">
           <div className="flex items-center gap-2 px-3 py-1 rounded-xl bg-muted/40 border border-border/40 text-xs font-mono">
             <Clock className="h-3.5 w-3.5 text-primary animate-pulse" />
-            <span className="font-bold text-foreground">
+            <span className="font-bold text-foreground" suppressHydrationWarning>
               {formattedOverallTime}
             </span>
             <span className="hidden sm:inline text-muted-foreground text-[10px]">
@@ -442,7 +443,7 @@ export function EnglishQuizEngine({ quizId }: { quizId: string }) {
 
           <div className="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-card/60 border border-border/40 text-xs font-mono text-muted-foreground">
             <span>This Q:</span>
-            <span className="font-bold text-foreground">
+            <span className="font-bold text-foreground" suppressHydrationWarning>
               {currentQElapsedSec}s
             </span>
           </div>
